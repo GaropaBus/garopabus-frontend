@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestão de Paradas</title>
+    <title>Gestão de Rotas</title>
     <link rel="stylesheet" href="assets\css\index.css">
 </head>
 <body>
@@ -15,34 +15,27 @@
     </div>
 
     <div class="form-section">
-        <h2>Adicionar parada</h2>
+        <h2>Adicionar Rota</h2>
         <form>
-            <label for="rua">Rua onde a parada se encontra</label>
-            <input type="text" id="rua" placeholder="Rod.SC 434">
+            <label for="rua">Início</label>
+            <input type="text" id="rua" placeholder="Garopaba">
 
-            <label for="coordenada">Coordenada</label>
-            <input type="text" id="coordenada" placeholder="00000000">
+            <label for="coordenada">Destino</label>
+            <input type="text" id="coordenada" placeholder="Rosa">
 
-            <label for="descricao">Descrição</label>
-            <input type="text" id="descricao" placeholder="Parada de ônibus em frente a veterinária viva bixo">
-
-            <label for="rota">Rotas</label>
-            <select id="rota">
-                <option value="">Select</option>
-                <!-- Outras opções de rota -->
-            </select>
+            <label for="descricao">Variação</label>
+            <input type="text" id="descricao" placeholder="Via ressecada">
 
             <button type="submit">Adicionar</button>
         </form>
     </div>
 
     <div class="edit-section">
-        <h2>Editar paradas</h2>
+        <h2>Editar Rotas</h2>
         <div class="parada-item">
             <div class="parada-info">
-                <span>Nome da rua</span>
-                <span>00000000</span>
-                <span>Descrição da parada</span>
+                <span>Rota</span>
+                <span>Variação</span>
             </div>
             <div class="parada-actions">
                 <button class="edit-btn">✏️</button>

@@ -1,5 +1,92 @@
-* {
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
     margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    padding: 20px;
+}
+
+.menu {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 30px;
+}
+
+.menu-btn {
+    background-color: #444;
+    color: white;
+    padding: 15px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.menu-btn:hover {
+    background-color: #555;
+}
+
+.form-section, .edit-section {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+h2 {
+    margin-top: 0;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button[type="submit"] {
+    background-color: #444;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #555;
+}
+
+.edit-section .parada-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background-color: #f0f0f0;
+}
+
+.parada-actions button {
+    background-color: #444;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 5px 10px;
+    margin-left: 10px;
+}
+
+.parada-actions .edit-btn:hover {
+    background-color: #555;
+}
+
+.parada-actions .delete-btn:hover {
+    background-color: #c00;
 }
