@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão de Rotas</title>
+    <link rel="stylesheet" href="../assets/css/gestao_adm.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="../index.html"><button>Editar paradas</button></a>
+            <a href="../gestao-rotas"><button>Editar rotas</button></a>
+            <a href="../map"><button>Mapa</button></a>
+            <a href="../editar-itinerarios"><button>Editar itinerários</button></a>
+        </nav>
+    </header>
+    <main>
+        <div class="form-section">
+            <h2>Editar itinerários</h2>
+            <form>
+                <div class="inp">
+                    <label for="rotas">Rotas</label>
+                    <select name="rotas" id="rotas">
+                        <option value="null" disabled selected>Selecione uma rota</option>
+                        <option value="1">Garopaba X Rosa</option>
+                    </select>
+                </div>
+                
+
+                <fieldset class="inp">
+                    <legend>Horários</legend>
+                    <input type="time" name="horario" id="horario">
+                    <button id="select-time" type="button">Selecionar horário</button>
+                    <div class="times">
+                        <div class="selected-time">
+                            <p>17:30</p>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <div class="inp">
+                    <div class="variacao-input">
+                        <input type="checkbox" name="variacao" id="variacao">
+                        <label for="variacao">Tem variação?</label>
+                    </div>
+                    <!-- Se o checkbox for marcado, mostra o campo -->
+                    <div id="variacao-details" style="display:none;">
+                        <label for="descricao">Variação</label>
+                        <input type="text" id="descricao" placeholder="Via ressecada">
+                    </div>
+                </div>
+
+                <fieldset class="inp">
+                    <legend>Dia(s)</legend>
+                    <div class="dia">
+                        <input type="checkbox" name="segunda" id="segunda">
+                        <label for="segunda">Segunda</label>
+                    </div>
+                    <div class="dia">
+                        <input type="checkbox" name="terca" id="terca">
+                        <label for="terca">Terça</label>
+                    </div>
+                    <div class="dia">
+                        <input type="checkbox" name="quarta" id="quarta">
+                        <label for="quarta">Quarta</label>
+                    </div>
+                    <div class="dia">
+                        <input type="checkbox" name="quinta" id="quinta">
+                        <label for="quinta">Quinta</label>
+                    </div>
+                    <div class="dia">
+                        <input type="checkbox" name="sexta" id="sexta">
+                        <label for="sexta">Sexta</label>
+                    </div>
+                    <div class="dia">
+                        <input type="checkbox" name="sabado" id="sabado">
+                        <label for="sabado">Sábado</label>
+                    </div>
+                    <div class="dia">
+                        <input type="checkbox" name="domingo" id="domingo">
+                        <label for="domingo">Domingo</label>
+                    </div>
+                </fieldset>
+
+                <button type="submit">Adicionar</button>
+            </form>
+        </div>
+
+        <div class="edit-section">
+            <h2>Itinerarios já cadastrados</h2>
+            <div class="parada-item">
+                <div class="parada-info">
+                    <p>
+                        <span>Garopaba X Rosa</span>
+                        |
+                        <span>Variação</span>
+                    </p>
+                    
+                </div>
+                <div class="parada-actions">
+                    <button class="edit-btn">✏️</button>
+                    <button class="delete-btn">❌</button>
+                </div>
+            </div>
+            <!-- Repita .parada-item para mais itens -->
+        </div>
+    </main>
+    <script src="script.js"></script>
+
+    <script>
+        // Exibir detalhes de variação somente se o checkbox for marcado
+        document.getElementById('variacao').addEventListener('change', function() {
+            const variacaoDetails = document.getElementById('variacao-details');
+            if (this.checked) {
+                variacaoDetails.style.display = 'block';
+            } else {
+                variacaoDetails.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
