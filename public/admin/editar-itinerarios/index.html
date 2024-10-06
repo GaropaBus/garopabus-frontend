@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,8 +18,8 @@
     <main>
         <div class="form-section">
             <h2>Editar itinerários</h2>
-            <form>
-                <div class="inp">
+            <form class="inputs">
+                <div>
                     <label for="rotas">Rotas</label>
                     <select name="rotas" id="rotas">
                         <option value="null" disabled selected>Selecione uma rota</option>
@@ -28,7 +28,7 @@
                 </div>
                 
 
-                <fieldset class="inp">
+                <fieldset>
                     <legend>Horários</legend>
                     <input type="time" name="horario" id="horario">
                     <button id="select-time" type="button">Selecionar horário</button>
@@ -39,7 +39,7 @@
                     </div>
                 </fieldset>
 
-                <div class="inp">
+                <div>
                     <div class="variacao-input">
                         <input type="checkbox" name="variacao" id="variacao">
                         <label for="variacao">Tem variação?</label>
@@ -51,7 +51,7 @@
                     </div>
                 </div>
 
-                <fieldset class="inp">
+                <fieldset>
                     <legend>Dia(s)</legend>
                     <div class="dia">
                         <input type="checkbox" name="segunda" id="segunda">
@@ -83,7 +83,9 @@
                     </div>
                 </fieldset>
 
-                <button type="submit">Adicionar</button>
+                <div class="submit-button">
+                    <button type="submit">Adicionar</button>
+                </div>
             </form>
         </div>
 

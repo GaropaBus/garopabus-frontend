@@ -39,6 +39,14 @@ button:hover {
     width: 95%;
 }
 
+.inputs{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
 h2 {
     margin-top: 0;
     margin-bottom: 20px;
@@ -112,13 +120,11 @@ button[type="submit"]:hover {
 
 }
 
-.inp{
-    margin-bottom: 20px
-}
 
 fieldset{
     border: 1px solid rgba(209, 209, 209, 0.595);
     border-radius: 10px;
+    padding: 15px;
 }
 
 .times{
@@ -181,10 +187,6 @@ fieldset{
     margin-bottom: 20px;
 }
 
-fieldset.inp{
-    padding: 15px;
-}
-
 .selecionar-rota{
     padding: 10px 20px;
 }
@@ -206,4 +208,14 @@ fieldset.inp{
 
 .info p{
     overflow-wrap: break-word;
+}
+
+#trajetoTable {
+    width: 50%;
+}
+
+#trajetoTable td {
+    text-align: center; 
+    padding: 10px; 
+    max-width: 100%;
 }

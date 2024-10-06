@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,17 +16,86 @@
 
     <div class="form-section">
         <h2>Adicionar Rota</h2>
-        <form>
-            <label for="rua">Início</label>
-            <input type="text" id="rua" placeholder="Garopaba">
+        <form class="inputs">
+          <div class="name-rota-div inp">
+            <label for="name-rota">Nome da Rota</label>
+            <input type="text" id="name-rota" placeholder="Garopaba x Rosa">
+          </div>
 
-            <label for="coordenadaa">Destino</label>
-            <input type="text" id="coordenadaa" placeholder="Rosa">
+          <div>
+            <div class="variacao-input">
+                <input type="checkbox" name="variacao" id="variacao">
+                <label for="variacao">Tem variação?</label>
+            </div>
+            <!-- Se o checkbox for marcado, mostra o campo -->
+            <div id="variacao-details" style="display:none;">
+                <label for="descricao">Variação</label>
+                <input type="text" id="descricao" placeholder="Via ressecada">
+            </div>
+        </div>
+            
+          
 
-            <label for="descricao">Variação</label>
-            <input type="text" id="descricao" placeholder="Via ressecada">
-
+          <fieldset>
+            <legend>Trajeto da linha</legend>
+            <div class="inputs">
+              <div>
+                <label for="coordenada">Coordenada (Latitude, Longitude):</label>
+                <input type="text" id="coordenada" placeholder="Ex: -22.91216, -43.23015">
+              </div>
+              
+              <div class="submit-button">
+                <button type="button" onclick="adicionarParada(event)">Adicionar ponto de trajeto</button>
+              </div>
+            </div>
+  
+            <table id="trajetoTable">
+              <thead>
+                <tr>
+                  <th>Ordem</th>
+                  <th>Latitude e Longitude</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>101</td>
+                  <td>-22.91216, -43.23015</td>
+                  <td>
+                    <button onclick="moverParaCima(this)">↑</button>
+                    <button onclick="moverParaBaixo(this)">↓</button>
+                    <button onclick="editarParada(this)">✎</button>
+                    <button onclick="removerParada(this)">✖</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>102</td>
+                  <td>-22.91044, -43.22567</td>
+                  <td>
+                    <button onclick="moverParaCima(this)">↑</button>
+                    <button onclick="moverParaBaixo(this)">↓</button>
+                    <button onclick="editarParada(this)">✎</button>
+                    <button onclick="removerParada(this)">✖</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>103</td>
+                  <td>-22.90813, -43.22259</td>
+                  <td>
+                    <button onclick="moverParaCima(this)">↑</button>
+                    <button onclick="moverParaBaixo(this)">↓</button>
+                    <button onclick="editarParada(this)">✎</button>
+                    <button onclick="removerParada(this)">✖</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </fieldset>
+          
+          <div class="submit-button">
             <button type="submit">Adicionar</button>
+          </div>
+          </div>
         </form>
     </div>
 
@@ -45,128 +114,6 @@
         <!-- Repita .parada-item para mais itens -->
     </div>
 
-    <script src="script.js"></script>
-
-    <!-- Formulário para adicionar uma nova parada -->
-  <div class="form-container">
-    <label for="numeroLinha">Número da Linha:</label>
-    <input type="text" id="numeroLinha" placeholder="Ex: 104">
-    
-    <label for="coordenada">Coordenada (Latitude, Longitude):</label>
-    <input type="text" id="coordenada" placeholder="Ex: -22.91216, -43.23015">
-    
-    <button onclick="adicionarParada()">Adicionar Parada</button>
-  </div>
-
-  <table id="trajetoTable">
-    <thead>
-      <tr>
-        <th>Número da Linha</th>
-        <th>Coordenada (Latitude, Longitude)</th>
-        <th>Ações</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>101</td>
-        <td>-22.91216, -43.23015</td>
-        <td>
-          <button onclick="moverParaCima(this)">↑</button>
-          <button onclick="moverParaBaixo(this)">↓</button>
-          <button onclick="editarParada(this)">✎</button>
-          <button onclick="removerParada(this)">✖</button>
-        </td>
-      </tr>
-      <tr>
-        <td>102</td>
-        <td>-22.91044, -43.22567</td>
-        <td>
-          <button onclick="moverParaCima(this)">↑</button>
-          <button onclick="moverParaBaixo(this)">↓</button>
-          <button onclick="editarParada(this)">✎</button>
-          <button onclick="removerParada(this)">✖</button>
-        </td>
-      </tr>
-      <tr>
-        <td>103</td>
-        <td>-22.90813, -43.22259</td>
-        <td>
-          <button onclick="moverParaCima(this)">↑</button>
-          <button onclick="moverParaBaixo(this)">↓</button>
-          <button onclick="editarParada(this)">✎</button>
-          <button onclick="removerParada(this)">✖</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-
-  <script>
-    function moverParaCima(botao) {
-      var linhaAtual = botao.parentElement.parentElement;
-      var linhaAnterior = linhaAtual.previousElementSibling;
-      
-      if (linhaAnterior) {
-        linhaAtual.parentElement.insertBefore(linhaAtual, linhaAnterior);
-      }
-    }
-
-    function moverParaBaixo(botao) {
-      var linhaAtual = botao.parentElement.parentElement;
-      var linhaProxima = linhaAtual.nextElementSibling;
-      
-      if (linhaProxima) {
-        linhaAtual.parentElement.insertBefore(linhaProxima, linhaAtual);
-      }
-    }
-
-    function removerParada(botao) {
-      var linhaAtual = botao.parentElement.parentElement;
-      linhaAtual.remove();
-    }
-
-    function editarParada(botao) {
-      var linhaAtual = botao.parentElement.parentElement;
-      var numeroLinha = linhaAtual.cells[0].innerText;
-      var coordenada = linhaAtual.cells[1].innerText;
-
-      var novoNumeroLinha = prompt("Editar Número da Linha:", numeroLinha);
-      var novaCoordenada = prompt("Editar Coordenada (Latitude, Longitude):", coordenada);
-
-      if (novoNumeroLinha != null && novaCoordenada != null) {
-        linhaAtual.cells[0].innerText = novoNumeroLinha;
-        linhaAtual.cells[1].innerText = novaCoordenada;
-      }
-    }
-
-    function adicionarParada() {
-      var numeroLinha = document.getElementById("numeroLinha").value;
-      var coordenada = document.getElementById("coordenada").value;
-
-      if (numeroLinha === "" || coordenada === "") {
-        alert("Por favor, preencha todos os campos!");
-        return;
-      }
-
-      var table = document.getElementById("trajetoTable").getElementsByTagName('tbody')[0];
-      var novaLinha = table.insertRow();
-
-      var celulaNumeroLinha = novaLinha.insertCell(0);
-      var celulaCoordenada = novaLinha.insertCell(1);
-      var celulaAcoes = novaLinha.insertCell(2);
-
-      celulaNumeroLinha.innerText = numeroLinha;
-      celulaCoordenada.innerText = coordenada;
-      celulaAcoes.innerHTML = `
-        <button onclick="moverParaCima(this)">↑</button>
-        <button onclick="moverParaBaixo(this)">↓</button>
-        <button onclick="editarParada(this)">✎</button>
-        <button onclick="removerParada(this)">✖</button>
-      `;
-
-      // Limpar os campos do formulário após adicionar
-      document.getElementById("numeroLinha").value = "";
-      document.getElementById("coordenada").value = "";
-    }
-  </script>
+    <script src="../../assets/js/admin/gestao-rotas.js"></script>
 </body>
 </html>
