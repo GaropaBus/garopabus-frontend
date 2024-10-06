@@ -26,7 +26,7 @@ jobs:
 
       # Step 4: Cria a imagem Docker
       - name: Build Docker image
-        run: docker build . -t garopaBus-frontend:latest
+        run: docker build . -t garopabus-frontend:latest
 
       # Step 5: Login no Docker Hub
       - name: Login to Docker Hub
@@ -35,8 +35,8 @@ jobs:
       # Step 6: Envia a imagem Docker para o Docker Hub
       - name: Push Docker image
         run: |
-          docker tag garopaBus-frontend:latest ${{ secrets.DOCKER_USERNAME }}/garopaBus-frontend:latest
-          docker push ${{ secrets.DOCKER_USERNAME }}/garopaBus-frontend:latest
+          docker tag garopabus-frontend:latest ${{ secrets.DOCKER_USERNAME }}/garopabus-frontend:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/garopabus-frontend:latest
 
       # Step 7: Envia para a VPS via SSH e faz o deploy
       - name: Deploy to VPS
@@ -46,7 +46,7 @@ jobs:
           username: ${{ secrets.VPS_USER }} # O usuário da VPS
           key: ${{ secrets.SSH_KEY }}      # A chave SSH privada (adicionada aos secrets)
           script: |
-            docker stop garopaBus-frontend || true
-            docker rm garopaBus-frontend || true
-            docker pull ${{ secrets.DOCKER_USERNAME }}/garopaBus-frontend:latest
-            docker run -d --name garopaBus-frontend -p 80:80 ${{ secrets.DOCKER_USERNAME }}/garopaBus-frontend:latest
+            docker stop garopabus-frontend || true
+            docker rm garopabus-frontend || true
+            docker pull ${{ secrets.DOCKER_USERNAME }}/garopabus-frontend:latest
+            docker run -d --name garopabus-frontend -p 80:80 ${{ secrets.DOCKER_USERNAME }}/garopabus-frontend:latest
