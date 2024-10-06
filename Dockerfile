@@ -1,6 +1,9 @@
 # Usando uma imagem base que seja compatível com ARM64
 FROM node:20-alpine
 
+# Instalando o Certbot
+RUN apk add --no-cache certbot
+
 # Criando o diretório de trabalho dentro do container
 WORKDIR /app
 
@@ -13,8 +16,10 @@ RUN npm install
 # Copiando o resto do código da aplicação
 COPY . .
 
-# Expondo a porta 80
+# Expondo as portas 80 e 443
 EXPOSE 80
+EXPOSE 443
 
 # Comando para rodar o servidor
-CMD ["npm", "start"]
+CMD ["sh", "-c", "certbot renew --quiet --non-interactive && node server.js"]
+
