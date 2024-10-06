@@ -32,8 +32,11 @@ if (process.env.NODE_ENV === "production") {
     console.log(`Servidor rodando na porta 443 (HTTPS)`);
   });
 
-  // Para garantir que o HTTP redirecione para HTTPS
-  http.createServer(app).listen(80, () => {
+  http.createServer((req, res) => {
+    // Redirecionar para HTTPS
+    res.writeHead(301, { "Location": `https://${req.headers.host}${req.url}` });
+    res.end();
+  }).listen(80, () => {
     console.log(`Servidor rodando na porta 80 (HTTP) e redirecionando para HTTPS`);
   });
 } else {
