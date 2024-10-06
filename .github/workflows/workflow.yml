@@ -52,4 +52,4 @@ jobs:
             docker stop garopabus-frontend || true
             docker rm garopabus-frontend || true
             docker pull ${{ secrets.DOCKER_USERNAME }}/garopabus-frontend:latest
-            docker run -d --name garopabus-frontend -p 80:80 ${{ secrets.DOCKER_USERNAME }}/garopabus-frontend:latest
+            docker run --env-file /home/ubuntu/garopabus-files/.env -d --name garopabus-frontend -p 80:80 ${{ secrets.DOCKER_USERNAME }}/garopabus-frontend:latest
