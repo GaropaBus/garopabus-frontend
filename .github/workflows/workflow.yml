@@ -28,21 +28,28 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
-      # Step 5: Cria e envia a imagem Docker multi-arch
+      # Step 5: Login no Docker Hub
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      # Step 6: Constrói e faz push da imagem Docker multi-arch
       - name: Build and push Docker image (multi-arch)
         run: |
           docker buildx create --use
           docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/garopabus-frontend:latest --push .
 
-      # Step 6: Envia para a VPS via SSH e faz o deploy
+      # Step 7: Envia para a VPS via SSH e faz o deploy
       - name: Deploy to VPS
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.VPS_HOST }}   # O IP da sua VPS
-          username: ${{ secrets.VPS_USER }} # O usuário da VPS
-          key: ${{ secrets.SSH_KEY }}      # A chave SSH privada (adicionada aos secrets)
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.SSH_KEY }}
           script: |
             docker stop garopabus-frontend || true
             docker rm garopabus-frontend || true
             docker pull ${{ secrets.DOCKER_USERNAME }}/garopabus-frontend:latest
-            docker run -d --name garopabus-frontend -p 8080:8080 ${{ secrets.DOCKER_USERNAME }}/garopabus-frontend:latest
+            docker run -d --name garopabus-frontend -p 80:80 ${{ secrets.DOCKER_USERNAME }}/garopabus-frontend:latest
