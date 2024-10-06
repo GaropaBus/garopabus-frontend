@@ -1,0 +1,42 @@
+name: Deploy to VPS
+
+on:
+  push:
+    branches:
+      - main  # Roda o CI/CD apenas para a branch "main"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checa o código do repositório
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Configura o Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      # Step 3: Instala as dependências
+      - name: Install dependencies
+        run: npm install
+
+      # Step 4: Cria a imagem Docker
+      - name: Build Docker image
+        run: docker build . -t frontend:latest
+
+      # Step 5: Envia para a VPS via SSH
+      - name: Deploy to VPS
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.VPS_HOST }}   # O IP da sua VPS
+          username: ${{ secrets.VPS_USER }} # O usuário da VPS
+          key: ${{ secrets.SSH_KEY }}      # A chave SSH privada (adicionada aos secrets)
+          script: |
+            docker stop frontend || true
+            docker rm frontend || true
+            docker pull frontend:latest
+            docker run -d --name frontend -p 8080:8080 frontend:latest
