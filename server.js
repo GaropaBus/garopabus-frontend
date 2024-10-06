@@ -12,7 +12,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-const port = process.env.PORT || 8080; 
+const port = process.env.PORT_F || 8080; 
 
 // Configuração do servidor Express
 app.use(express.json());
