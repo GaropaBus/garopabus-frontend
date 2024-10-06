@@ -24,21 +24,17 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      # Step 4: Cria a imagem Docker
-      - name: Build Docker image
-        run: docker build . -t garopabus-frontend:latest
+      # Step 4: Configura o Docker Buildx para múltiplas arquiteturas
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
 
-      # Step 5: Login no Docker Hub
-      - name: Login to Docker Hub
-        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-
-      # Step 6: Envia a imagem Docker para o Docker Hub
-      - name: Push Docker image
+      # Step 5: Cria e envia a imagem Docker multi-arch
+      - name: Build and push Docker image (multi-arch)
         run: |
-          docker tag garopabus-frontend:latest ${{ secrets.DOCKER_USERNAME }}/garopabus-frontend:latest
-          docker push ${{ secrets.DOCKER_USERNAME }}/garopabus-frontend:latest
+          docker buildx create --use
+          docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/garopabus-frontend:latest --push .
 
-      # Step 7: Envia para a VPS via SSH e faz o deploy
+      # Step 6: Envia para a VPS via SSH e faz o deploy
       - name: Deploy to VPS
         uses: appleboy/ssh-action@master
         with:
@@ -49,4 +45,4 @@ jobs:
             docker stop garopabus-frontend || true
             docker rm garopabus-frontend || true
             docker pull ${{ secrets.DOCKER_USERNAME }}/garopabus-frontend:latest
-            docker run -d --name garopabus-frontend -p 80:80 ${{ secrets.DOCKER_USERNAME }}/garopabus-frontend:latest
+            docker run -d --name garopabus-frontend -p 8080:8080 ${{ secrets.DOCKER_USERNAME }}/garopabus-frontend:latest
