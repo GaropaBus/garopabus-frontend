@@ -1,14 +1,24 @@
-// Exibir detalhes de variação somente se o checkbox for marcado
-document.getElementById('variacao').addEventListener('change', function() {
-    const variacaoDetails = document.getElementById('variacao-details');
-    if (this.checked) {
-        variacaoDetails.style.display = 'block';
+
+const btn_AddRota_AddVariacao = document.getElementById('addRota-addVariacao');
+const div_addRota = document.querySelector('.addRota');
+const div_addVariacao = document.querySelector('.addVariacao');
+
+btn_AddRota_AddVariacao.addEventListener('change', function() {
+    if (btn_AddRota_AddVariacao.checked) {
+      div_addRota.style.display = "none";
+      div_addVariacao.style.display = "block"
     } else {
-        variacaoDetails.style.display = 'none';
+      div_addRota.style.display = "block";
+      div_addVariacao.style.display = "none"
     }
 });
 
-function moverParaCima(botao) {
+
+
+// Tabela de trajeto
+function moverParaCima(event, botao) {
+    event.preventDefault();
+
     var linhaAtual = botao.parentElement.parentElement;
     var linhaAnterior = linhaAtual.previousElementSibling;
     
@@ -17,7 +27,9 @@ function moverParaCima(botao) {
     }
 }
 
-function moverParaBaixo(botao) {
+function moverParaBaixo(event, botao) {
+    event.preventDefault();
+
     var linhaAtual = botao.parentElement.parentElement;
     var linhaProxima = linhaAtual.nextElementSibling;
 
@@ -26,12 +38,16 @@ function moverParaBaixo(botao) {
     }
 }
 
-function removerParada(botao) {
+function removerParada(event, botao) {
+    event.preventDefault();
+
     var linhaAtual = botao.parentElement.parentElement;
     linhaAtual.remove();
 }
 
-function editarParada(botao) {
+function editarParada(event, botao) {
+    event.preventDefault();
+
     var linhaAtual = botao.parentElement.parentElement;
     var numeroLinha = linhaAtual.cells[0].innerText;
     var coordenada = linhaAtual.cells[1].innerText;

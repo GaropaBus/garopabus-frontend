@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestão de Rotas</title>
+    <title>GaropabaBus | Gestão de Rotas</title>
     <link rel="stylesheet" href="../../assets/css/gestao_adm.css">
 </head>
 <body>
@@ -15,96 +15,169 @@
     </nav>
 
     <div class="form-section">
-        <h2>Adicionar Rota</h2>
+      <div class="title">
+        <input type="checkbox" class="toggle" id="addRota-addVariacao">
+        <label for="addRota-addVariacao" class="title-rotas">|</label>
+      </div>
+      <div class="addRota">
         <form class="inputs">
           <div class="name-rota-div inp">
             <label for="name-rota">Nome da Rota</label>
             <input type="text" id="name-rota" placeholder="Garopaba x Rosa">
           </div>
 
-          <div>
-            <div class="variacao-input">
-                <input type="checkbox" name="variacao" id="variacao">
-                <label for="variacao">Tem variação?</label>
+            <fieldset>
+              <legend>Trajeto da linha</legend>
+              <div class="inputs">
+                <div>
+                  <label for="coordenada">Coordenada (Latitude, Longitude):</label>
+                  <input type="text" id="coordenada" placeholder="Ex: -22.91216, -43.23015">
+                </div>
+                
+                <div class="submit-button">
+                  <button type="button" onclick="adicionarParada(event)">Adicionar ponto de trajeto</button>
+                </div>
+              </div>
+    
+              <table id="trajetoTable">
+                <thead>
+                  <tr>
+                    <th>Ordem</th>
+                    <th>Latitude e Longitude</th>
+                    <th>Ações</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>101</td>
+                    <td>-22.91216, -43.23015</td>
+                    <td>
+                      <button onclick="moverParaCima(event, this)">↑</button>
+                      <button onclick="moverParaBaixo(event, this)">↓</button>
+                      <button onclick="editarParada(event, this)">✎</button>
+                      <button onclick="removerParada(event, this)">✖</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>102</td>
+                    <td>-22.91044, -43.22567</td>
+                    <td>
+                      <button onclick="moverParaCima(event, this)">↑</button>
+                      <button onclick="moverParaBaixo(event, this)">↓</button>
+                      <button onclick="editarParada(event, this)">✎</button>
+                      <button onclick="removerParada(event, this)">✖</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>103</td>
+                    <td>-22.90813, -43.22259</td>
+                    <td>
+                      <button onclick="moverParaCima(event, this)">↑</button>
+                      <button onclick="moverParaBaixo(event, this)">↓</button>
+                      <button onclick="editarParada(event, this)">✎</button>
+                      <button onclick="removerParada(event, this)">✖</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </fieldset>
+            
+            <div class="submit-button">
+              <button type="submit">Adicionar</button>
             </div>
-            <!-- Se o checkbox for marcado, mostra o campo -->
-            <div id="variacao-details" style="display:none;">
+        </form>
+      </div>
+      <div class="addVariacao">
+        <form class="inputs">
+          <div class="name-rota-div inp">
+            <select name="select-rota" id="select-rota" >
+              <option value="null" disabled selected>Selecione uma rota existente</option>
+              <option value="Garopaba x Rosa">Garopaba x Rosa</option>
+            </select>
+          </div>
+
+          <div>
+            <div id="variacao-details">
                 <label for="descricao">Variação</label>
                 <input type="text" id="descricao" placeholder="Via ressecada">
             </div>
-        </div>
-            
-          
-
-          <fieldset>
-            <legend>Trajeto da linha</legend>
-            <div class="inputs">
-              <div>
-                <label for="coordenada">Coordenada (Latitude, Longitude):</label>
-                <input type="text" id="coordenada" placeholder="Ex: -22.91216, -43.23015">
-              </div>
+          </div>
               
-              <div class="submit-button">
-                <button type="button" onclick="adicionarParada(event)">Adicionar ponto de trajeto</button>
-              </div>
-            </div>
+            
   
-            <table id="trajetoTable">
-              <thead>
-                <tr>
-                  <th>Ordem</th>
-                  <th>Latitude e Longitude</th>
-                  <th>Ações</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>101</td>
-                  <td>-22.91216, -43.23015</td>
-                  <td>
-                    <button onclick="moverParaCima(this)">↑</button>
-                    <button onclick="moverParaBaixo(this)">↓</button>
-                    <button onclick="editarParada(this)">✎</button>
-                    <button onclick="removerParada(this)">✖</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>102</td>
-                  <td>-22.91044, -43.22567</td>
-                  <td>
-                    <button onclick="moverParaCima(this)">↑</button>
-                    <button onclick="moverParaBaixo(this)">↓</button>
-                    <button onclick="editarParada(this)">✎</button>
-                    <button onclick="removerParada(this)">✖</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>103</td>
-                  <td>-22.90813, -43.22259</td>
-                  <td>
-                    <button onclick="moverParaCima(this)">↑</button>
-                    <button onclick="moverParaBaixo(this)">↓</button>
-                    <button onclick="editarParada(this)">✎</button>
-                    <button onclick="removerParada(this)">✖</button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </fieldset>
-          
-          <div class="submit-button">
-            <button type="submit">Adicionar</button>
-          </div>
-          </div>
-        </form>
+            <fieldset>
+              <legend>Trajeto da linha</legend>
+              <div class="inputs">
+                <div>
+                  <label for="coordenada">Coordenada (Latitude, Longitude):</label>
+                  <input type="text" id="coordenada" placeholder="Ex: -22.91216, -43.23015">
+                </div>
+                
+                <div class="submit-button">
+                  <button type="button" onclick="adicionarParada(event)">Adicionar ponto de trajeto</button>
+                </div>
+              </div>
+    
+              <table id="trajetoTable">
+                <thead>
+                  <tr>
+                    <th>Ordem</th>
+                    <th>Latitude e Longitude</th>
+                    <th>Ações</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>101</td>
+                    <td>-22.91216, -43.23015</td>
+                    <td>
+                      <button onclick="moverParaCima(event, this)">↑</button>
+                      <button onclick="moverParaBaixo(event, this)">↓</button>
+                      <button onclick="editarParada(event, this)">✎</button>
+                      <button onclick="removerParada(event, this)">✖</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>102</td>
+                    <td>-22.91044, -43.22567</td>
+                    <td>
+                      <button onclick="moverParaCima(event, this)">↑</button>
+                      <button onclick="moverParaBaixo(event, this)">↓</button>
+                      <button onclick="editarParada(event, this)">✎</button>
+                      <button onclick="removerParada(event, this)">✖</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>103</td>
+                    <td>-22.90813, -43.22259</td>
+                    <td>
+                      <button onclick="moverParaCima(event, this)">↑</button>
+                      <button onclick="moverParaBaixo(event, this)">↓</button>
+                      <button onclick="editarParada(event, this)">✎</button>
+                      <button onclick="removerParada(event, this)">✖</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </fieldset>
+            
+            <div class="submit-button">
+              <button type="submit">Adicionar</button>
+            </div>
+          </form>
+      </div>
     </div>
+        
+        
 
     <div class="edit-section">
         <h2>Editar Rotas</h2>
         <div class="parada-item">
             <div class="parada-info">
-                <span>Rota</span>
-                <span>Variação</span>
+              <div class="name-item">
+                <p><span>Rota</span></p>
+                <p>| <span id="variacao">Variação</span></p>
+              </div>
             </div>
             <div class="parada-actions">
                 <button class="edit-btn">✏️</button>

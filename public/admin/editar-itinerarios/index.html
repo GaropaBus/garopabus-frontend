@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestão de Rotas</title>
+    <title>GaropabaBus | Gestão de Itinerários</title>
     <link rel="stylesheet" href="../../assets/css/gestao_adm.css">
 </head>
 <body>
@@ -28,7 +28,7 @@
                 </div>
                 
 
-                <fieldset>
+                <fieldset class="submit-button">
                     <legend>Horários</legend>
                     <input type="time" name="horario" id="horario">
                     <button id="select-time" type="button">Selecionar horário</button>
@@ -39,19 +39,7 @@
                     </div>
                 </fieldset>
 
-                <div>
-                    <div class="variacao-input">
-                        <input type="checkbox" name="variacao" id="variacao">
-                        <label for="variacao">Tem variação?</label>
-                    </div>
-                    <!-- Se o checkbox for marcado, mostra o campo -->
-                    <div id="variacao-details" style="display:none;">
-                        <label for="descricao">Variação</label>
-                        <input type="text" id="descricao" placeholder="Via ressecada">
-                    </div>
-                </div>
-
-                <fieldset>
+                <fieldset class="dias">
                     <legend>Dia(s)</legend>
                     <div class="dia">
                         <input type="checkbox" name="segunda" id="segunda">
@@ -98,7 +86,6 @@
                         |
                         <span>Variação</span>
                     </p>
-                    
                 </div>
                 <div class="parada-actions">
                     <button class="edit-btn">✏️</button>
