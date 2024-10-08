@@ -6,9 +6,36 @@
     <title>Gestão de Paradas</title>
     <link rel="stylesheet" href="../../assets/css/gestao_adm.css">
 </head>
+<style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    .login-section{
+        width: 400px;
+        padding: 3%;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background-color: #f9f9f9;
+    }
+
+    input[type="text"], input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+</style>
 <body>
     
-    <div class="form-section">
+    <div class="login-section">
         <form action="processa_login.php" method="post">
             <h2>Login</h2>
             <label for="username">Usuário:</label><br>
