@@ -39,6 +39,14 @@ button:hover {
     width: 95%;
 }
 
+.inputs{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
 h2 {
     margin-top: 0;
     margin-bottom: 20px;
@@ -46,7 +54,6 @@ h2 {
 
 label {
     display: block;
-    margin-bottom: 5px;
     color: #333;
 }
 
@@ -56,7 +63,7 @@ input, select {
     border-radius: 5px;
 }
 
-button[type="submit"] {
+.submit-button button{
     background-color: #444;
     color: white;
     padding: 10px 20px;
@@ -109,16 +116,20 @@ button[type="submit"]:hover {
 .dia, .variacao-input{
     display: flex;
     align-items: center;
-
+    gap: 10px;
 }
 
-.inp{
-    margin-bottom: 20px
+.dias{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
+
 
 fieldset{
     border: 1px solid rgba(209, 209, 209, 0.595);
     border-radius: 10px;
+    padding: 15px;
 }
 
 .times{
@@ -181,10 +192,6 @@ fieldset{
     margin-bottom: 20px;
 }
 
-fieldset.inp{
-    padding: 15px;
-}
-
 .selecionar-rota{
     padding: 10px 20px;
 }
@@ -206,4 +213,51 @@ fieldset.inp{
 
 .info p{
     overflow-wrap: break-word;
+}
+
+#trajetoTable {
+    width: 100%;
+}
+
+#trajetoTable td {
+    text-align: center; 
+    padding: 10px; 
+    max-width: 100%;
+}
+
+.name-item{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.title{
+    margin-bottom: 20px;
+}
+
+.title input[type=checkbox]{
+    display: none;
+}
+
+.title-rotas{
+    display: flex;
+    gap: 10px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    &::before{
+        content: "Adicionar Rota";
+        text-decoration: underline;
+    }   
+    &::after{
+        content: "Adicionar Variação em uma Rota";
+    }   
+}
+
+.title input[type='checkbox']:checked + .title-rotas{
+    &::after{
+        text-decoration: underline;
+    }
+    &::before{
+        text-decoration: none;
+    }
 }

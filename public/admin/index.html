@@ -1,16 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestão de Paradas</title>
-    <link rel="stylesheet" href="../assets/css/gestao_adm.css">
-</head>
-<body>
-    <a href="editar-paradas"><button>Editar Paradas</button></a>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GaropaBus | Admin</title>
+    <link rel="stylesheet" href="../assets/css/admin/auth.css" />
+    <script src="../assets/js/admin/auth.js" defer></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="container-title">Admin</h1>
 
-    <!-- Criar um sistema de autenticação da administração -->
+      <form class="container-form" id="auth-form">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" required />
+        </div>
 
-    <script src="script.js"></script>
-</body>
+        <div class="form-group">
+          <label for="password">Senha</label>
+          <input type="password" id="password" name="password" required />
+        </div>
+
+        <button type="submit" class="btn-submit">Entrar</button>
+      </form>
+    </div>
+  </body>
 </html>
