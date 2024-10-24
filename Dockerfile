@@ -16,9 +16,8 @@ RUN npm install
 # Copiando o resto do código da aplicação
 COPY . .
 
-# Expondo as portas 80 e 443
-EXPOSE 80
-EXPOSE 443
+# Expondo a porta 8011
+EXPOSE 8011
 
 # Comando para rodar o servidor
 CMD ["sh", "-c", "certbot renew --quiet --non-interactive && node server.js"]
