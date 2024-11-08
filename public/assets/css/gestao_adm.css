@@ -76,7 +76,7 @@ button[type="submit"]:hover {
     background-color: #555;
 }
 
-.edit-section .parada-item {
+.edit-section .item {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -167,7 +167,7 @@ fieldset{
     width: 100%;
 }
 
-.parada-item span{
+.item span{
     font-weight: bold;
 }
 
@@ -260,8 +260,4 @@ fieldset{
     &::before{
         text-decoration: none;
     }
-}
-
-.addVariacao{
-    display: none;
 }

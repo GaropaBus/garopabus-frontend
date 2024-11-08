@@ -58,11 +58,11 @@
           </fieldset>
 
           <div class="submit-button">
-            <button type="submit">Adicionar</button>
+            <button id="addNewRota">Adicionar</button>
           </div>
         </form>
       </div>
-      <div class="addVariacao">
+      <div class="addVariacao" hidden>
         <form class="inputs">
           <div class="name-rota-div inp">
             <select name="select-rota" id="select-rota">
@@ -153,21 +153,66 @@
 
     <div class="edit-section">
       <h2>Editar Rotas</h2>
-      <div class="parada-item">
-        <div class="parada-info">
-          <div class="name-item">
-            <p><span>Rota</span></p>
-            <p>| <span id="variacao">Variação</span></p>
+      <div id="rota-item">
+        <div>
+          <div class="item">
+            <div class="parada-info">
+              <div class="name-item">
+                <p><span>Rota: </span><span id="nameRotaDisplay">Garopaba x Rosa</span></p>
+                <p>| <span id="variacaoDisplay">Variação: Sem Variação</span></p>
+              </div>
+            </div>
+            <div class="parada-actions">
+              <button class="edit-btn" onclick="mostrarFormularioEdicao()">✏️ Editar</button>
+              <button class="delete-btn">❌</button>
+            </div>
           </div>
-        </div>
-        <div class="parada-actions">
-          <button class="edit-btn">✏️</button>
-          <button class="delete-btn">❌</button>
-        </div>
-      </div>
-      <!-- Repita .parada-item para mais itens -->
+        
+          <!-- Formulário para editar a rota -->
+          <div id="editForm" style="display: none;">
+            <form class="inputs">
+              <div class="name-rota-div inp">
+                <label for="edit-name-rota">Nome da Rota</label>
+                <input type="text" id="edit-name-rota" placeholder="Garopaba x Rosa" />
+              </div>
+        
+              <fieldset>
+                <legend>Trajeto da linha</legend>
+                <div class="inputs">
+                  <div>
+                    <label for="edit-coordenada">Coordenada (Latitude, Longitude):</label>
+                    <input type="text" id="edit-coordenada" placeholder="Ex: -22.91216, -43.23015" />
+                  </div>
+        
+                  <div class="submit-button">
+                    <button type="button" onclick="adicionarParada(event)">
+                      Adicionar ponto de trajeto
+                    </button>
+                  </div>
+                </div>
+        
+                <table id="edit-trajetoTable">
+                  <thead>
+                    <tr>
+                      <th>Ordem</th>
+                      <th>Latitude e Longitude</th>
+                      <th>Ações</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- Aqui serão adicionados os pontos de trajeto da rota -->
+                  </tbody>
+                </table>
+              </fieldset>
+        
+              <div class="submit-button">
+                <button type="button" onclick="salvarEdicao()">Salvar Alterações</button>
+              </div>
+            </form>
+          </div>
+        </div>        
     </div>
 
-    <script src="../../../assets/js/admin/gestao-rotas.js"></script>
+    <script src="../../../assets/js/admin/rotas/gestao-rotas.js"></script>
   </body>
 </html>
