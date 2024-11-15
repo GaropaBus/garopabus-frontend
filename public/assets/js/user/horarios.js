@@ -1,0 +1,121 @@
+import * as rotasAPI from './api/get.js';
+
+let rota; 
+
+const tbody_semana = document.getElementById('weekSchedule-tbody');
+const tbody_feriado = document.getElementById('weekendSchedule-tbody');
+
+const preencherTabelaHorariosSemana = () => {
+    if (!rota || !rota.horarios_semana) {
+        console.error("Dados da rota ou horários não encontrados");
+        return;
+    }
+
+    tbody_semana.innerHTML = '';
+
+    rota.horarios_semana.forEach(horario => {
+        const tr = document.createElement('tr');
+
+        const tdVariacao = document.createElement('td');
+        tdVariacao.textContent = horario.variacao;
+        tr.appendChild(tdVariacao);
+
+        const tdHorarioPartida = document.createElement('td');
+        tdHorarioPartida.textContent = horario.horarioPartida;
+        tr.appendChild(tdHorarioPartida);
+
+        const tdHorarioChegada = document.createElement('td');
+        tdHorarioChegada.textContent = horario.horarioChegada;
+        tr.appendChild(tdHorarioChegada);
+
+        tbody_semana.appendChild(tr);
+    });
+};
+
+const preencherTabelaHorariosFeriado = () => {
+    if (!rota || !rota.horarios_feriado) {
+        console.error("Dados da rota ou horários não encontrados");
+        return;
+    }
+
+    tbody_feriado.innerHTML = '';
+
+    rota.horarios_feriado.forEach(horario => {
+        const tr = document.createElement('tr');
+
+        const tdVariacao = document.createElement('td');
+        tdVariacao.textContent = horario.variacao;
+        tr.appendChild(tdVariacao);
+
+        const tdHorarioPartida = document.createElement('td');
+        tdHorarioPartida.textContent = horario.horarioPartida;
+        tr.appendChild(tdHorarioPartida);
+
+        const tdHorarioChegada = document.createElement('td');
+        tdHorarioChegada.textContent = horario.horarioChegada;
+        tr.appendChild(tdHorarioChegada);
+
+        tbody_feriado.appendChild(tr);
+    });
+};
+
+// Função para preencher o nome da rota
+const preencherNomeRota = () => {
+    const routeNameElement = document.getElementById('routeName');
+
+    if (!rota || !rota.nome) {
+        console.error("Nome da rota não encontrado");
+        return;
+    }
+
+    // Preenche o nome da rota
+    routeNameElement.textContent = rota.nome;
+};
+
+// Função para obter dados da API e inicializar o preenchimento
+const inicializarPagina = async () => {
+    try {
+        const urlParams = new URLSearchParams(window.location.search);
+        const rota_url = urlParams.get('rota') || 'Desconhecida';
+
+        rota = await rotasAPI.getRotaSelecionada(rota_url); // Salvar a primeira rota na variável global
+
+        const tituloPagina = document.title = `GaropaBus | ${rota.nome}`; 
+
+        preencherTabelaHorariosSemana(); // Preencher tabela de horários
+        preencherNomeRota(); // Preencher nome da rota
+        preencherTabelaHorariosFeriado();
+    } catch (error) {
+        console.error("Erro ao obter dados da API:", error);
+    }
+};
+
+document.addEventListener('DOMContentLoaded', inicializarPagina);
+
+
+window.changeTab= (tab) => {
+    const weekSchedule = document.getElementById('weekSchedule');
+    const weekendSchedule = document.getElementById('weekendSchedule');
+
+    if (tab === 'semana') {
+        weekSchedule.style.display = 'block';
+        weekendSchedule.style.display = 'none';
+    } else {
+        weekSchedule.style.display = 'none';
+        weekendSchedule.style.display = 'block';
+    }
+
+    // Limpar a classe 'active' de todos os elementos .tab
+    document.querySelectorAll('.tab').forEach(tabEl => {
+        tabEl.classList.remove('active');
+    });
+
+    // Adicionar a classe 'active' ao elemento clicado
+    const activeTab = tab === 'semana' ? document.querySelector('.tab:nth-child(1)') : document.querySelector('.tab:nth-child(2)');
+    activeTab.classList.add('active');
+}
+
+window.goBack = () => {
+    window.location.href = "/user/rotas-onibus";
+}
+

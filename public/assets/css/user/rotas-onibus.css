@@ -45,6 +45,7 @@
 .route-itens table tr .item-nome-rota{
     display: flex;
     align-items: center;
+    flex: 1;
 }
 
 .route-itens table tr .item-nome-rota p {
