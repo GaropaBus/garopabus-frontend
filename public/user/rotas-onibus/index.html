@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Rotas de Ônibus</title>
+    <link rel="stylesheet" href="../../assets/css/user/rotas-onibus.css">
+    <link rel="stylesheet" href="../../assets/css/user/navbar.css">
+    <link rel="stylesheet" href="../../assets/css/user/header.css">
+    <link rel="stylesheet" href="../../assets/css/base.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="main-title">
+                <i class="fa fa-bus"></i>
+                <h1>Horários de Ônibus</h1>
+            </div>
+            <div class="search-container">
+                <i class="fa fa-search"></i>
+                <input type="text" placeholder="Procure por rotas">
+            </div>
+        </header>
+
+        <!-- Lista de rotas -->
+        <div class="route-list" id="routeList">
+            <h2>Partindo de Garopaba</h2>
+            <div class="route-itens">
+                <table>
+                    <tbody id="tabelaRotas">
+                        <!-- Preenchido pelo back -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Visualização de horários -->
+
+        <nav>
+            <button>
+                <i class="fa-regular fa-map fa-fw"></i>
+                <div>
+                    Mapa
+                </div>
+            </button>
+            <button class="active">
+                <i class="fa fa-bus"></i>
+                <div>
+                    Rotas
+                </div>
+            </button>
+            <button>
+                <i class="fas fa-info-circle"></i>
+                <div>
+                    Ajuda
+                </div>
+            </button>
+        </nav>
+
+        <script type="module" src="../../assets/js/user/rotas-onibus.js"></script>
+</body>
+</html>
