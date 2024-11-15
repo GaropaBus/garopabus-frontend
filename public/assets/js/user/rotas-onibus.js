@@ -66,7 +66,7 @@ export const showSchedule = async (routeId) => {
         const routeName = selectedRoute.nome.replace(/ /g, '');
         
         // Utiliza query strings para redirecionar
-        const link = `http://localhost:8080/user/horarios/?rota=${encodeURIComponent(routeName)}`;
+        const link = `/user/horarios/?rota=${encodeURIComponent(routeName)}`;
 
         // Redireciona para o link com a query string
         window.location.href = link;
