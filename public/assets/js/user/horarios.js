@@ -159,8 +159,9 @@ container.addEventListener('touchend', () => {
             console.log('Swipe para a direita!');
             weekSchedule.style.display = 'block';
             weekendSchedule.style.display = 'none';
-            tabs[0].classList.remove('active')
-            tabs[1].classList.add('active')
+            
+            tabs[1].classList.remove('active')
+            tabs[0].classList.add('active')
             // Coloque aqui a função que deseja chamar para o swipe à direita
         }
         // Verificar se o swipe foi para a esquerda
@@ -168,8 +169,9 @@ container.addEventListener('touchend', () => {
             console.log('Swipe para a esquerda!');
             weekSchedule.style.display = 'none';
             weekendSchedule.style.display = 'block';
-            tabs[1].classList.remove('active')
-            tabs[0].classList.add('active')
+            
+            tabs[0].classList.remove('active')
+            tabs[1].classList.add('active')
             // Coloque aqui a função que deseja chamar para o swipe à esquerda
         }
     }
