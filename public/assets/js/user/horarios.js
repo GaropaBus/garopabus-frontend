@@ -119,3 +119,54 @@ window.goBack = () => {
     window.location.href = "/user/rotas-onibus";
 }
 
+
+
+/* Arrastar e trocar os horarios */
+
+let startX;
+let startY;
+let endX;
+let endY;
+
+const threshold = 50; // Distância mínima para considerar um swipe
+const container = document.querySelector('main'); // Elemento onde queremos detectar o swipe
+
+// Detecta o início do toque
+container.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+});
+
+// Detecta o movimento do toque (opcional, para detectar enquanto arrasta)
+container.addEventListener('touchmove', (e) => {
+    endX = e.touches[0].clientX;
+    endY = e.touches[0].clientY;
+});
+
+// Detecta o fim do toque
+container.addEventListener('touchend', () => {
+    const diffX = endX - startX;
+    const diffY = endY - startY;
+    
+    const weekSchedule = document.getElementById('weekSchedule');
+    const weekendSchedule = document.getElementById('weekendSchedule');
+
+    // Verificar se o movimento foi horizontal (esquerda ou direita)
+    if (Math.abs(diffX) > Math.abs(diffY)) {
+        // Verificar se o swipe foi para a direita
+        if (diffX > threshold) {
+            console.log('Swipe para a direita!');
+            weekSchedule.style.display = 'none';
+            weekendSchedule.style.display = 'block';
+            // Coloque aqui a função que deseja chamar para o swipe à direita
+        }
+        // Verificar se o swipe foi para a esquerda
+        else if (diffX < -threshold) {
+            console.log('Swipe para a esquerda!');
+            
+            weekSchedule.style.display = 'block';
+            weekendSchedule.style.display = 'none';
+            // Coloque aqui a função que deseja chamar para o swipe à esquerda
+        }
+    }
+});

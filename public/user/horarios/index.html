@@ -25,56 +25,58 @@
                 <h3 id="routeName">Rota Selecionada</h3>
             </div>
         </header>
-        <div class="schedule-view" id="scheduleView">
+        <main>
+            <div class="schedule-view" id="scheduleView">
 
-            <!-- Tabs -->
-            <div class="escolha-tipo-horario">
-                <div class="tab active" onclick="changeTab('semana')">Semana</div>
-                <div class="tab" onclick="changeTab('feriado')">Fim de Semana/Feriado</div>
+                <!-- Tabs -->
+                <div class="escolha-tipo-horario">
+                    <div class="tab active" onclick="changeTab('semana')">Semana</div>
+                    <div class="tab" onclick="changeTab('feriado')">Fim de Semana/Feriado</div>
+                </div>
+                <!-- Tabela de horários -->
+                <div id="weekSchedule">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Variação</th>
+                                <th>Horário Partida</th>
+                                <th>Horário Chegada</th>
+                            </tr>
+                        </thead>
+                        <tbody id="weekSchedule-tbody">
+                            <tr>
+                                <td>Direto</td>
+                                <td>06:45</td>
+                                <td>07:15</td>
+                            </tr>
+                            <tr>
+                                <td>Direto</td>
+                                <td>08:50</td>
+                                <td>09:20</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="weekendSchedule" style="display: none;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Variação</th>
+                                <th>Horário Partida</th>
+                                <th>Horário Chegada</th>
+                            </tr>
+                        </thead>
+                        <tbody id="weekendSchedule-tbody">
+                            <tr>
+                                <td>Direto</td>
+                                <td>06:40</td>
+                                <td>07:10</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <!-- Tabela de horários -->
-            <div id="weekSchedule">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Variação</th>
-                            <th>Horário Partida</th>
-                            <th>Horário Chegada</th>
-                        </tr>
-                    </thead>
-                    <tbody id="weekSchedule-tbody">
-                        <tr>
-                            <td>Direto</td>
-                            <td>06:45</td>
-                            <td>07:15</td>
-                        </tr>
-                        <tr>
-                            <td>Direto</td>
-                            <td>08:50</td>
-                            <td>09:20</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div id="weekendSchedule" style="display: none;">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Variação</th>
-                            <th>Horário Partida</th>
-                            <th>Horário Chegada</th>
-                        </tr>
-                    </thead>
-                    <tbody id="weekendSchedule-tbody">
-                        <tr>
-                            <td>Direto</td>
-                            <td>06:40</td>
-                            <td>07:10</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+        </main>
     </div>
     </div>
     <script type="module" src="../../assets/js/user/horarios.js"></script>
