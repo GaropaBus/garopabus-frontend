@@ -1,4 +1,4 @@
-import * as rotasAPI from './api/get.js';
+import * as apiGet from './api/get.js';
 
 let rota; 
 
@@ -78,7 +78,7 @@ const inicializarPagina = async () => {
         const urlParams = new URLSearchParams(window.location.search);
         const rota_url = urlParams.get('rota') || 'Desconhecida';
 
-        rota = await rotasAPI.getRotaSelecionada(rota_url); // Salvar a primeira rota na variável global
+        rota = await apiGet.getRotaSelecionada(rota_url); // Salvar a primeira rota na variável global
 
         const tituloPagina = document.title = `GaropaBus | ${rota.nome}`; 
 

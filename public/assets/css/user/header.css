@@ -61,3 +61,13 @@ header button{
     border: none;
     background-color: transparent;
 }
+
+header #img-logo-garopabus {
+    margin: auto;
+    width: 75%;
+    height: 150px; 
+    background-image: url('../../images/Logo_garopabus_horizontal.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}

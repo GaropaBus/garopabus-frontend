@@ -25,34 +25,43 @@
             </div>
         </header>
 
-        <!-- Lista de rotas -->
-        <div class="route-list" id="routeList">
-            <h2>Partindo de Garopaba</h2>
-            <div class="route-itens">
-                <table>
-                    <tbody id="tabelaRotas">
-                        <!-- Preenchido pelo back -->
-                    </tbody>
-                </table>
+        <div class="listas-rotas">
+            <div class="route-list">
+                <h2>Partindo de Garopaba</h2>
+                <div class="route-itens">
+                    <table>
+                        <tbody id="tabelaRotasPartindo">
+                            <!-- Preenchido pelo back -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="route-list">
+                <h2>Sentido para Garopaba</h2>
+                <div class="route-itens">
+                    <table>
+                        <tbody id="tabelaRotasSentido">
+                            <!-- Preenchido pelo back -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
-        <!-- Visualização de horários -->
-
         <nav>
-            <button>
+            <button id="garopabus-map">
                 <i class="fa-regular fa-map fa-fw"></i>
                 <div>
                     Mapa
                 </div>
             </button>
-            <button class="active">
+            <button id="garopabus-rotas">
                 <i class="fa fa-bus"></i>
                 <div>
                     Rotas
                 </div>
             </button>
-            <button>
+            <button id="garopabus-ajuda">
                 <i class="fas fa-info-circle"></i>
                 <div>
                     Ajuda
@@ -61,5 +70,6 @@
         </nav>
 
         <script type="module" src="../../assets/js/user/rotas-onibus.js"></script>
+        <script src="../../assets/js/user/nav.js"></script>
 </body>
 </html>
