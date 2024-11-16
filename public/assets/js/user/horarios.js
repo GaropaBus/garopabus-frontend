@@ -150,22 +150,26 @@ container.addEventListener('touchend', () => {
     
     const weekSchedule = document.getElementById('weekSchedule');
     const weekendSchedule = document.getElementById('weekendSchedule');
+    const tabs = document.querySelectorAll('.tab');
 
     // Verificar se o movimento foi horizontal (esquerda ou direita)
     if (Math.abs(diffX) > Math.abs(diffY)) {
         // Verificar se o swipe foi para a direita
         if (diffX > threshold) {
             console.log('Swipe para a direita!');
-            weekSchedule.style.display = 'none';
-            weekendSchedule.style.display = 'block';
+            weekSchedule.style.display = 'block';
+            weekendSchedule.style.display = 'none';
+            tabs[0].classList.remove('active')
+            tabs[1].classList.add('active')
             // Coloque aqui a função que deseja chamar para o swipe à direita
         }
         // Verificar se o swipe foi para a esquerda
         else if (diffX < -threshold) {
             console.log('Swipe para a esquerda!');
-            
-            weekSchedule.style.display = 'block';
-            weekendSchedule.style.display = 'none';
+            weekSchedule.style.display = 'none';
+            weekendSchedule.style.display = 'block';
+            tabs[1].classList.remove('active')
+            tabs[0].classList.add('active')
             // Coloque aqui a função que deseja chamar para o swipe à esquerda
         }
     }
