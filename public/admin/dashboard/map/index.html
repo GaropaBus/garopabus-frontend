@@ -73,7 +73,7 @@
             });
 
             map.addLayer({
-              id: "route",
+              id: "route1",
               type: "line",
               source: "route",
               layout: {
@@ -81,10 +81,10 @@
                 "line-join": "round",
               },
               paint: {
-                "line-color": "#888",
-                "line-width": 8,
-              },
-            });
+                  "line-color": "#888",
+                  "line-width": 8,
+                },
+            },'aerialway');
 
             // Centraliza o mapa na rota
             const bounds = new mapboxgl.LngLatBounds();
@@ -133,6 +133,8 @@
           )
           .addTo(map);
       });
+
+      
     </script>
   </body>
 </html>
