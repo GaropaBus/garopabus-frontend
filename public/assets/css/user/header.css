@@ -10,11 +10,7 @@ header .main-title{
 header h1 {
     font-size: 1.125rem;
     font-weight: bold;
-    margin-right: auto;
-}
-
-header .main-title i{
-    margin-right: auto;
+    margin: auto;
 }
 
 header .search-container, header .title-horario{
