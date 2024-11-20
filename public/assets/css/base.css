@@ -5,8 +5,15 @@
     font-family: Arial, Helvetica, sans-serif
 }
 
-body {
+.container {
     font-family: Arial, sans-serif;
     background-color: #F6F8F9;
     padding-bottom: 60px;
+    max-width: 1000px;
+    margin: auto;
+}
+
+nav{
+    max-width: 1000px;
+    margin: auto;
 }
