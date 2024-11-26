@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GaropaBus | Gestão de Itinerários</title>
+    <link rel="stylesheet" href="../../../assets/css/gestao_adm.css" />
+    <link rel="stylesheet" href="../../../assets/css/admin/editar-itinerarios.css">
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="../index.html"><button>Voltar</button></a>
+      </nav>
+    </header>
+    <main>
+      <div class="form-section">
+        <h2>Editar itinerários</h2>
+        <form class="inputs">
+          <div>
+            <label for="rotas">Rotas</label>
+            <select name="rotas" id="rotas">
+              <option value="null" disabled selected>Selecione uma rota</option>
+            </select>
+          </div>
+
+          <fieldset class="submit-button">
+            <legend>Horários</legend>
+            <div class="horarios">
+              <div>
+                <label for="horario-partida"> Partida</label>
+                <input type="time" name="horario" id="horario-partida" />
+              </div>
+              <div>
+                <label for="horario-chegada"> Chegada</label>
+                <input type="time" name="horario" id="horario-chegada" />
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="dias">
+            <legend>Dia(s)</legend>
+            <div class="dia">
+              <input class="inp-dia"  type="radio" name="tipo-dia" id="dia-util" data-tipoDia="dia_util"/>
+              <label for="dia-util">Dias Uteis</label>
+            </div>
+            <div class="dia">
+              <input class="inp-dia" type="radio" name="tipo-dia" id="final _semana_feriado" data-tipoDia="final _semana_feriado"/>
+              <label for="final _semana_feriado">Final de Semana/Feriado</label>
+            </div>
+          </fieldset>
+
+          <div class="submit-button">
+            <button id="submit">Adicionar</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="edit-section">
+        <h2>Itinerarios já cadastrados</h2>
+        <div class="parada-item">
+          <div class="parada-info">
+            <p>
+              <span>Garopaba X Rosa</span>
+              (<span>Variação</span>)
+            </p>
+          </div>
+          <div class="parada-actions">
+            <button class="edit-btn">✏️</button>
+            <button class="delete-btn">❌</button>
+          </div>
+        </div>
+        <!-- Repita .parada-item para mais itens -->
+      </div>
+    </main>
+
+    <script src="../../../assets/js/admin/editar-horarios-onibus.js" type="module"></script>
+  </body>
+</html>

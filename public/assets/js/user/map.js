@@ -1,3 +1,5 @@
+import * as apiGet from '../api/get.js';
+
 let watchId;
 // Função para iniciar o monitoramento de localização
 function iniciarMonitoramentoLocalizacao() {
@@ -84,15 +86,6 @@ const map = new mapboxgl.Map({
 // Waypoints (pontos de interesse)
 const waypoints = [
   "-48.62894836820254, -28.02746079165392",
-  "-48.628410903411876, -28.025598241783666",
-  "-48.621591752515485, -28.026523938849035",
-  "-48.621250363059566, -28.025854259476553",
-  "-48.61873356401721, -28.026090321928184",
-  "-48.619799252983604, -28.03086284299131",
-  "-48.62132002274654, -28.030795007331825",
-  "-48.66292993741211, -28.06737067528255",
-  "-48.66676338550059, -28.068160420248585",
-  "-48.66373924545923, -28.072476768416987",
   "-48.6737003441736, -28.099317038170057",
 ].join(";");
 
@@ -102,100 +95,48 @@ const url = `https://api.mapbox.com/directions/v5/mapbox/driving/${waypoints}?ge
 fetch(url).then((response) => response.json()).then((data) => {
   const route = data.routes[0].geometry.coordinates;
 
-  // Adiciona a rota ao mapa
+  // Adiciona apenas o marcador ao mapa
   map.on("load", () => {
     iniciarMonitoramentoLocalizacao();
 
-    map.addSource("route", {
-      type: "geojson",
-      data: {
-        type: "Feature",
-        geometry: {
-          type: "LineString",
-          coordinates: route,
-        },
-      },
-    });
-
-    map.addLayer({
-      id: "route1",
-      type: "line",
-      source: "route",
-      layout: {
-        "line-cap": "round",
-        "line-join": "round",
-      },
-      paint: {
-          "line-color": "#888",
-          "line-width": 8,
-        },
-    },'aerialway');
-
-    /* // Centraliza o mapa na rota
-    const bounds = new mapboxgl.LngLatBounds();
-    route.forEach((coord) => bounds.extend(coord));
-    map.fitBounds(bounds, { padding: 20 }); */
-
-
+    // Adiciona um marcador ao mapa
     const el = document.createElement("div");
     el.className = "user-marker";
-    userMarker = new mapboxgl.Marker(el).setLngLat([-48.67506218376818, -28.09891989595239]).addTo(map);
-    console.log(userMarker)
-    // Centraliza o mapa no usuário
+    userMarker = new mapboxgl.Marker(el)
+      .setLngLat([-48.67506218376818, -28.09891989595239])
+      .addTo(map);
+
+    console.log(userMarker);
+
+    // Centraliza o mapa no marcador do usuário
     setTimeout(() => {
       if (userMarker && userMarker.getLngLat) {
-        
-        centralizarMapa(); 
+        centralizarMapa();
       } else {
         console.error("Erro ao obter coordenadas do marcador.");
       }
     }, 1000); // Aguarda 1 segundo para garantir que o marcador tenha sido colocado
 
+    // Botão para centralizar o mapa no usuário
     const btn_centralizar = document.getElementById('centralizar-user');
     btn_centralizar.addEventListener('click', () => {
       centralizarMapa();
     });
   });
-
-  
 }).catch((error) => console.error("Error:", error));
 
 // Array de pontos de ônibus com coordenadas e informações
-const busStops = [
-{
-  coordinates: [-48.62894836820254, -28.02746079165392],
-  title: "Ponto de Ônibus 1",
-  description: "Este é o ponto de ônibus da rua principal.",
-},
-{
-  coordinates: [-48.628410903411876, -28.025598241783666],
-  title: "Ponto de Ônibus 2",
-  description: "Este ponto atende as linhas 5 e 7.",
-},
-{
-  coordinates: [-48.621591752515485, -28.026523938849035],
-  title: "Ponto de Ônibus 3",
-  description: "Ponto próximo ao parque.",
-},
-];
-
+let busStops = await apiGet.getAllBusStops();
 // Função para adicionar os pontos de ônibus ao mapa
 busStops.forEach(function (stop) {
-  // Cria um elemento HTML para o ícone do ponto de ônibus
   const el = document.createElement("div");
-  el.className = "bus-stop-marker";
-  el.style.width = "30px";
-  el.style.height = "30px";
-  el.style.backgroundImage =
-    "url(https://img.icons8.com/ios-filled/50/000000/bus.png)";
-  el.style.backgroundSize = "100%";
+  el.className = "parada-marker";
 
-  // Adiciona o marcador no mapa
   new mapboxgl.Marker(el)
     .setLngLat(stop.coordinates)
     .setPopup(
-      new mapboxgl.Popup({ offset: 25 }) // Popup ao clicar
-        .setHTML(`<h3>${stop.title}</h3><p>${stop.description}</p>`)
+      new mapboxgl.Popup({ offset: 25 })
+        .setHTML(`<p>Link Streat View: ${stop.linkStreatView}</p>`)
     )
     .addTo(map);
 });

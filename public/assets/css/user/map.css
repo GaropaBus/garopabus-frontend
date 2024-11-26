@@ -33,3 +33,23 @@ body {
   color: rgba(0, 0, 0, 0.742);
   font-size: 18px;
 }
+
+.parada-marker {
+  width: 15px;
+  height: 15px;
+  background-image: url('https://img.icons8.com/ios-filled/50/000000/bus.png');
+  background-size: cover;
+}
+
+.mapboxgl-popup-content{
+  max-width: 250px;
+}
+
+.mapboxgl-popup-content p{
+  margin-top: 10px;
+}
+
+.mapboxgl-popup-content button{
+  padding: 5px;
+  outline: none;
+}

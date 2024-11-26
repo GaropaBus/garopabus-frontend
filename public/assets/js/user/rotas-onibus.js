@@ -1,4 +1,4 @@
-import * as apiGet from './api/get.js';
+import * as apiGet from '../api/get.js';
 
 // Obter as rotas do backend
 const rotas = await apiGet.getRotasOnibus();

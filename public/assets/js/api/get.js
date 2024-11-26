@@ -242,3 +242,21 @@ export const getAvisos = async () => {
     ]
     return avisos
 }
+
+export const getAllBusStops = async () => {
+    const busStops = [
+        {
+          coordinates: [-48.62894836820254, -28.02746079165392],
+          linkStreatView: "Link aqui",
+        },
+        {
+          coordinates: [-48.628410903411876, -28.025598241783666],
+          linkStreatView: "Link aqui",
+        },
+        {
+          coordinates: [-48.621591752515485, -28.026523938849035],
+          linkStreatView: "Link aqui",
+        },
+    ];
+    return busStops;
+}

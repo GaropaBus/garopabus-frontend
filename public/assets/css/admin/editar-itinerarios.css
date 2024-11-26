@@ -1,0 +1,17 @@
+.dias{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.dia{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.horarios{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
