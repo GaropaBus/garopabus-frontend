@@ -126,8 +126,16 @@ fetch(url).then((response) => response.json()).then((data) => {
         "line-join": "round",
       },
       paint: {
-          "line-color": "#888",
-          "line-width": 8,
+          "line-color": "#1B5789",
+          "line-width": [
+            'interpolate',
+            ['linear'],
+            ["zoom"],
+            5, 2,
+            10, 4,
+            15, 6,
+            22, 8
+          ]
         },
     },'aerialway');
 
