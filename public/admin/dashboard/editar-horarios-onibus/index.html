@@ -4,8 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>GaropaBus | Gestão de Itinerários</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="../../../assets/css/gestao_adm.css" />
     <link rel="stylesheet" href="../../../assets/css/admin/editar-itinerarios.css">
+    <link rel="stylesheet" href="../../../assets/css/base_adm.css">
   </head>
   <body>
     <header>
@@ -56,23 +58,61 @@
         </form>
       </div>
 
-      <div class="edit-section">
-        <h2>Itinerarios já cadastrados</h2>
-        <div class="parada-item">
-          <div class="parada-info">
-            <p>
-              <span>Garopaba X Rosa</span>
-              (<span>Variação</span>)
-            </p>
-          </div>
-          <div class="parada-actions">
-            <button class="edit-btn">✏️</button>
-            <button class="delete-btn">❌</button>
-          </div>
-        </div>
+      <div class="edit-section" id="edit-section">
+        <h2 >Horarios já cadastrados</h2>
+        
         <!-- Repita .parada-item para mais itens -->
       </div>
     </main>
+    <div id="modal-backdrop" onclick="closeUpdadeModal()"></div>
+    <div id="modal">
+      <div id="modal-header">
+        <div>
+            <h2>Editando horário id <span id="id-horario-selecionado"></span></h2><i class="fa fa-x" id="close-button" onclick="closeUpdadeModal()"></i>
+        </div>
+      </div>
+      <div id="modal-main">
+        <div>
+          <form class="inputs">
+            <div>
+              <label for="rotas_updt">Rotas</label>
+              <select name="rotas_updt" id="rotas_updt">
+              </select>
+            </div>
+  
+            <fieldset class="submit-button">
+              <legend>Horários</legend>
+              <div class="horarios">
+                <div>
+                  <label for="horario-partida_updt"> Partida</label>
+                  <input type="time" name="horario_updt" id="horario-partida_updt" />
+                </div>
+                <div>
+                  <label for="horario-chegada"> Chegada</label>
+                  <input type="time" name="horario_updt" id="horario-chegada_updt" />
+                </div>
+              </div>
+            </fieldset>
+  
+            <fieldset class="dias">
+              <legend>Dia(s)</legend>
+              <div class="dia">
+                <input class="inp-dia_updt"  type="radio" name="tipo-dia_updt" id="dia-util_updt" data-tipoDia="dia_util"/>
+                <label for="dia-util">Dias Uteis</label>
+              </div>
+              <div class="dia">
+                <input class="inp-dia_updt" type="radio" name="tipo-dia_updt" id="final _semana_feriado_updt" data-tipoDia="final _semana_feriado"/>
+                <label for="final _semana_feriado">Final de Semana/Feriado</label>
+              </div>
+            </fieldset>
+  
+            <div class="submit-button">
+              <button id="submit_updt">Confirmar mudanças</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
 
     <script src="../../../assets/js/admin/editar-horarios-onibus.js" type="module"></script>
   </body>

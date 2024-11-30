@@ -11,9 +11,11 @@
     padding-bottom: 60px;
     max-width: 1000px;
     margin: auto;
+    min-height: 100vh;
 }
 
 nav{
     max-width: 1000px;
     margin: auto;
 }
+

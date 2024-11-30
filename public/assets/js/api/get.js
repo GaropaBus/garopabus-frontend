@@ -1,5 +1,3 @@
-// api/rotas-onibus.js
-
 export const getRotasOnibus = async () => {
     const rotas = [
         {
