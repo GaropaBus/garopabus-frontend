@@ -99,7 +99,45 @@ fetch(url).then((response) => response.json()).then((data) => {
   map.on("load", () => {
     iniciarMonitoramentoLocalizacao();
 
-    // Adiciona um marcador ao mapa
+    map.addSource("route", {
+      type: "geojson",
+      data: {
+        type: "Feature",
+        geometry: {
+          type: "LineString",
+          coordinates: route,
+        },
+      },
+    });
+
+    map.addLayer({
+      id: "route1",
+      type: "line",
+      source: "route",
+      layout: {
+        "line-cap": "round",
+        "line-join": "round",
+      },
+      paint: {
+          "line-color": "#1B5789",
+          "line-width": [
+            'interpolate',
+            ['linear'],
+            ["zoom"],
+            5, 2,
+            10, 4,
+            15, 6,
+            22, 8
+          ]
+        },
+    },'aerialway');
+
+    /* // Centraliza o mapa na rota
+    const bounds = new mapboxgl.LngLatBounds();
+    route.forEach((coord) => bounds.extend(coord));
+    map.fitBounds(bounds, { padding: 20 }); */
+
+
     const el = document.createElement("div");
     el.className = "user-marker";
     userMarker = new mapboxgl.Marker(el)
