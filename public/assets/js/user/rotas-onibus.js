@@ -1,5 +1,24 @@
 import * as apiGet from '../api/get.js';
 
+// Função para redirecionar para o link específico utilizando query strings
+export const showSchedule = async (routeId) => {
+    const selectedRoute = rotas.find(route => route.id === routeId);
+
+    if (selectedRoute) {
+        // Substitui espaços em branco no nome da rota para construir o nome na URL
+        const routeName = selectedRoute.nome.replace(/ /g, '');
+        
+        // Utiliza query strings para redirecionar
+        const link = `/user/horarios/?rota=${encodeURIComponent(routeName)}`;
+
+        // Redireciona para o link com a query string
+        window.location.href = link;
+    } else {
+        console.error('Rota não encontrada!');
+    }
+};
+
+
 // Função genérica para preencher a tabela
 const preencherTabelaRotas = (rotas, tbody) => {
     // Limpar o conteúdo existente na tabela
@@ -64,20 +83,3 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 });
 
-// Função para redirecionar para o link específico utilizando query strings
-export const showSchedule = async (routeId) => {
-    const selectedRoute = rotas.find(route => route.id === routeId);
-
-    if (selectedRoute) {
-        // Substitui espaços em branco no nome da rota para construir o nome na URL
-        const routeName = selectedRoute.nome.replace(/ /g, '');
-        
-        // Utiliza query strings para redirecionar
-        const link = `/user/horarios/?rota=${encodeURIComponent(routeName)}`;
-
-        // Redireciona para o link com a query string
-        window.location.href = link;
-    } else {
-        console.error('Rota não encontrada!');
-    }
-};
