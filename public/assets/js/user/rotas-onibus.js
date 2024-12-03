@@ -1,110 +1,67 @@
 import * as apiGet from '../api/get.js';
 
-// Obter as rotas do backend
-const rotas = await apiGet.getRotasOnibus();
-const rotas_partindo = await apiGet.getRotasOnibusPartindoGaropaba();
-const rotas_sentido = await apiGet.getRotasOnibusSentidoGaropaba();
+// Função genérica para preencher a tabela
+const preencherTabelaRotas = (rotas, tbody) => {
+    // Limpar o conteúdo existente na tabela
+    tbody.innerHTML = '';
 
-// Selecionar o elemento tbody da tabela
-const tbody_partindo = document.getElementById("tabelaRotasPartindo");
-const tbody_sentido = document.getElementById("tabelaRotasSentido");
-
-
-// Função para adicionar as rotas na tabela
-const preencherTabelaRotasPartindo = (rotas) => {
-    // Limpar o tbody antes de adicionar os dados
-    tbody_partindo.innerHTML = '';
-
-    // Percorrer todas as rotas e criar uma linha para cada uma
+    // Percorrer todas as rotas e adicionar as linhas
     rotas.forEach((rota) => {
-        const tr = document.createElement('tr'); // Criar uma nova linha
+        const tr = document.createElement('tr'); // Criar uma linha
 
-        // Coluna do nome da rota
+        // Coluna com o nome da rota
         const tdNome = document.createElement('td');
         tdNome.textContent = rota.nome;
-        tdNome.classList.add('item-nome-rota'); // Adiciona uma classe para estilizar
-        tdNome.onclick = () => showSchedule(rota.id);
+        tdNome.classList.add('item-nome-rota'); // Classe para estilização
+        tdNome.onclick = () => showSchedule(rota.id); // Ação ao clicar
         tr.appendChild(tdNome);
 
         // Coluna de ações com ícones
         const tdAcoes = document.createElement('td');
         tdAcoes.classList.add('buttons');
 
-        // Primeiro ícone (mapa)
+        // Ícone do mapa
         const divMapa = document.createElement('div');
         divMapa.classList.add('btn-table-routes-itens');
         const iconeMapa = document.createElement('i');
-        iconeMapa.classList.add('fa', 'fa-map-location-dot');
+        iconeMapa.classList.add('fa', 'fa-map-location-dot'); // Compatível com Font Awesome 4.7
         divMapa.appendChild(iconeMapa);
 
-        // Segundo ícone (ver horários)
+        // Ícone de horários
         const divHorarios = document.createElement('div');
         divHorarios.classList.add('btn-table-routes-itens');
         divHorarios.setAttribute('id', 'horarios');
         divHorarios.onclick = () => showSchedule(rota.id);
         const iconeHorarios = document.createElement('i');
-        iconeHorarios.classList.add('fa-regular', 'fa-clock', 'fa-fw');
+        iconeHorarios.classList.add('fa', 'fa-clock'); // Compatível com Font Awesome 4.7
         divHorarios.appendChild(iconeHorarios);
 
-        // Adiciona os ícones à coluna de ações
+        // Adicionar ícones à coluna de ações
         tdAcoes.appendChild(divMapa);
         tdAcoes.appendChild(divHorarios);
         tr.appendChild(tdAcoes);
 
         // Adicionar a linha ao tbody
-        tbody_partindo.appendChild(tr);
+        tbody.appendChild(tr);
     });
 };
 
-const preencherTabelaRotasSentido = (rotas) => {
-    // Limpar o tbody antes de adicionar os dados
-    tbody_sentido.innerHTML = '';
+document.addEventListener('DOMContentLoaded', async () => {
+    try {
+        // Obter dados das rotas do backend
+        const rotas_partindo = await apiGet.getRotasOnibusPartindoGaropaba();
+        const rotas_sentido = await apiGet.getRotasOnibusSentidoGaropaba();
 
-    // Percorrer todas as rotas e criar uma linha para cada uma
-    rotas.forEach((rota) => {
-        const tr = document.createElement('tr'); // Criar uma nova linha
+        // Selecionar os elementos do tbody das tabelas
+        const tbody_partindo = document.getElementById("tabelaRotasPartindo");
+        const tbody_sentido = document.getElementById("tabelaRotasSentido");
 
-        // Coluna do nome da rota
-        const tdNome = document.createElement('td');
-        tdNome.textContent = rota.nome;
-        tdNome.classList.add('item-nome-rota'); // Adiciona uma classe para estilizar
-        tdNome.onclick = () => showSchedule(rota.id);
-        tr.appendChild(tdNome);
-
-        // Coluna de ações com ícones
-        const tdAcoes = document.createElement('td');
-        tdAcoes.classList.add('buttons');
-
-        // Primeiro ícone (mapa)
-        const divMapa = document.createElement('div');
-        divMapa.classList.add('btn-table-routes-itens');
-        const iconeMapa = document.createElement('i');
-        iconeMapa.classList.add('fa', 'fa-map-location-dot');
-        divMapa.appendChild(iconeMapa);
-
-        // Segundo ícone (ver horários)
-        const divHorarios = document.createElement('div');
-        divHorarios.classList.add('btn-table-routes-itens');
-        divHorarios.setAttribute('id', 'horarios');
-        divHorarios.onclick = () => showSchedule(rota.id);
-        const iconeHorarios = document.createElement('i');
-        iconeHorarios.classList.add('fa-regular', 'fa-clock', 'fa-fw');
-        divHorarios.appendChild(iconeHorarios);
-
-        // Adiciona os ícones à coluna de ações
-        tdAcoes.appendChild(divMapa);
-        tdAcoes.appendChild(divHorarios);
-        tr.appendChild(tdAcoes);
-
-        // Adicionar a linha ao tbody
-        tbody_sentido.appendChild(tr);
-    });
-};
-
-// Preencher a tabela ao carregar a página
-document.addEventListener('DOMContentLoaded', () => {
-    preencherTabelaRotasPartindo(rotas_partindo);
-    preencherTabelaRotasSentido(rotas_sentido);
+        // Preencher as tabelas com os dados
+        preencherTabelaRotas(rotas_partindo, tbody_partindo);
+        preencherTabelaRotas(rotas_sentido, tbody_sentido);
+    } catch (error) {
+        console.error("Erro ao carregar as rotas:", error);
+    }
 });
 
 // Função para redirecionar para o link específico utilizando query strings

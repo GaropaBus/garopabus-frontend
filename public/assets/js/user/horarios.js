@@ -67,7 +67,6 @@ const preencherNomeRota = () => {
         console.error("Nome da rota não encontrado");
         return;
     }
-
     // Preenche o nome da rota
     routeNameElement.textContent = rota.nome;
 };
