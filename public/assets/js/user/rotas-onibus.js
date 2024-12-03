@@ -1,30 +1,5 @@
 import * as apiGet from '../api/get.js';
 
-// Função para redirecionar para o link específico utilizando query strings
-export const showSchedule = async (routeId) => {
-    try {
-        // Garantir que rotas é um array
-        const rotas = await apiGet.getRotasOnibus()
-
-        if (!Array.isArray(rotas)) {
-            console.error('Rotas não são um array!');
-            return;
-        }
-
-        const selectedRoute = rotas.find(route => route.id === routeId);
-
-        if (selectedRoute) {
-            const routeName = encodeURIComponent(selectedRoute.nome.replace(/\s+/g, ''));
-            const link = `/user/horarios/?rota=${routeName}`;
-            window.location.assign(link);
-        } else {
-            console.error('Rota não encontrada!');
-        }
-    } catch (error) {
-        console.error('Erro ao processar o redirecionamento:', error);
-    }
-};
-
 
 // Função genérica para preencher a tabela
 const preencherTabelaRotas = (rotas, tbody) => {
@@ -90,3 +65,27 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 });
 
+// Função para redirecionar para o link específico utilizando query strings
+export const showSchedule = async (routeId) => {
+    try {
+        // Garantir que rotas é um array
+        const rotas = await apiGet.getRotasOnibus()
+
+        if (!Array.isArray(rotas)) {
+            console.error('Rotas não são um array!');
+            return;
+        }
+
+        const selectedRoute = rotas.find(route => route.id === routeId);
+
+        if (selectedRoute) {
+            const routeName = encodeURIComponent(selectedRoute.nome.replace(/\s+/g, ''));
+            const link = `/user/horarios/?rota=${routeName}`;
+            window.location.assign(link);
+        } else {
+            console.error('Rota não encontrada!');
+        }
+    } catch (error) {
+        console.error('Erro ao processar o redirecionamento:', error);
+    }
+};
