@@ -13,7 +13,7 @@ const preencherTabelaHorariosSemana = () => {
 
     tbody_semana.innerHTML = '';
 
-    rota.horarios_semana.forEach(horario => {
+    for (const horario of rota.horarios_semana) {
         const tr = document.createElement('tr');
 
         const tdVariacao = document.createElement('td');
@@ -29,7 +29,7 @@ const preencherTabelaHorariosSemana = () => {
         tr.appendChild(tdHorarioChegada);
 
         tbody_semana.appendChild(tr);
-    });
+    }
 };
 
 const preencherTabelaHorariosFeriado = () => {
@@ -40,7 +40,7 @@ const preencherTabelaHorariosFeriado = () => {
 
     tbody_feriado.innerHTML = '';
 
-    rota.horarios_feriado.forEach(horario => {
+    for (const horario of rota.horarios_feriado) {
         const tr = document.createElement('tr');
 
         const tdVariacao = document.createElement('td');
@@ -56,7 +56,7 @@ const preencherTabelaHorariosFeriado = () => {
         tr.appendChild(tdHorarioChegada);
 
         tbody_feriado.appendChild(tr);
-    });
+    }
 };
 
 // Função para preencher o nome da rota

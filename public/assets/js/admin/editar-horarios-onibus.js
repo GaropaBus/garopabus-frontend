@@ -334,31 +334,3 @@ document.addEventListener('DOMContentLoaded', async () => {
         enviarUpdateHorario()
     })
 });
-
-
-document.addEventListener('DOMContentLoaded', () => {
-    const dropdownButton = document.getElementById('dropdownButton');
-    const dropdownMenu = document.getElementById('dropdownMenu');
-
-    // Alternar visibilidade do menu ao clicar no botão
-    dropdownButton.addEventListener('click', () => {
-        const isVisible = dropdownMenu.style.display === 'block';
-        dropdownMenu.style.display = isVisible ? 'none' : 'block';
-    });
-
-    // Ocultar o menu ao clicar fora do dropdown
-    document.addEventListener('click', (event) => {
-        if (!event.target.closest('.dropdown')) {
-            dropdownMenu.style.display = 'none';
-        }
-    });
-
-    // Adicionar ação aos itens do menu
-    const dropdownItems = document.querySelectorAll('.dropdown-item');
-    dropdownItems.forEach(item => {
-        item.addEventListener('click', (event) => {
-            alert(`Você selecionou: ${event.target.textContent}`);
-            dropdownMenu.style.display = 'none'; // Fechar o menu
-        });
-    });
-});
