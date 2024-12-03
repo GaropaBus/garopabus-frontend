@@ -1,4 +1,3 @@
-import * as apiGet from '../api/get.js';
 import * as apiGetBack from '../api/moldes_back/get.js'
 import * as apiPostBack from '../api/moldes_back/post.js'
 import * as apiDelete from '../api/moldes_back/delete.js'
@@ -337,3 +336,4 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 
+apiGetBack.rotasApi()

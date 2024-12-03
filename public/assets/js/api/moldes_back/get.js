@@ -126,6 +126,29 @@ export const getRotasList = async () => {
     return rotas
 }
 
+export const rotasApi = async () => {
+    try {
+        const response = await fetch('https://dev.api.garopabus.uk/rotas/', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error(`Erro: ${response.status} - ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        console.log('Rotas:', data);
+        return data;
+    } catch (error) {
+        console.error('Erro ao buscar as rotas:', error.message);
+    }
+};
+
+
+
 export const getRotasPrincipais = async () => {
     const rotas = await getRotasList()
     let rotas_principais = []
