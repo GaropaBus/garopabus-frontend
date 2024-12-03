@@ -1,20 +1,26 @@
 import * as apiGet from '../api/get.js';
 
+const rotas = await apiGet.getRotasOnibus()
 // Função para redirecionar para o link específico utilizando query strings
 export const showSchedule = async (routeId) => {
-    const selectedRoute = rotas.find(route => route.id === routeId);
+    try {
+        // Garantir que rotas é um array
+        if (!Array.isArray(rotas)) {
+            console.error('Rotas não são um array!');
+            return;
+        }
 
-    if (selectedRoute) {
-        // Substitui espaços em branco no nome da rota para construir o nome na URL
-        const routeName = selectedRoute.nome.replace(/ /g, '');
-        
-        // Utiliza query strings para redirecionar
-        const link = `/user/horarios/?rota=${encodeURIComponent(routeName)}`;
+        const selectedRoute = rotas.find(route => route.id === routeId);
 
-        // Redireciona para o link com a query string
-        window.location.href = link;
-    } else {
-        console.error('Rota não encontrada!');
+        if (selectedRoute) {
+            const routeName = encodeURIComponent(selectedRoute.nome.replace(/\s+/g, ''));
+            const link = `/user/horarios/?rota=${routeName}`;
+            window.location.assign(link);
+        } else {
+            console.error('Rota não encontrada!');
+        }
+    } catch (error) {
+        console.error('Erro ao processar o redirecionamento:', error);
     }
 };
 
