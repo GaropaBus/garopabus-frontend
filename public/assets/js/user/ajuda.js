@@ -5,7 +5,7 @@ const avisos = await apiGet.getAvisos()
 document.addEventListener('DOMContentLoaded', () => {
     const lista_aviso = document.getElementById('lista-avisos')
     lista_aviso.textContent = ''
-    for (const aviso_element of lista_aviso) {
+    for (const aviso_element of avisos) {
         const aviso = document.createElement('div')
         aviso.classList.add('aviso')
 
