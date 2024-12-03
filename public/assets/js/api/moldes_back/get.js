@@ -126,7 +126,7 @@ export const getRotasList = async () => {
     return rotas
 }
 
-export const rotasApi = async () => {
+/* export const rotasApi = async () => {
     try {
         const response = await fetch('https://dev.api.garopabus.uk/rotas/', {
             method: 'GET',
@@ -145,7 +145,7 @@ export const rotasApi = async () => {
     } catch (error) {
         console.error('Erro ao buscar as rotas:', error.message);
     }
-};
+}; */
 
 
 

@@ -41,6 +41,8 @@
     display: flex;
     flex-direction: column;
     gap: 7.5px;
+    cursor: pointer;
+
 }
 
 #variacao{
@@ -54,4 +56,51 @@
 
 .delete-mode:hover{
     background-color: #c00;
+}
+
+/* Estilos do dropdown */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.dropdown-button:hover {
+    background-color: #0056b3;
+}
+
+/* Menu do dropdown (inicialmente oculto) */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: white;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    margin-top: 5px;
+    padding: 0;
+    list-style: none;
+    width: 200px;
+    z-index: 1000;
+}
+
+.dropdown-item {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.dropdown-item:last-child {
+    border-bottom: none;
+}
+
+.dropdown-item:hover {
+    background-color: #f0f0f0;
 }
