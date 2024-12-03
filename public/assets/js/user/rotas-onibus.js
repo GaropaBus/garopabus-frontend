@@ -1,10 +1,11 @@
 import * as apiGet from '../api/get.js';
 
-const rotas = await apiGet.getRotasOnibus()
 // Função para redirecionar para o link específico utilizando query strings
 export const showSchedule = async (routeId) => {
     try {
         // Garantir que rotas é um array
+        const rotas = await apiGet.getRotasOnibus()
+
         if (!Array.isArray(rotas)) {
             console.error('Rotas não são um array!');
             return;
