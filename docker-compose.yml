@@ -1,0 +1,9 @@
+services:
+  app:
+    image: ${DOCKER_USERNAME}/garopabus-frontend:${IMAGE_TAG}
+    container_name: ${APP_CONTAINER_NAME}-frontend
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - "${PORT_FRONT}:8000"
