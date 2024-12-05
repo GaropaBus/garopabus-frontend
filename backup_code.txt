@@ -1,0 +1,104 @@
+index.html:
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1 id="titulo-pagina"></h1>
+
+    <button id="btn-pt-br">PT-BR</button>
+    <button id="btn-esp">ESP</button>
+    <button id="btn-eng">ENG</button>
+
+    <script type="module" src="main.js"></script>
+  </body>
+</html>
+
+
+main.js:
+
+import { Translate_Text } from "./langs.js";
+
+const DEFAULT_LANGUAGE = "PT-BR";
+const LANGUAGES = ["PT-BR", "ESP", "ENG"];
+
+const isLanguageStored = () => localStorage.getItem("language") !== null;
+
+const validLanguage = (lang) => {
+  if (!LANGUAGES.includes(lang)) {
+    console.log(`[System | Language] Language '${lang}' not identified.`);
+    return false;
+  }
+  return true;
+};
+
+const getLanguage = () => {
+  if (!isLanguageStored()) localStorage.setItem("language", DEFAULT_LANGUAGE);
+
+  let lang = localStorage.getItem("language");
+
+  if (!lang || !LANGUAGES.includes(lang)) {
+    lang = DEFAULT_LANGUAGE;
+    changeLanguage(lang);
+  }
+
+  return lang;
+};
+
+const changeLanguage = (lang) => {
+  if (!validLanguage(lang)) return;
+
+  localStorage.setItem("language", lang);
+  console.log(`[System | Language] Language changed to '${lang}'.`);
+  translate(lang);
+};
+
+const translate = (lang) => {
+  if (!validLanguage(lang)) return;
+
+  const translations = Translate_Text[lang];
+  if (translations) {
+    Object.keys(translations).forEach((key) => {
+      const element = document.getElementById(key);
+      if (element) {
+        element.textContent = translations[key];
+      }
+    });
+  }
+};
+
+document
+  .getElementById("btn-pt-br")
+  .addEventListener("click", () => changeLanguage("PT-BR"));
+document
+  .getElementById("btn-esp")
+  .addEventListener("click", () => changeLanguage("ESP"));
+document
+  .getElementById("btn-eng")
+  .addEventListener("click", () => changeLanguage("ENG"));
+
+function initLanguage() {
+  const lang = getLanguage();
+  translate(lang);
+}
+
+initLanguage();
+
+
+langs.js:
+
+export const Translate_Text = {
+  "PT-BR": {
+    "titulo-pagina": "Olá",
+  },
+  ESP: {
+    "titulo-pagina": "Hola",
+  },
+  ENG: {
+    "titulo-pagina": "Hello",
+  },
+};
