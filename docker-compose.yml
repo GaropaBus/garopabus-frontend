@@ -4,6 +4,6 @@ services:
     container_name: ${APP_CONTAINER_NAME}-frontend
     restart: always
     env_file:
-      - ../.env
+      - /home/ubuntu/dev-garopabus-files/.env
     ports:
       - "${PORT_FRONT}:8000"
