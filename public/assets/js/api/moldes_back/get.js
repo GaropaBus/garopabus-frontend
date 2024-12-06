@@ -1,134 +1,10 @@
 
+import * as util from '../util.js'
+
 // api de rotas 
 export const getRotasList = async () => {
-    const rotas = [
-        {
-            id: 1,
-            nome: "Garopaba X Rosa",
-            bairro_origem: "Garopaba",
-            bairro_destino: "Rosa",
-            nome_variacao: null,
-            id_variacao: null,
-            tipo: "principal",
-            status: true
-        },
-        {
-            id: 2,
-            nome: "Garopaba X Rosa (Ressacada)",
-            bairro_origem: "Garopaba",
-            bairro_destino: "Rosa",
-            nome_variacao: "Ressacada",
-            id_variacao: 1,
-            tipo: "variacao",
-            status: true
-        },
-        {
-            id: 3,
-            nome: "Garopaba X Campo Duna",
-            bairro_origem: "Garopaba",
-            bairro_destino: "Campo Duna",
-            nome_variacao: null,
-            id_variacao: null,
-            tipo: "principal",
-            status: true
-        },
-        {
-            id: 4,
-            nome: "Garopaba X Campo Duna (Ressacada)",
-            bairro_origem: "Garopaba",
-            bairro_destino: "Campo Duna",
-            nome_variacao: "Ressacada",
-            id_variacao: 3,
-            tipo: "variacao",
-            status: true
-        },
-        {
-            id: 5,
-            nome: "Garopaba X Imbituba",
-            bairro_origem: "Garopaba",
-            bairro_destino: "Imbituba",
-            nome_variacao: null,
-            id_variacao: null,
-            tipo: "principal",
-            status: true
-        },
-        {
-            id: 6,
-            nome: "Garopaba X Imbituba (Ressacada)",
-            bairro_origem: "Garopaba",
-            bairro_destino: "Imbituba",
-            nome_variacao: "Ressacada",
-            id_variacao: 5,
-            tipo: "variacao",
-            status: true
-        },
-        {
-            id: 7,
-            nome: "Rosa X Garopaba",
-            bairro_origem: "Rosa",
-            bairro_destino: "Garopaba",
-            nome_variacao: null,
-            id_variacao: null,
-            tipo: "principal",
-            status: true
-        },
-        {
-            id: 8,
-            nome: "Rosa X Garopaba (Ressacada)",
-            bairro_origem: "Rosa",
-            bairro_destino: "Garopaba",
-            nome_variacao: "Ressacada",
-            id_variacao: 9,
-            tipo: "variacao",
-            status: true
-        },
-        {
-            id: 9,
-            nome: "Campo Duna X Garopaba",
-            bairro_origem: "Campo Duna",
-            bairro_destino: "Garopaba",
-            nome_variacao: null,
-            id_variacao: null,
-            tipo: "principal",
-            status: true
-        },
-        {
-            id: 10,
-            nome: "Campo Duna X Garopaba (Ressacada)",
-            bairro_origem: "Campo Duna",
-            bairro_destino: "Garopaba",
-            nome_variacao: "Ressacada",
-            id_variacao: 11,
-            tipo: "variacao",
-            status: true
-        },
-        {
-            id: 11,
-            nome: "Imbituba X Garopaba",
-            bairro_origem: "Imbituba",
-            bairro_destino: "Garopaba",
-            nome_variacao: null,
-            id_variacao: null,
-            tipo: "principal",
-            status: true
-        },
-        {
-            id: 12,
-            nome: "Imbituba X Garopaba (Ressacada)",
-            bairro_origem: "Imbituba",
-            bairro_destino: "Garopaba",
-            nome_variacao: "Ressacada",
-            id_variacao: 13,
-            tipo: "variacao",
-            status: true
-        },
-    ]
-    return rotas
-}
-
-/* export const rotasApi = async () => {
     try {
-        const response = await fetch('https://dev.api.garopabus.uk/rotas/', {
+        const response = await fetch('https://dev.api.garopabus.uk/api/rotas/', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -140,16 +16,15 @@ export const getRotasList = async () => {
         }
 
         const data = await response.json();
-        console.log('Rotas:', data);
-        return data;
+        return await util.addNomeRota(data);
     } catch (error) {
         console.error('Erro ao buscar as rotas:', error.message);
     }
-}; */
-
+}
 
 
 export const getRotasPrincipais = async () => {
+    // /api/rotas/filtrado/
     const rotas = await getRotasList()
     let rotas_principais = []
     for (const rota of rotas) {
@@ -311,3 +186,38 @@ export const getHorariosRotaVariacao = async (rota_id) => {
 
     return listHorarios;
 };
+
+export const getPontosTrajeto = async () => {
+    const pontos_trajeto = [
+        {
+            id: 1,
+            ordem: 1,
+            latitude: "-28.02746079165392",
+            longitude: "-48.62894836820254",
+            id_rota: 1
+        },
+        {
+            id: 2,
+            ordem: 2,
+            latitude: "-28.025598241783666",
+            longitude: "-48.628410903411876",
+            id_rota: 1
+        },
+        {
+            id: 3,
+            ordem: 3,
+            latitude: "-28.026523938849035",
+            longitude: "-48.621591752515485",
+            id_rota: 1
+        },
+    ]
+
+    return pontos_trajeto
+}
+
+export const getPontosTrajetoRota = async (rota_id) => {
+    const pontos_trajeto = await getPontosTrajeto()
+    const pontos_trajeto_rota = pontos_trajeto.find(ponto_trajeto => ponto_trajeto.id_rota === rota_id)
+
+    return pontos_trajeto_rota
+}

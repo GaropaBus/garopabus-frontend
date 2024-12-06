@@ -3,14 +3,17 @@ import * as apiPostBack from '../api/moldes_back/post.js'
 import * as apiDelete from '../api/moldes_back/delete.js'
 
 const rotas = await apiGetBack.getRotasList();
+console.log(rotas)
 const rotas_principais = await apiGetBack.getRotasPrincipais(); // Obter as rotas principais
 
 // adicionar algum horario
 const addOptionRotas = async () => {
     try {
+        const rotas = await apiGetBack.getRotasList(); // Obtenha as rotas aqui
         const select_rotas = document.getElementById('rotas');
         
         rotas.forEach(element => {
+            console.log(element);
             const option = document.createElement('option');
             option.value = element.id;
             option.textContent = element.nome;
@@ -21,6 +24,7 @@ const addOptionRotas = async () => {
         alert('Erro ao carregar as rotas. Tente novamente mais tarde.');
     }
 };
+
 
 let hora_partida = '';
 let hora_chegada = '';

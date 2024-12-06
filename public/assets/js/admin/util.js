@@ -15,4 +15,4 @@ export const isCoordinate = async (str) => {
     const isValidLongitude = longitude >= -180 && longitude <= 180;
   
     return isValidLatitude && isValidLongitude;
-  }
+}
