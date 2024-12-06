@@ -57,22 +57,3 @@
 .delete-mode:hover{
     background-color: #c00;
 }
-
-/* Estilos do dropdown */
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-.dropdown-button {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.dropdown-button:hover {
-    background-color: #0056b3;
-}

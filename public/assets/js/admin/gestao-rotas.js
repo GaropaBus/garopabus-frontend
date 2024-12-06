@@ -1,12 +1,11 @@
 import * as util from './util.js';
 let new_rota = {}
 
-let trajetos_add = [];
 
 // Muda para adicionar uma variação em uma rota já existente
 const btn_AddRota_AddVariacao = document.getElementById('addRota-addVariacao');
-const div_addRota = document.querySelector('.addRota');
 const div_addVariacao = document.querySelector('.addVariacao');
+const div_addRota = document.querySelector('.addRota')
 
 btn_AddRota_AddVariacao.addEventListener('change', () => {
     if (btn_AddRota_AddVariacao.checked) {
@@ -19,39 +18,6 @@ btn_AddRota_AddVariacao.addEventListener('change', () => {
 });
 
 
-//Parte de modificar a tabela de trajetos
-function adicionarParada(event, tableId = "trajetoTable") {
-    event.preventDefault(); // Previne o envio do formulário e recarregamento da página
-
-    var coordenada = document.getElementById("coordenada").value;
-
-    // Verifica se a coordenada é válida
-    if (!coordenadaValida(coordenada)) {
-        alert("Por favor, insira uma coordenada válida! O formato correto é 'latitude,longitude' com valores numéricos.");
-        return;
-    }
-
-    var table = document.getElementById(tableId).getElementsByTagName('tbody')[0];
-    var novaLinha = table.insertRow();
-
-    var celulaOrdem = novaLinha.insertCell(0);
-    var celulaCoordenada = novaLinha.insertCell(1);
-    var celulaAcoes = novaLinha.insertCell(2);
-
-    // Define o texto da célula de ordem
-    celulaOrdem.innerText = table.getElementsByTagName('tr').length;
-    celulaCoordenada.innerText = coordenada;
-    celulaAcoes.innerHTML = `
-        <button type="button" onclick="moverParaCima(event, this, '${tableId}')">↑</button>
-        <button type="button" onclick="moverParaBaixo(event, this, '${tableId}')">↓</button>
-        <button type="button" onclick="editarParada(event, this, '${tableId}')">✎</button>
-        <button type="button" onclick="removerParada(event, this, '${tableId}')">✖</button>
-    `;
-
-    // Limpar os campos do formulário após adicionar
-    document.getElementById("coordenada").value = "";
-    atualizarOrdens(tableId);
-}
 
 
 // Adicionar uma nova rota
@@ -101,6 +67,40 @@ let rotas = [
 
 // Função para carregar os dados da rota para o formulário
 
+
+//Parte de modificar a tabela de trajetos
+function adicionarPontoTrajeto(event, tableId = "trajetoTable") {
+    event.preventDefault(); // Previne o envio do formulário e recarregamento da página
+
+    var coordenada = document.getElementById("coordenada").value;
+
+    // Verifica se a coordenada é válida
+    if (!util.coordenadaValida(coordenada)) {
+        alert("Por favor, insira uma coordenada válida! O formato correto é 'latitude,longitude' com valores numéricos.");
+        return;
+    }
+
+    var table = document.getElementById(tableId).getElementsByTagName('tbody')[0];
+    var novaLinha = table.insertRow();
+
+    var celulaOrdem = novaLinha.insertCell(0);
+    var celulaCoordenada = novaLinha.insertCell(1);
+    var celulaAcoes = novaLinha.insertCell(2);
+
+    // Define o texto da célula de ordem
+    celulaOrdem.innerText = table.getElementsByTagName('tr').length;
+    celulaCoordenada.innerText = coordenada;
+    celulaAcoes.innerHTML = `
+        <button type="button" onclick="moverParaCima(event, this, '${tableId}')">↑</button>
+        <button type="button" onclick="moverParaBaixo(event, this, '${tableId}')">↓</button>
+        <button type="button" onclick="editarParada(event, this, '${tableId}')">✎</button>
+        <button type="button" onclick="removerParada(event, this, '${tableId}')">✖</button>
+    `;
+
+    // Limpar os campos do formulário após adicionar
+    document.getElementById("coordenada").value = "";
+    atualizarOrdens(tableId);
+}
 // Gerar a lista de rotas e associar o botão de edição
 for (let i = 0; i < rotas.length; i++) {
     const rota = rotas[i];

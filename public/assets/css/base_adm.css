@@ -26,6 +26,134 @@
     background-color: #c00;
 }
 
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    margin: 0;
+    padding: 20px;
+}
+
+nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+button {
+    background-color: #444;
+    color: white;
+    padding: 15px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+.form-section, .edit-section {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin: auto;
+    margin-bottom: 20px;
+    width: 95%;
+}
+
+.inputs{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    color: #333;
+}
+
+input, select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.submit-button button{
+    background-color: #444;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #555;
+}
+
+.edit-section .item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background-color: #f0f0f0;    
+}
+
+.parada-actions{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 15px;
+    margin-right: 10px;
+}
+
+.parada-actions button {
+    background-color: #444;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+.parada-actions .edit-btn:hover {
+    background-color: #555;
+}
+
+.parada-actions .delete-btn:hover {
+    background-color: #c00;
+}
+
+.variacao-input{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+fieldset{
+    border: 1px solid rgba(209, 209, 209, 0.595);
+    border-radius: 10px;
+    padding: 15px;
+}
+
+/* Modal style */
 #modal-backdrop {
     display: none;
     position: fixed;
