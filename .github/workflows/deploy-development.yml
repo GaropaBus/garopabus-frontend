@@ -55,4 +55,4 @@ jobs:
           script: |
             cd /home/${{ secrets.VPS_USER }}/dev-garopabus-files/frontend/
             docker-compose pull
-            docker-compose down && docker-compose up -d --build
+            docker-compose down && docker-compose --env-file ../.env up -d --build
