@@ -1,73 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title id="metadata-title-help"></title>
+    <!-- GaropaBus - Ajuda -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/css/user/navbar.css" />
+    <link rel="stylesheet" href="../../assets/css/base.css" />
+    <link rel="stylesheet" href="../../assets/css/user/header.css" />
+    <link rel="stylesheet" href="../../assets/css/user/ajuda.css" />
+  </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GaropaBus | Ajuda</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="../../assets/css/user/navbar.css">
-    <link rel="stylesheet" href="../../assets/css/base.css">
-    <link rel="stylesheet" href="../../assets/css/user/header.css">
-    <link rel="stylesheet" href="../../assets/css/user/ajuda.css">
-</head>
-
-<body>
+  <body>
     <div class="container">
-        <header>
-            <div id="img-logo-garopabus"></div>
-        </header>
-        <main>
-            <div class="avisos-container">
-                <div class="avisos">
-                    <i class="fa-regular fa-clock fa-fw"></i>
-                    <h2>Avisos</h2>
-                </div>
-                <div class="lista-avisos" id="lista-avisos">
-                    <!-- Preenchido pelo back -->
-                </div>
-            </div>
+      <header>
+        <div id="img-logo-garopabus"></div>
+      </header>
+      <main>
+        <div class="avisos-container">
+          <div class="avisos">
+            <i class="fa-regular fa-clock fa-fw"></i>
+            <h2 id="label-title-help"></h2>
+            <!-- Avisos -->
+          </div>
+          <div class="lista-avisos" id="lista-avisos">
+            <!-- Preenchido pelo back -->
+          </div>
+        </div>
 
-            <div class="contato-container">
-                <div class="icon-contato">
-                    <i class="fa fa-phone"></i>
-                </div>
-                <div>
-                    <h2>
-                        Informações de contato
-                    </h2>
-                    <p>
-                        Para reclamações ou sugestões
-                    </p>
-                </div>
-                <div>
-                    <button>Contato</button>
-                </div>
-            </div>
-        </main>
+        <div class="contato-container">
+          <div class="icon-contato">
+            <i class="fa fa-phone"></i>
+          </div>
+          <div>
+            <h2 id="label-title-contact"></h2>
+            <!-- Informações de contato -->
+            <p id="label-description-contact"></p>
+            <!-- Para reclamações ou sugestões -->
+          </div>
+          <div>
+            <button id="label-button-contact"></button>
+            <!-- Contato -->
+          </div>
+        </div>
+      </main>
     </div>
+
     <nav>
-        <button id="garopabus-map">
-            <i class="fa-regular fa-map fa-fw"></i>
-            <div>
-                Mapa
-            </div>
-        </button>
-        <button id="garopabus-rotas">
-            <i class="fa fa-bus"></i>
-            <div>
-                Rotas
-            </div>
-        </button>
-        <button id="garopabus-ajuda">
-            <i class="fas fa-info-circle"></i>
-            <div>
-                Ajuda
-            </div>
-        </button>
+      <button id="garopabus-map">
+        <i class="fa-regular fa-map fa-fw"></i>
+        <div id="navbar-map"></div>
+        <!-- Mapa -->
+      </button>
+      <button id="garopabus-rotas">
+        <i class="fa fa-bus"></i>
+        <div id="navbar-routes"></div>
+        <!-- Rotas -->
+      </button>
+      <button id="garopabus-ajuda">
+        <i class="fas fa-info-circle"></i>
+        <div id="navbar-help"></div>
+        <!-- Ajuda -->
+      </button>
     </nav>
+
     <script type="module" src="../../assets/js/user/ajuda.js"></script>
     <script src="../../assets/js/user/nav.js"></script>
-</body>
-
+    <script src="../../assets/js/user/language.js"></script>
+  </body>
 </html>
