@@ -8,8 +8,8 @@ services:
     ports:
       - "${PORT_FRONT}:80"
     networks:
-      - ${APP_CONTAINER_NAME}_network
+      - ${APP_CONTAINER_NAME}-network
 
 networks:
-  ${APP_CONTAINER_NAME}_network:
+  ${APP_CONTAINER_NAME}-network:
     driver: bridge
