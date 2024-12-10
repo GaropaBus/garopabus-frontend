@@ -54,5 +54,6 @@ jobs:
           port: 22
           script: |
             cd /home/${{ secrets.VPS_USER }}/garopabus-files/frontend/
-            docker-compose pull
-            docker-compose --env-file ../.env down && docker-compose --env-file ../.env up -d --build
+            docker-compose --env-file ../.env down
+            docker-compose --env-file ../.env pull
+            docker-compose --env-file ../.env up -d --build
