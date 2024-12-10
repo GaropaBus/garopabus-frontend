@@ -1,8 +1,11 @@
 import * as util from './util.js'
+import * as apiGet from '../api/moldes_back/get.js'
 // Muda para adicionar uma variação em uma rota já existente
 const btn_AddRota_AddVariacao = document.getElementById('addRota-addVariacao');
 const div_addVariacao = document.querySelector('.addVariacao');
 const div_addRota = document.querySelector('.addRota')
+let rotas = []
+let rotas_filtradas = {}
 
 btn_AddRota_AddVariacao.addEventListener('change', () => {
     if (btn_AddRota_AddVariacao.checked) {
@@ -14,194 +17,190 @@ btn_AddRota_AddVariacao.addEventListener('change', () => {
     }
 });
 
+// add nova rota
+const addNewRota = () => {
+    const bairro_origem = document.getElementById('bairro-origem').value
+    const bairro_destino = document.getElementById('bairro-destino').value
 
-
-// Tabela de pontos de trajeto
-let trajetos_add = [];
-
-const moverParaCima = (event, botao, tableId = "trajetoTable") => {
-    event.preventDefault();
-
-    var linhaAtual = botao.parentElement.parentElement;
-    var linhaAnterior = linhaAtual.previousElementSibling;
-
-    if (linhaAnterior) {
-        // Troca as linhas
-        linhaAtual.parentElement.insertBefore(linhaAtual, linhaAnterior);
-
-        // Atualiza as ordens
-        atualizarOrdens(tableId);
-    }
-};
-
-
-const moverParaBaixo = (event, botao, tableId = "trajetoTable") => {
-    event.preventDefault();
-
-    var linhaAtual = botao.parentElement.parentElement;
-    var linhaProxima = linhaAtual.nextElementSibling;
-
-    if (linhaProxima) {
-        // Troca as linhas
-        linhaAtual.parentElement.insertBefore(linhaProxima, linhaAtual);
-
-        // Atualiza as ordens
-        atualizarOrdens(tableId);
-    }
-};
-
-
-const reorganizarTrajetos = (tableId = "trajetoTable") => {
-    var table = document.getElementById(tableId).getElementsByTagName('tbody')[0];
-    var linhas = table.getElementsByTagName('tr');
-
-    // Criar um novo array temporário para armazenar as paradas na nova ordem
-    var novosTrajetos = [];
-
-    for (var i = 0; i < linhas.length; i++) {
-        var celulaCoordenada = linhas[i].getElementsByTagName('td')[1].innerText;
-        // Adiciona a nova coordenada e a ordem correspondente à lista
-        novosTrajetos.push({
-            coordenada: celulaCoordenada,
-            ordem: i + 1
-        });
+    if(bairro_origem === '' || bairro_destino === ''){
+        alert('Alguma campo não foi preenchido')
+        return
     }
 
-    // Substitui trajetos_add pela nova ordem
-    trajetos_add = novosTrajetos;
+    const enviar = {
+        bairro_origem: bairro_origem,
+        bairro_destino: bairro_destino,
+        nome_variacao: null,
+        tipo: "principal",
+        status: true,
+        id_rota_principal: null,
+    }
+
+    console.log(enviar)
 }
 
-const atualizarOrdens = (tableId = "trajetoTable") => {
-    var table = document.getElementById(tableId).getElementsByTagName('tbody')[0];
-    var linhas = table.getElementsByTagName('tr');
-
-    // Atualiza as ordens na tabela
-    for (var i = 0; i < linhas.length; i++) {
-        var celulaOrdem = linhas[i].getElementsByTagName('td')[0];
-        celulaOrdem.innerText = i + 1; // Atualiza a ordem na tabela
-    }
-    reorganizarTrajetos(tableId);
-    console.log(trajetos_add);
-}
-    
-const removerParada = (event, botao, tableId = "trajetoTable") => {
-    event.preventDefault();
-
-    var linhaAtual = botao.parentElement.parentElement;
-    linhaAtual.remove();
-    atualizarOrdens(tableId);
-}
-
-const editarParada = (event, botao, tableId = "trajetoTable") => {
-    event.preventDefault();
-
-    var linhaAtual = botao.parentElement.parentElement;
-    var ordemAtual = parseInt(linhaAtual.cells[0].innerText);
-    var coordenadaAtual = linhaAtual.cells[1].innerText;
-
-    // Solicita as novas entradas do usuário
-    var novaOrdem = prompt("Editar Número da Linha:", ordemAtual);
-    var novaCoordenada = prompt("Editar Coordenada (Latitude, Longitude):", coordenadaAtual);
-
-    // Verifica se o usuário cancelou a operação
-    if (novaOrdem != null && novaCoordenada != null) {
-        // Se a nova ordem é diferente da atual, atualiza as ordens
-        if (novaOrdem != ordemAtual) {
-            // Atualiza a coordenada
-            linhaAtual.cells[1].innerText = novaCoordenada;
-
-            // Atualiza a ordem da linha atual
-            linhaAtual.cells[0].innerText = novaOrdem;
-
-            // Move a linha para a nova posição
-            moverLinhaParaNovaPosicao(linhaAtual, ordemAtual, parseInt(novaOrdem), tableId);
-        } else {
-            // Apenas atualiza a coordenada
-            linhaAtual.cells[1].innerText = novaCoordenada;
-        }
-    }
-}
-
-const moverLinhaParaNovaPosicao = (linhaAtual, ordemAntiga, novaOrdem, tableId = "trajetoTable") => {
-    var table = document.getElementById(tableId).getElementsByTagName('tbody')[0];
-    var linhas = table.getElementsByTagName('tr');
-
-    // Remove a linha atual da tabela
-    table.removeChild(linhaAtual);
-
-    // Insere a linha de volta na nova posição
-    if (novaOrdem <= linhas.length) {
-        // Insere a linha na posição correta
-        var linhaAlvo = linhas[novaOrdem - 1];
-        table.insertBefore(linhaAtual, linhaAlvo);
-    } else {
-        // Se a nova ordem for maior que o número de linhas, insere no final
-        table.appendChild(linhaAtual);
-    }
-
-    // Atualiza as ordens após mover a linha
-    atualizarOrdens(tableId);
-}
-
-const mostrarFormularioEdicao = (nameRota) => {
-    // Oculta todos os outros formulários
-    const allForms = document.querySelectorAll('[id^="editForm-"]');
-    allForms.forEach(form => form.style.display = 'none');
-
-    // Exibe apenas o formulário correspondente à rota clicada
-    const editForm = document.getElementById(`editForm-${nameRota}`);
-    if (editForm) {
-        editForm.style.display = "block";
-    }
-}
-
-//Parte de modificar a tabela de trajetos
-const adicionarPontoTrajeto = (event, tableId = "trajetoTable") => {
-    event.preventDefault(); // Previne o envio do formulário e recarregamento da página
-
-    var coordenada = document.getElementById("coordenada").value;
-
-    // Verifica se a coordenada é válida
-    if (!util.isCoordinate(coordenada)) {
-        alert("Por favor, insira uma coordenada válida! O formato correto é 'latitude,longitude' com valores numéricos.");
-        return;
-    }
-
-    var table = document.getElementById(tableId).getElementsByTagName('tbody')[0];
-    var novaLinha = table.insertRow();
-
-    var celulaOrdem = novaLinha.insertCell(0);
-    var celulaCoordenada = novaLinha.insertCell(1);
-    var celulaAcoes = novaLinha.insertCell(2);
-
-    // Define o texto da célula de ordem
-    celulaOrdem.innerText = table.getElementsByTagName('tr').length;
-    celulaCoordenada.innerText = coordenada;
-    celulaAcoes.innerHTML = `
-        <button type="button" onclick="moverParaCima(event, this, '${tableId}')">↑</button>
-        <button type="button" onclick="moverParaBaixo(event, this, '${tableId}')">↓</button>
-        <button type="button" onclick="editarParada(event, this, '${tableId}')">✎</button>
-        <button type="button" onclick="removerParada(event, this, '${tableId}')">✖</button>
-    `;
-
-    // Limpar os campos do formulário após adicionar
-    document.getElementById("coordenada").value = "";
-    atualizarOrdens(tableId);
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    // Corrige o seletor para buscar elementos pela classe
-    document.querySelectorAll('.btn-add-ponto-trajeto').forEach((element) => {
-        element.addEventListener('click', (event) => {
-            event.preventDefault(); // Previne o comportamento padrão do botão
-            adicionarPontoTrajeto(event); // Chama a função corretamente
-        });
+// add nova Variação
+const preencherRotas = () => {
+    const select_rota = document.getElementById('select-rota')
+    rotas.forEach(element => {
+        const option = document.createElement('option')
+        option.value = element.id
+        option.textContent = element.nome
+        select_rota.appendChild(option)
     });
-    
-    // Add Funções no escopo global
-    window.moverParaBaixo = moverParaBaixo;
-    window.moverParaCima = moverParaCima;
-    window.editarParada = editarParada;
-    window.removerParada = removerParada;
+}
 
-});
+const addNewVariacao = async () => {
+    const select_rota = document.getElementById('select-rota').value
+    const inp_nome_variacao = document.getElementById('nome-variacao').value
+    const rota = await apiGet.getRota(parseInt(select_rota))
+    const enviar = {
+        bairro_origem: rota.bairro_origem,
+        bairro_destino: rota.bairro_destino,
+        nome_variacao: inp_nome_variacao,
+        tipo: 'variacao',
+        status: true,
+        id_rota_principal: parseInt(select_rota)
+    }
+
+    console.log(enviar)
+}
+
+const closeUpdadeModal = () => {
+    const modal = document.getElementById('modal')
+    const modal_backdrop = document.getElementById('modal-backdrop')
+    modal_backdrop.style.display = 'none'
+    modal.style.display = 'none'
+}
+
+const openModal = async (id_rota) => {
+    const modal = document.getElementById('modal')
+    const modal_backdrop = document.getElementById('modal-backdrop')
+    const rota = await apiGet.getRota(id_rota)
+    document.getElementById('id-horario-selecionado').textContent = rota.id
+    const div_principal = document.getElementById('principal')
+    const div_variacao = document.getElementById('variacao')
+
+    if(rota.id_rota_principal === null) {
+        div_principal.style.display = 'block'
+        div_variacao.style.display = 'none'
+        document.getElementById('bairro-origem_edit').value = rota.bairro_origem
+        document.getElementById('bairro-destino_edit').value = rota.bairro_destino
+    
+       
+    } else {
+        div_principal.style.display = 'none'
+        div_variacao.style.display = 'block'
+        
+        document.getElementById('nome-variacao_edit').value = rota.nome_variacao
+        const select_rota = document.getElementById('select-rota_edit')
+        rotas.forEach(element => {
+            const option = document.createElement('option')
+            option.value = element.id
+            option.textContent = element.nome
+            if (option.value === rota.id) {
+                option.selected
+            }
+            select_rota.appendChild(option)
+        });
+
+        
+    }
+
+    document.getElementById('addNewRota_edit').addEventListener('click', (event) => {
+        event.preventDefault()
+        let enviar
+        if (div_principal.style.display === 'block'){
+            enviar = {
+                bairro_origem: document.getElementById('bairro-origem_edit').value,
+                bairro_destino: document.getElementById('bairro-destino_edit').value,
+                nome_variacao: null,
+                tipo: 'principal',
+                status: true,
+                id_rota_principal: null
+            }
+        } else if(div_variacao.style.display === 'block') {
+            enviar = {
+                bairro_origem: rota.bairro_origem,
+                bairro_destino: rota.bairro_destino,
+                nome_variacao: document.getElementById('nome-variacao_edit'),
+                tipo: 'variacao',
+                status: true,
+                id_rota_principal: document.getElementById('nome-variacao_edit').value
+            }
+        }
+        console.log(rota.id, enviar)
+        /* Enviar */
+    })
+
+    modal_backdrop.style.display = 'block'
+    modal.style.display = 'block'
+}
+
+const addRotasEdit = () => {
+    const div_sentido_bairros = document.getElementById('rotas-sentido-bairros')
+    const dic_sentido_garopaba = document.getElementById('rotas-sentido-garopaba')
+    rotas_filtradas.sentido_bairros.forEach(element => {
+        const div = `
+            <div class="item">
+                <div class="parada-info">
+                    <div class="name-item">
+                        <p>${element.nome}</p>
+                        ${element.id_rota_principal != null ? `<p>(${element.nome_variacao})</p>` : ""}
+                    </div>
+                </div>
+                <div class="parada-actions">
+                    <button class="edit-btn" onclick="openModal(${element.id})">✏️</button>
+                    <button class="delete-btn">❌</button>
+                </div>
+            </div>
+        `
+        div_sentido_bairros.innerHTML += div
+    })
+
+    rotas_filtradas.sentido_garopaba.forEach(element => {
+        const div = `
+            <div class="item">
+                <div class="parada-info">
+                    <div class="name-item">
+                        <p>${element.nome}</p>
+                        ${element.id_rota_principal != null ? `<p>(${element.nome_variacao})</p>` : ""}
+                    </div>
+                </div>
+                <div class="parada-actions">
+                    <button class="edit-btn" onclick="openModal(${element.id})">✏️</button>
+                    <button class="delete-btn">❌</button>
+                </div>
+            </div>
+        `
+        dic_sentido_garopaba.innerHTML += div
+    })
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
+    rotas_filtradas = await apiGet.getRotasFiltradas()
+    rotas_filtradas.sentido_bairros.forEach(element=> {
+        // mudar isso dps quando o back fazer a api certa 
+        rotas.push(element)
+    })
+    rotas_filtradas.sentido_garopaba.forEach(element=> {
+        // mudar isso dps quando o back fazer a api certa 
+        rotas.push(element)
+    })
+
+    preencherRotas()
+    document.getElementById('addNewRota').addEventListener('click', (event) =>{
+        event.preventDefault()
+        addNewRota()
+    })
+
+    document.getElementById('addNewVariacao').addEventListener('click', (event) => {
+        event.preventDefault()
+        addNewVariacao()
+    })
+
+    addRotasEdit()
+
+    window.closeUpdadeModal = closeUpdadeModal
+    window.openModal = openModal;
+})

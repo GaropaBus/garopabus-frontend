@@ -2,9 +2,6 @@ import * as apiGetBack from '../api/moldes_back/get.js'
 import * as apiPostBack from '../api/moldes_back/post.js'
 import * as apiDelete from '../api/moldes_back/delete.js'
 
-const rotas = await apiGetBack.getRotasList();
-console.log(rotas)
-const rotas_principais = await apiGetBack.getRotasPrincipais(); // Obter as rotas principais
 
 // adicionar algum horario
 const addOptionRotas = async () => {
@@ -13,7 +10,6 @@ const addOptionRotas = async () => {
         const select_rotas = document.getElementById('rotas');
         
         rotas.forEach(element => {
-            console.log(element);
             const option = document.createElement('option');
             option.value = element.id;
             option.textContent = element.nome;
@@ -319,9 +315,12 @@ const updateHorario = () => {
 };
 
 
-
+let rotas = []
+let rotas_principais = []
 // assim que a página abrir
 document.addEventListener('DOMContentLoaded', async () => {
+    rotas = await apiGetBack.getRotasList();
+    rotas_principais = await apiGetBack.getRotasPrincipais(); // Obter as rotas principais
     await addOptionRotas();
     const submit = document.getElementById('submit');
     submit.addEventListener('click', (event) => {

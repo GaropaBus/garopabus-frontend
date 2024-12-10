@@ -104,6 +104,11 @@ button[type="submit"]:hover {
     background-color: #555;
 }
 
+.edit-section h3{
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
 .edit-section .item {
     display: flex;
     justify-content: space-between;
@@ -168,17 +173,17 @@ fieldset{
 
 #modal {
     display: none;
-    position: fixed; /* Fixa o modal na tela do usuário */
-    top: 50%; /* Centraliza verticalmente */
-    left: 50%; /* Centraliza horizontalmente */
-    transform: translate(-50%, -50%); /* Ajusta a posição para o centro exato */
+    position: fixed; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
     background-color: white;
     width: 50%;
-    max-width: 600px; /* Define um limite máximo de largura */
+    max-width: 600px;
     padding: 20px;
     border-radius: 30px;
     box-shadow: 0px 0px 5px rgb(176, 176, 176);
-    z-index: 1000; /* Garante que fique acima de outros elementos */
+    z-index: 1000;
 }
 
 #close-button {
@@ -186,11 +191,11 @@ fieldset{
     top: 10px;
     right: 20px;
     cursor: pointer;
-    font-size: 20px; /* Ajuste o tamanho */
-    color: #333; /* Cor do X */
+    font-size: 20px; 
+    color: #333; 
     transition: color 0.3s ease;
 }
 
 #close-button:hover {
-    color: red; /* Muda a cor ao passar o mouse */
+    color: red;
 }

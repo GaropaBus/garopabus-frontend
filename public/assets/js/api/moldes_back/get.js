@@ -22,6 +22,25 @@ export const getRotasList = async () => {
     }
 }
 
+export const getRotasFiltradas = async () => {
+    try {
+        const response = await fetch('https://dev.api.garopabus.uk/api/rotas/filtrado/', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error(`Erro: ${response.status} - ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        return await util.addNomeRotasFiltradas(data);
+    } catch (error) {
+        console.error('Erro ao buscar as rotas:', error.message);
+    }
+}
 
 export const getRotasPrincipais = async () => {
     // /api/rotas/filtrado/

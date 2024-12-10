@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>GaropaBus | Gestão de Rotas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="../../../assets/css/gestao_adm.css" />
     <link rel="stylesheet" href="../../../assets/css/base_adm.css">
   </head>
@@ -19,45 +20,14 @@
       </div>
       <div class="addRota">
         <form class="inputs">
-          <div class="name-rota-div inp">
-            <label for="name-rota">Nome da Rota</label>
-            <input type="text" id="name-rota" placeholder="Garopaba x Rosa" />
+          <div class="inp">
+            <label for="bairro-origem">Bairro Origem</label>
+            <input type="text" id="bairro-origem" placeholder="Garopaba" />
           </div>
-
-          <fieldset>
-            <legend>Trajeto da linha</legend>
-            <div class="inputs">
-              <div>
-                <label for="coordenada"
-                  >Coordenada (Latitude, Longitude):</label
-                >
-                <input
-                  type="text"
-                  id="coordenada"
-                  placeholder="Ex: -22.91216, -43.23015"
-                />
-              </div>
-
-              <div class="submit-button">
-                <button type="button" class="btn-add-ponto-trajeto" >
-                  Adicionar ponto de trajeto
-                </button>
-              </div>
-            </div>
-
-            <table id="trajetoTable">
-              <thead>
-                <tr>
-                  <th>Ordem</th>
-                  <th>Latitude e Longitude</th>
-                  <th>Ações</th>
-                </tr>
-              </thead>
-              <tbody>
-              </tbody>
-            </table>
-          </fieldset>
-
+          <div class="inp">
+            <label for="bairro-destino">Bairro Destino</label>
+            <input type="text" id="bairro-destino" placeholder="Rosa" />
+          </div>
           <div class="submit-button">
             <button id="addNewRota">Adicionar</button>
           </div>
@@ -65,88 +35,22 @@
       </div>
       <div class="addVariacao" hidden>
         <form class="inputs">
-          <div class="name-rota-div inp">
+          <div class="inp">
             <select name="select-rota" id="select-rota">
               <option value="null" disabled selected>
                 Selecione uma rota existente
               </option>
-              <option value="Garopaba x Rosa">Garopaba x Rosa</option>
             </select>
           </div>
 
           <div>
             <div id="variacao-details">
-              <label for="descricao">Variação</label>
-              <input type="text" id="descricao" placeholder="Via ressecada" />
+              <label for="nome-variacao">Variação</label>
+              <input type="text" id="nome-variacao" placeholder="Via ressecada" />
             </div>
           </div>
-
-          <fieldset>
-            <legend>Trajeto da linha</legend>
-            <div class="inputs">
-              <div>
-                <label for="coordenada"
-                  >Coordenada (Latitude, Longitude):</label
-                >
-                <input
-                  type="text"
-                  id="coordenada"
-                  placeholder="Ex: -22.91216, -43.23015"
-                />
-              </div>
-
-              <div class="submit-button">
-                <button type="button" class="btn-add-ponto-trajeto" >
-                  Adicionar ponto de trajeto
-                </button>
-              </div>
-            </div>
-
-            <table id="trajetoTable">
-              <thead>
-                <tr>
-                  <th>Ordem</th>
-                  <th>Latitude e Longitude</th>
-                  <th>Ações</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>101</td>
-                  <td>-22.91216, -43.23015</td>
-                  <td>
-                    <button onclick="moverParaCima(event, this)">↑</button>
-                    <button onclick="moverParaBaixo(event, this)">↓</button>
-                    <button onclick="editarParada(event, this)">✎</button>
-                    <button onclick="removerParada(event, this)">✖</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>102</td>
-                  <td>-22.91044, -43.22567</td>
-                  <td>
-                    <button onclick="moverParaCima(event, this)">↑</button>
-                    <button onclick="moverParaBaixo(event, this)">↓</button>
-                    <button onclick="editarParada(event, this)">✎</button>
-                    <button onclick="removerParada(event, this)">✖</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>103</td>
-                  <td>-22.90813, -43.22259</td>
-                  <td>
-                    <button onclick="moverParaCima(event, this)">↑</button>
-                    <button onclick="moverParaBaixo(event, this)">↓</button>
-                    <button onclick="editarParada(event, this)">✎</button>
-                    <button onclick="removerParada(event, this)">✖</button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </fieldset>
-
           <div class="submit-button">
-            <button type="submit">Adicionar</button>
+            <button type="button" id="addNewVariacao">Adicionar</button>
           </div>
         </form>
       </div>
@@ -154,67 +58,59 @@
 
     <div class="edit-section">
       <h2>Editar Rotas</h2>
-      <div id="rota-item">
-        <div>
-          <div class="item">
-            <div class="parada-info">
-              <div class="name-item">
-                <p><span>Rota: </span><span id="nameRotaDisplay">Garopaba x Rosa</span></p>
-                <p>| <span id="variacaoDisplay">Variação: Sem Variação</span></p>
-              </div>
-            </div>
-            <div class="parada-actions">
-              <button class="edit-btn" onclick="mostrarFormularioEdicao()">✏️</button>
-              <button class="delete-btn">❌</button>
-            </div>
-          </div>
-        
-          <!-- Formulário para editar a rota -->
-          <div id="editForm" style="display: none;">
-            <form class="inputs">
-              <div class="name-rota-div inp">
-                <label for="edit-name-rota">Nome da Rota</label>
-                <input type="text" id="edit-name-rota" placeholder="Garopaba x Rosa" />
-              </div>
-        
-              <fieldset>
-                <legend>Trajeto da linha</legend>
-                <div class="inputs">
-                  <div>
-                    <label for="edit-coordenada">Coordenada (Latitude, Longitude):</label>
-                    <input type="text" id="edit-coordenada" placeholder="Ex: -22.91216, -43.23015" />
-                  </div>
-        
-                  <div class="submit-button">
-                    <button type="button" class="btn-add-ponto-trajeto" >
-                      Adicionar ponto de trajeto
-                    </button>
-                  </div>
-                </div>
-        
-                <table id="edit-trajetoTable">
-                  <thead>
-                    <tr>
-                      <th>Ordem</th>
-                      <th>Latitude e Longitude</th>
-                      <th>Ações</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <!-- Aqui serão adicionados os pontos de trajeto da rota -->
-                  </tbody>
-                </table>
-              </fieldset>
-        
-              <div class="submit-button">
-                <button type="button" onclick="salvarEdicao()">Salvar Alterações</button>
-              </div>
-            </form>
-          </div>
-        </div>        
-    </div>
+      <h3>Saindo de Garopaba</h3>
+      <div id="rotas-sentido-bairros">
+        <!-- Preenchido pelo js -->
+      </div>
 
+      <h3>Sentido a Garopaba</h3>
+      <div id="rotas-sentido-garopaba">
+        <!-- Preenchido pelo js -->
+      </div>
+    </div>
+    <div id="modal-backdrop" onclick="closeUpdadeModal()"></div>
+    <div id="modal">
+      <div id="modal-header">
+        <div>
+            <h2>Editando Rota id <span id="id-horario-selecionado"></span></h2><i class="fa fa-x" id="close-button" onclick="closeUpdadeModal()"></i>
+        </div>
+      </div>
+      <div id="modal-main">
+        <div id="principal">
+          <form class="inputs">
+            <div class="inp">
+              <label for="bairro-origem_edit">Bairro Origem</label>
+              <input type="text" id="bairro-origem_edit" placeholder="Garopaba" />
+            </div>
+            <div class="inp">
+              <label for="bairro-destino_edit">Bairro Destino</label>
+              <input type="text" id="bairro-destino_edit" placeholder="Rosa" />
+            </div>
+            <div class="submit-button">
+              <button id="addNewRota_edit">Confirmar edição</button>
+            </div>
+          </form>
+        </div>
+        <div id="variacao">
+          <form class="inputs">
+            <div class="inp">
+              <select name="select-rota" id="select-rota_edit">
+              </select>
+            </div>
+  
+            <div>
+              <div id="variacao-details">
+                <label for="nome-variacao">Variação</label>
+                <input type="text" id="nome-variacao_edit" placeholder="Via ressecada" />
+              </div>
+            </div>
+            <div class="submit-button">
+              <button type="button" id="addNewVariacao_edit">Confirmar edição</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
     <script type="module" src="../../../assets/js/admin/editar-rotas.js"></script>
-    <script type="module" src="../../../assets/js/admin/tabela-trajeto.js"></script>
   </body>
 </html>
