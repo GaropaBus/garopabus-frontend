@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  app:
+    image: ${DOCKER_USERNAME}/garopabus-frontend:${IMAGE_TAG}
+    container_name: ${APP_CONTAINER_NAME}-frontend
+    restart: always
+    ports:
+      - "${PORT_FRONT}:80"
