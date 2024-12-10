@@ -3,7 +3,7 @@ name: Deploy to VPS
 on:
   push:
     branches:
-      - development  # Roda o CI/CD apenas para a branch "main"
+      - development
 
 jobs:
   build:

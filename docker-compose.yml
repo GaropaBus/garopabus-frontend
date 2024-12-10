@@ -6,4 +6,4 @@ services:
     container_name: ${APP_CONTAINER_NAME}-frontend
     restart: always
     ports:
-      - "${PORT_FRONT}:8000"
+      - "${PORT_FRONT}:80"
