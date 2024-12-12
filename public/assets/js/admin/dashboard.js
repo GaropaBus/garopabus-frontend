@@ -1,4 +1,4 @@
-window.onload = () => {
+document.addEventListener('DOMContentLoaded', () => {
   const buttons = document.querySelectorAll(".dashboard-btn");
 
   buttons.forEach((button) => {
@@ -7,4 +7,4 @@ window.onload = () => {
       window.location.href = url;
     });
   });
-};
+})

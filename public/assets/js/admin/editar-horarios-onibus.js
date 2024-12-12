@@ -31,6 +31,9 @@ const getHorarios = () => {
     if (partidaInput.value === '' || chegadaInput.value === '') {
         alert('Algum horário não foi preenchido');
         return false;
+    } else if (partidaInput.value === chegadaInput.value){
+        alert('Não deixe os horarios iguas ( Dica: coloque no minimo 30min de diferença entre eles )')
+        return false;
     }
 
     hora_partida = partidaInput.value;
@@ -53,6 +56,30 @@ const getTipoDia = () => {
     return false;
 };
 
+const clearInformacoes = () => {
+     // Limpar o campo select
+     const rotaSelect = document.getElementById('rotas');
+     if (rotaSelect) {
+         rotaSelect.selectedIndex = 0; // Define para o primeiro item
+     }
+ 
+     // Limpar os campos de horário
+     const horarioPartida = document.getElementById('horario-partida');
+     const horarioChegada = document.getElementById('horario-chegada');
+     if (horarioPartida) {
+         horarioPartida.value = '';
+     }
+     if (horarioChegada) {
+         horarioChegada.value = '';
+     }
+ 
+     // Desmarcar os botões de rádio
+     const radioButtons = document.querySelectorAll('.inp-dia');
+     radioButtons.forEach(radio => {
+         radio.checked = false;
+     });
+}
+
 const addNewHorarioOnibus = () => {
     if (!getTipoDia()) return;
     if (!getHorarios()) return;
@@ -70,67 +97,76 @@ const addNewHorarioOnibus = () => {
         id_rota: select_value,
     };
 
+    console.log(enviar)
+    clearInformacoes()
 };
 
 // editar os horarios
-
 
 const addRotasHorariosEdit = async () => {
     const div_edit = document.getElementById('edit-section'); // Elemento onde os itens serão adicionados
 
     for (const rota of rotas_principais) {
-        // Obter os horários (com variações) de cada rota
-        const horarios_rota = await apiGetBack.getHorariosRotaVariacao(rota.id);
+        try {
+            // Obter os horários (com variações) de cada rota
+            const horarios_rota = await apiGetBack.getHorariosRota(
+                `${rota.bairro_origem.replace(/\s+/g, '').toLowerCase()}-${rota.bairro_destino.replace(/\s+/g, '').toLowerCase()}`
+            );
 
-        if (horarios_rota.length === 0) {
-            break;
-        }
+            // Validar se o retorno é um array
+            if (!Array.isArray(horarios_rota) || horarios_rota.length === 0) {
+                console.warn(`Horários não encontrados para a rota: ${rota.nome}`);
+                continue;
+            }
 
-        let horariosDiaUtilHtml = '';
-        let horariosFimDeSemanaHtml = '';
+            let horariosDiaUtilHtml = '';
+            let horariosFimDeSemanaHtml = '';
 
-        horarios_rota.forEach(horario => {
-            const horarioHtml = `
-                <div class="edit-time" data-id="${horario.id}"->
-                    <p id="variacao">${horario.tipo_varicao}</p>
-                    <p>Partida: <span>${horario.hora_partida}</span></p>
-                    <p>Chegada: <span>${horario.hora_chegada}</span></p>
+            horarios_rota.forEach(horario => {
+                const horarioHtml = `
+                    <div class="edit-time" data-id="${horario.id}">
+                        <p id="variacao">${horario.tipo_variacao}</p>
+                        <p>Partida: <span>${horario.hora_partida}</span></p>
+                        <p>Chegada: <span>${horario.hora_chegada}</span></p>
+                    </div>
+                `;
+                if (horario.dia_semana === 'dia_util') {
+                    horariosDiaUtilHtml += horarioHtml;
+                } else if (horario.dia_semana === 'fim_semana_feriado') {
+                    horariosFimDeSemanaHtml += horarioHtml;
+                }
+            });
+
+            const edit_item = `
+                <div class="edit-item">
+                    <div class="edit-info">
+                        <h3>
+                            <span>${rota.nome}</span>
+                        </h3>
+                        <div class="edit-tipo-dia">
+                            <h4>Dia Util</h4>
+                            <div class="edit-times">
+                                ${horariosDiaUtilHtml}
+                            </div>
+                        </div>
+                        
+                        <div class="edit-tipo-dia">
+                            <h4>Fim de semana/feriado</h4>
+                            <div class="edit-times">
+                                ${horariosFimDeSemanaHtml}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="parada-actions">
+                        <button class="edit-btn">✏️</button>
+                        <button class="delete-btn">❌</button>
+                    </div>
                 </div>
             `;
-            if (horario.dia_semana === 'dia_util') {
-                horariosDiaUtilHtml += horarioHtml;
-            } else if (horario.dia_semana === 'fim_semana_feriado') {
-                horariosFimDeSemanaHtml += horarioHtml;
-            }
-        });
-
-        const edit_item = `
-            <div class="edit-item">
-                <div class="edit-info">
-                    <h3>
-                        <span>${rota.nome}</span>
-                    </h3>
-                    <div class="edit-tipo-dia">
-                        <h4>Dia Util</h4>
-                        <div class="edit-times">
-                            ${horariosDiaUtilHtml}
-                        </div>
-                    </div>
-                    
-                    <div class="edit-tipo-dia">
-                        <h4>Fim de semana/feriado</h4>
-                        <div class="edit-times">
-                            ${horariosFimDeSemanaHtml}
-                        </div>
-                    </div>
-                </div>
-                <div class="parada-actions">
-                    <button class="edit-btn">✏️</button>
-                    <button class="delete-btn">❌</button>
-                </div>
-            </div>
-        `;
-        div_edit.innerHTML += edit_item;
+            div_edit.innerHTML += edit_item;
+        } catch (error) {
+            console.error(`Erro ao buscar horários para a rota ${rota.nome}:`, error);
+        }
     }
 };
 
@@ -294,7 +330,7 @@ const handleHorarioClick = async (dataId, action) => {
         openUpdadeModal(horario)
     } else if(dataId && action === 'exclusão'){
         if (confirm(`Deseja excluir o horário de ID ${dataId}?`)) {
-            deleteHorario(dataId); // Executa se o usuário clicar em "OK"
+            deleteHorario(dataId);
         }
     }
 };
@@ -320,7 +356,10 @@ let rotas_principais = []
 // assim que a página abrir
 document.addEventListener('DOMContentLoaded', async () => {
     rotas = await apiGetBack.getRotasList();
-    rotas_principais = await apiGetBack.getRotasPrincipais(); // Obter as rotas principais
+
+    // arrumar quando o back fazer a api certa
+    rotas_principais = await apiPostBack.getRotasListFiltrada({tipo: 'principal'});
+
     await addOptionRotas();
     const submit = document.getElementById('submit');
     submit.addEventListener('click', (event) => {

@@ -2,7 +2,7 @@
 import * as util from '../util.js'
 
 // api de rotas 
-export const getRotasList = async () => {
+export const getRotasList = async (tipo = '') => {
     try {
         const response = await fetch('https://dev.api.garopabus.uk/api/rotas/', {
             method: 'GET',
@@ -42,17 +42,8 @@ export const getRotasFiltradas = async () => {
     }
 }
 
-export const getRotasPrincipais = async () => {
-    // /api/rotas/filtrado/
-    const rotas = await getRotasList()
-    let rotas_principais = []
-    for (const rota of rotas) {
-        if (rota.tipo === 'principal') {
-            rotas_principais.push(rota)
-        }
-    }
-    return rotas_principais
-}
+
+
 
 export const getVariacaoRota = async (rota_id) => {
     const rotas = await getRotasList()
@@ -66,144 +57,83 @@ export const getVariacaoRota = async (rota_id) => {
 }
 
 export const getRota = async (rota_id) => {
-    const rotas = await getRotasList()
-    const rota = rotas.find((r) => r.id === rota_id);
-    return rota
+    try {
+        const response = await fetch(`https://dev.api.garopabus.uk/api/rotas/${rota_id}/`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error(`Erro: ${response.status} - ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        return await util.addNomeRotasFiltradas(data);
+    } catch (error) {
+        console.error('Erro ao buscar as rotas:', error.message);
+    }
 }
 
 export const getHorariosList = async () => {
-    const horarios = [
-        { 
-            id: 1, 
-            dia_semana: "dia_util", 
-            hora_partida: "06:45", 
-            hora_chegada: "07:15", 
-            id_rota: 1 
-        },
-        { 
-            id: 2, 
-            dia_semana: "dia_util", 
-            hora_partida: "08:50", 
-            hora_chegada: "09:20", 
-            id_rota: 1 
-        },
-        { 
-            id: 3, 
-            dia_semana: "dia_util", 
-            hora_partida: "12:30", 
-            hora_chegada: "13:00", 
-            id_rota: 1 
-        },
-        { 
-            id: 4, 
-            dia_semana: "dia_util", 
-            hora_partida: "10:15", 
-            hora_chegada: "10:45", 
-            id_rota: 2 
-        },
-        { 
-            id: 5, 
-            dia_semana: "fim_semana_feriado", 
-            hora_partida: "06:45", 
-            hora_chegada: "07:15", 
-            id_rota: 1 
-        },
-        { 
-            id: 6, 
-            dia_semana: "fim_semana_feriado", 
-            hora_partida: "08:50", 
-            hora_chegada: "09:20", 
-            id_rota: 1 
-        },
-        { 
-            id: 7, 
-            dia_semana: "dia_util", 
-            hora_partida: "06:45", 
-            hora_chegada: "07:15", 
-            id_rota: 3
-        },
-        { 
-            id: 8, 
-            dia_semana: "dia_util", 
-            hora_partida: "08:50", 
-            hora_chegada: "09:20", 
-            id_rota: 3
-        },
-        { 
-            id: 9, 
-            dia_semana: "dia_util", 
-            hora_partida: "12:30", 
-            hora_chegada: "13:00", 
-            id_rota: 3
-        },
-        { 
-            id: 10, 
-            dia_semana: "dia_util", 
-            hora_partida: "10:15", 
-            hora_chegada: "10:45", 
-            id_rota: 4 
-        },
-        { 
-            id: 11, 
-            dia_semana: "fim_semana_feriado", 
-            hora_partida: "06:45", 
-            hora_chegada: "07:15", 
-            id_rota: 3 
-        },
-        { 
-            id: 12, 
-            dia_semana: "fim_semana_feriado", 
-            hora_partida: "08:50", 
-            hora_chegada: "09:20", 
-            id_rota: 3
-        },
-    ];
-    return horarios
+    try {
+        const response = await fetch('https://dev.api.garopabus.uk/api/horarios/', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error(`Erro: ${response.status} - ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        return await util.addNomeRotasFiltradas(data);
+    } catch (error) {
+        console.error('Erro ao buscar os horarios:', error.message);
+    }
 }
 
 export const getHorario = async (horario_id) => {
-    const horarios = await getHorariosList(); 
-    const horario = horarios.find(horario => horario.id === horario_id);
-    return horario;
-};
+    try {
+        const response = await fetch(`https://dev.api.garopabus.uk/api/horarios/${horario_id}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
 
-export const getHorariosRota = async (rota_id) => {
-    const rota = await getRota(rota_id)
-    const horarios = await getHorariosList()
-    let horarios_rota = []
-    horarios.forEach(element => {
-        if (element.id_rota === rota_id) {
-            if (rota.nome_variacao === null) {
-                element['tipo_varicao'] = "Direto"
-            } else {
-                element['tipo_varicao'] = rota.nome_variacao
-            }
-            horarios_rota.push(element)
+        if (!response.ok) {
+            throw new Error(`Erro: ${response.status} - ${response.statusText}`);
         }
-    })
-    return horarios_rota
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Erro ao buscar os horarios:', error.message);
+    }
 };
 
-export const getHorariosRotaVariacao = async (rota_id) => {
-    const rotasVariacao = await getVariacaoRota(rota_id);
-    const rota = await getRota(rota_id);
-    let listHorarios = [];
+export const getHorariosRota = async (rota_name) => {
+    try {
+        const response = await fetch(`https:///dev.api.garopabus.uk/api/horarios/rota/${rota_name}/`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
 
-    const horariosRotaPrincipal = await getHorariosRota(rota_id);
-    listHorarios.push(...horariosRotaPrincipal);
+        if (!response.ok) {
+            throw new Error(`Erro: ${response.status} - ${response.statusText}`);
+        }
 
-    for (const variacao of rotasVariacao) {
-        const horariosVariacao = await getHorariosRota(variacao.id);
-        listHorarios.push(...horariosVariacao);
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Erro ao buscar os horarios:', error.message);
     }
-
-    listHorarios.sort((a, b) => {
-        const timeA = a.hora_partida.split(":").map(Number); 
-        const timeB = b.hora_partida.split(":").map(Number);
-        return timeA[0] - timeB[0] || timeA[1] - timeB[1];
-    });
-
-    return listHorarios;
 };
 
 export const getPontosTrajeto = async () => {
@@ -240,3 +170,30 @@ export const getPontosTrajetoRota = async (rota_id) => {
 
     return pontos_trajeto_rota
 }
+
+export const getTokenValid = async (token) => {
+    try {
+      const response = await fetch(`https://dev.api.garopabus.uk/api/token/validate/`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+      });
+  
+      if (!response.ok) {
+        if (response.status === 401) {
+          // Handle 401 (Unauthorized) response
+          throw new Error("Token inválido. Por favor, faça login novamente.");
+        } else {
+          throw new Error(`Erro: ${response.status} - ${response.statusText}`);
+        }
+      }
+  
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Erro ao validar token:', error.message);
+      throw error; // Re-throw the error for client-side handling
+    }
+  };
