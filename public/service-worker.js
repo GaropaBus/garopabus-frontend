@@ -11,7 +11,8 @@ const urlsToCache = [
     '/assets/css/index.css',
     '/assets/images/android-chrome-192x192.png',
     '/assets/images/android-chrome-512x512.png',
-    '/assets/images/favicon-32x32.png'
+    '/assets/images/favicon-32x32.png',
+    '/assets/images/Logo_garopabus_horizontal.png'
     // Adicione aqui todos os recursos essenciais do seu site
 ];
 

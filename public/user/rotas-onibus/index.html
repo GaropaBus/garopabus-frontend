@@ -74,6 +74,55 @@
             </button>
         </nav>
 
+        <div id="install-container" style="display:none; background-color:#f0f0f0; padding:15px; text-align:center; position:fixed; bottom:0; width:100%; z-index:1000;">
+            <p>Instale o Garopabus no seu celular! 
+                <button id="install-button" style="background-color:#007bff; color:white; border:none; padding:8px 15px; margin-left:10px;">Instalar</button>
+            </p>
+        </div>
+        
+        <script>
+            let deferredPrompt;
+            const installContainer = document.getElementById('install-container');
+            const installButton = document.getElementById('install-button');
+        
+            window.addEventListener('beforeinstallprompt', (e) => {
+                // Prevent Chrome 67 and earlier from automatically showing the prompt
+                e.preventDefault();
+                
+                // Stash the event so it can be triggered later.
+                deferredPrompt = e;
+                
+                // Show install banner
+                installContainer.style.display = 'block';
+            });
+        
+            installButton.addEventListener('click', async () => {
+                // Hide the app provided install button
+                installContainer.style.display = 'none';
+                
+                // Show the prompt
+                if (deferredPrompt) {
+                    deferredPrompt.prompt();
+                    
+                    // Wait for the user to respond to the prompt
+                    const { outcome } = await deferredPrompt.userChoice;
+                    
+                    if (outcome === 'accepted') {
+                        console.log('User accepted the install prompt');
+                    } else {
+                        console.log('User dismissed the install prompt');
+                    }
+                    
+                    deferredPrompt = null;
+                }
+            });
+        
+            // Hide banner if app is installed
+            window.addEventListener('appinstalled', (evt) => {
+                installContainer.style.display = 'none';
+            });
+        </script>
+
         <script type="module" src="../../assets/js/user/rotas-onibus.js"></script>
         <script src="../../assets/js/user/nav.js"></script>
         <script>
