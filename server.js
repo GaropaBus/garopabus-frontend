@@ -1,7 +1,5 @@
 import express from "express";
-import https from "https";
 import http from "http";
-import fs from "fs";
 import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
