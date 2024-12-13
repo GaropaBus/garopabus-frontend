@@ -1,58 +1,59 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GaropabaBus | Map</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title id="metadata-title-map"></title>
+    <!-- GaropaBus - Mapa -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.js"></script>
     <link
       href="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.css"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="../../assets/css/user/map.css">
-    <link rel="stylesheet" href="../../assets/css/user/header.css">
-    <link rel="stylesheet" href="../../assets/css/base.css">
-    <link rel="stylesheet" href="../../assets/css/user/navbar.css">
-</head>
-<body>
+    <link rel="stylesheet" href="../../assets/css/user/map.css" />
+    <link rel="stylesheet" href="../../assets/css/user/header.css" />
+    <link rel="stylesheet" href="../../assets/css/base.css" />
+    <link rel="stylesheet" href="../../assets/css/user/navbar.css" />
+  </head>
+  <body>
     <div class="container">
-        <header>
-            <div class="main-title">
-                <h1>GaropaBus</h1>
-            </div>
-        </header>
-        <main>
-            <div id="map"></div>
-            <button id="centralizar-user">
-                <i class="fas fa-crosshairs"></i>
-            </button>
-        </main>
+      <header>
+        <div class="main-title">
+          <h1>GaropaBus</h1>
+        </div>
+      </header>
+      <main>
+        <div id="map"></div>
+        <button id="centralizar-user">
+          <i class="fas fa-crosshairs"></i>
+        </button>
+      </main>
     </div>
-    
 
     <nav>
-        <button id="garopabus-map">
-            <i class="fa-regular fa-map fa-fw"></i>
-            <div>
-                Mapa
-            </div>
-        </button>
-        <button id="garopabus-rotas">
-            <i class="fa fa-bus"></i>
-            <div>
-                Rotas
-            </div>
-        </button>
-        <button id="garopabus-ajuda">
-            <i class="fas fa-info-circle"></i>
-            <div>
-                Ajuda
-            </div>
-        </button>
+      <button id="garopabus-map">
+        <i class="fa-regular fa-map fa-fw"></i>
+        <div id="navbar-map"></div>
+        <!-- Mapa -->
+      </button>
+      <button id="garopabus-rotas">
+        <i class="fa fa-bus"></i>
+        <div id="navbar-routes"></div>
+        <!-- Rotas -->
+      </button>
+      <button id="garopabus-ajuda">
+        <i class="fas fa-info-circle"></i>
+        <div id="navbar-help"></div>
+        <!-- Ajuda -->
+      </button>
     </nav>
 
     <script src="../../assets/js/user/map.js" type="module"></script>
     <script src="../../assets/js/user/nav.js"></script>
-</body>
+    <script src="../../assets/js/user/language.js"></script>
+  </body>
 </html>

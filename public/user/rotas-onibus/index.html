@@ -1,75 +1,81 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <title id="metadata-title-routes"></title>
+    <!-- GaropaBus - Rotas -->
+    <link rel="stylesheet" href="../../assets/css/user/rotas-onibus.css" />
+    <link rel="stylesheet" href="../../assets/css/user/navbar.css" />
+    <link rel="stylesheet" href="../../assets/css/user/header.css" />
+    <link rel="stylesheet" href="../../assets/css/base.css" />
+  </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <title>Rotas de Ônibus</title>
-    <link rel="stylesheet" href="../../assets/css/user/rotas-onibus.css">
-    <link rel="stylesheet" href="../../assets/css/user/navbar.css">
-    <link rel="stylesheet" href="../../assets/css/user/header.css">
-    <link rel="stylesheet" href="../../assets/css/base.css">
-</head>
-
-<body>
+  <body>
     <div class="container">
-        <header>
-            <div class="main-title">
-                <i class="fa fa-bus"></i>
-                <h1>Horários de Ônibus</h1>
-            </div>
-            <div class="search-container">
-                <i class="fa fa-search"></i>
-                <input type="text" placeholder="Procure por rotas">
-            </div>
-        </header>
-
-        <div class="listas-rotas">
-            <div class="route-list">
-                <h2>Partindo de Garopaba</h2>
-                <div class="route-itens">
-                    <table>
-                        <tbody id="tabelaRotasPartindo">
-                            <!-- Preenchido pelo back -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="route-list">
-                <h2>Sentido para Garopaba</h2>
-                <div class="route-itens">
-                    <table>
-                        <tbody id="tabelaRotasSentido">
-                            <!-- Preenchido pelo back -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+      <header>
+        <div class="main-title">
+          <i class="fa fa-bus"></i>
+          <h1 id="label-title-routes"></h1>
+          <!-- Rota dos Ônibus -->
         </div>
+        <div class="search-container">
+          <i class="fa fa-search"></i>
+          <input type="text" placeholder="" id="placeholder-search-routes" />
+          <!-- Procure por rotas -->
+        </div>
+      </header>
 
-        <nav>
-            <button id="garopabus-map">
-                <i class="fa-regular fa-map fa-fw"></i>
-                <div>
-                    Mapa
-                </div>
-            </button>
-            <button id="garopabus-rotas">
-                <i class="fa fa-bus"></i>
-                <div>
-                    Rotas
-                </div>
-            </button>
-            <button id="garopabus-ajuda">
-                <i class="fas fa-info-circle"></i>
-                <div>
-                    Ajuda
-                </div>
-            </button>
-        </nav>
+      <div class="listas-rotas">
+        <div class="route-list">
+          <h2 id="label-form-outgaropaba"></h2>
+          <!-- Partindo de Garopaba -->
+          <div class="route-itens">
+            <table>
+              <tbody id="tabelaRotasPartindo">
+                <!-- Preenchido pelo back -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="route-list">
+          <h2 id="label-form-togaropaba"></h2>
+          <!-- Sentido para Garopaba -->
+          <div class="route-itens">
+            <table>
+              <tbody id="tabelaRotasSentido">
+                <!-- Preenchido pelo back -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
 
-        <script type="module" src="../../assets/js/user/rotas-onibus.js"></script>
-        <script src="../../assets/js/user/nav.js"></script>
-</body>
+      <nav>
+        <button id="garopabus-map">
+          <i class="fa-regular fa-map fa-fw"></i>
+          <div id="navbar-map"></div>
+          <!-- Mapa -->
+        </button>
+        <button id="garopabus-rotas">
+          <i class="fa fa-bus"></i>
+          <div id="navbar-routes"></div>
+          <!-- Rotas -->
+        </button>
+        <button id="garopabus-ajuda">
+          <i class="fas fa-info-circle"></i>
+          <div id="navbar-help"></div>
+          <!-- Ajuda -->
+        </button>
+      </nav>
+
+      <script type="module" src="../../assets/js/user/rotas-onibus.js"></script>
+      <script src="../../assets/js/user/nav.js"></script>
+      <script src="../../assets/js/user/language.js"></script>
+    </div>
+  </body>
 </html>
