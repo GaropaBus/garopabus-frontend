@@ -3,12 +3,14 @@
     "title-map": "GaropaBus - Map",
     "title-routes": "GaropaBus - Routes",
     "title-hours": "GaropaBus - Hours",
-    "title-help": "GaropaBus - Help"
+    "title-help": "GaropaBus - Help",
+    "title-settings": "GaropaBus - Settings"
   },
   "navbar": {
     "map": "Map",
     "routes": "Routes",
-    "help": "Help"
+    "help": "Help",
+    "settings": "Settings"
   },
   "label": {
     "title-routes": "Bus routes",
@@ -20,7 +22,8 @@
     "form-outgaropaba": "Departing from Garopaba",
     "form-togaropaba": "To Garopaba",
     "tab-week": "Week",
-    "tab-weekend": "Weekend/Holiday"
+    "tab-weekend": "Weekend/Holiday",
+    "settings-language": "Language"
   },
   "placeholder": {
     "search-routes": "Search for routes"

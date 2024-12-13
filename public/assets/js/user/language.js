@@ -2,7 +2,7 @@ const VALID_LANGUAGES = ["pt-br", "esp", "eng"];
 const DEFAULT_LANGUAGE = "pt-br";
 const STORAGE_KEY = "language";
 
-const loadTranslations = async () => {
+export const loadTranslations = async () => {
   const langs = {};
 
   try {
@@ -20,7 +20,7 @@ const loadTranslations = async () => {
   return langs;
 };
 
-const translatePage = (language, langs) => {
+export const translatePage = (language, langs) => {
   const data = langs[language];
 
   const elements = document.querySelectorAll("*");
@@ -56,6 +56,17 @@ const translatePage = (language, langs) => {
       }
     }
   });
+};
+
+export const changeLanguage = async (newLanguage) => {
+  try {
+    localStorage.setItem(STORAGE_KEY, newLanguage);
+    const langs = await loadTranslations();
+
+    translatePage(newLanguage, langs);
+  } catch (error) {
+    console.error("Erro ao alterar o idioma:", error);
+  }
 };
 
 window.onload = async () => {
