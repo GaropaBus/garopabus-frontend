@@ -1,5 +1,9 @@
 import * as util from './util.js'
 import * as apiGet from '../api/moldes_back/get.js'
+import * as apiPost from '../api/moldes_back/post.js'
+import * as apiPut from '../api/moldes_back/put.js'
+import * as apiDelete from '../api/moldes_back/delete.js'
+
 // Muda para adicionar uma variação em uma rota já existente
 const btn_AddRota_AddVariacao = document.getElementById('addRota-addVariacao');
 const div_addVariacao = document.querySelector('.addVariacao');
@@ -18,7 +22,7 @@ btn_AddRota_AddVariacao.addEventListener('change', () => {
 });
 
 // add nova rota
-const addNewRota = () => {
+const addNewRota = async () => {
     const bairro_origem = document.getElementById('bairro-origem').value
     const bairro_destino = document.getElementById('bairro-destino').value
 
@@ -36,7 +40,7 @@ const addNewRota = () => {
         id_rota_principal: null,
     }
 
-    console.log(enviar)
+    await apiPost.postNewRota(enviar)
 }
 
 // add nova Variação
@@ -63,7 +67,7 @@ const addNewVariacao = async () => {
         id_rota_principal: parseInt(select_rota)
     }
 
-    console.log(enviar)
+    await apiPost.postNewRota(enviar)
 }
 
 const closeUpdadeModal = () => {
@@ -107,7 +111,7 @@ const openModal = async (id_rota) => {
         
     }
 
-    document.getElementById('addNewRota_edit').addEventListener('click', (event) => {
+    document.getElementById('addNewRota_edit').addEventListener('click', async (event) => {
         event.preventDefault()
         let enviar
         if (div_principal.style.display === 'block'){
@@ -123,18 +127,27 @@ const openModal = async (id_rota) => {
             enviar = {
                 bairro_origem: rota.bairro_origem,
                 bairro_destino: rota.bairro_destino,
-                nome_variacao: document.getElementById('nome-variacao_edit'),
+                nome_variacao: document.getElementById('nome-variacao_edit').value,
                 tipo: 'variacao',
                 status: true,
-                id_rota_principal: document.getElementById('nome-variacao_edit').value
+                id_rota_principal: parseInt(document.getElementById('select-rota_edit').value)
             }
         }
         console.log(rota.id, enviar)
+
+        await apiPut.updateRota(rota.id, enviar)
+        closeUpdadeModal()
         /* Enviar */
     })
 
     modal_backdrop.style.display = 'block'
     modal.style.display = 'block'
+}
+
+const deleteRota = async (id) => {
+    if (confirm(`Deseja deletar a rota de id ${id}`)){
+        await apiDelete.deleteRota(id)
+    }
 }
 
 const addRotasEdit = () => {
@@ -146,12 +159,11 @@ const addRotasEdit = () => {
                 <div class="parada-info">
                     <div class="name-item">
                         <p>${element.nome}</p>
-                        ${element.id_rota_principal != null ? `<p>(${element.nome_variacao})</p>` : ""}
                     </div>
                 </div>
                 <div class="parada-actions">
                     <button class="edit-btn" onclick="openModal(${element.id})">✏️</button>
-                    <button class="delete-btn">❌</button>
+                    <button class="delete-btn" onclick="deleteRota(${element.id})">❌</button>
                 </div>
             </div>
         `
@@ -164,12 +176,11 @@ const addRotasEdit = () => {
                 <div class="parada-info">
                     <div class="name-item">
                         <p>${element.nome}</p>
-                        ${element.id_rota_principal != null ? `<p>(${element.nome_variacao})</p>` : ""}
                     </div>
                 </div>
                 <div class="parada-actions">
                     <button class="edit-btn" onclick="openModal(${element.id})">✏️</button>
-                    <button class="delete-btn">❌</button>
+                    <button class="delete-btn" onclick="deleteRota(${element.id})">❌</button>
                 </div>
             </div>
         `
@@ -179,19 +190,12 @@ const addRotasEdit = () => {
 
 document.addEventListener('DOMContentLoaded', async () => {
     rotas_filtradas = await apiGet.getRotasFiltradas()
-    rotas_filtradas.sentido_bairros.forEach(element=> {
-        // mudar isso dps quando o back fazer a api certa 
-        rotas.push(element)
-    })
-    rotas_filtradas.sentido_garopaba.forEach(element=> {
-        // mudar isso dps quando o back fazer a api certa 
-        rotas.push(element)
-    })
+    rotas = await apiPost.getRotasListFiltrada({tipo: 'principal'})
 
     preencherRotas()
-    document.getElementById('addNewRota').addEventListener('click', (event) =>{
+    document.getElementById('addNewRota').addEventListener('click', async (event) =>{
         event.preventDefault()
-        addNewRota()
+        await addNewRota()
     })
 
     document.getElementById('addNewVariacao').addEventListener('click', (event) => {
@@ -203,4 +207,5 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     window.closeUpdadeModal = closeUpdadeModal
     window.openModal = openModal;
+    window.deleteRota = deleteRota;
 })

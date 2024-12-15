@@ -1,6 +1,7 @@
 import * as apiGetBack from '../api/moldes_back/get.js'
 import * as apiPostBack from '../api/moldes_back/post.js'
 import * as apiDelete from '../api/moldes_back/delete.js'
+import * as apiPut from '../api/moldes_back/put.js'
 
 
 // adicionar algum horario
@@ -80,7 +81,7 @@ const clearInformacoes = () => {
      });
 }
 
-const addNewHorarioOnibus = () => {
+const addNewHorarioOnibus = async () => {
     if (!getTipoDia()) return;
     if (!getHorarios()) return;
 
@@ -97,7 +98,7 @@ const addNewHorarioOnibus = () => {
         id_rota: select_value,
     };
 
-    console.log(enviar)
+    await apiPostBack.postNewHorario(enviar)
     clearInformacoes()
 };
 
@@ -132,7 +133,7 @@ const addRotasHorariosEdit = async () => {
                 `;
                 if (horario.dia_semana === 'dia_util') {
                     horariosDiaUtilHtml += horarioHtml;
-                } else if (horario.dia_semana === 'fim_semana_feriado') {
+                } else if (horario.dia_semana === 'final_semana_feriado') {
                     horariosFimDeSemanaHtml += horarioHtml;
                 }
             });
@@ -251,8 +252,8 @@ const openUpdadeModal = (horario) => {
 
     if (horario.dia_semana === "dia_util"){
         document.getElementById('dia-util_updt').checked = true
-    } else if (horario.dia_semana === "fim_semana_feriado"){
-        document.getElementById('final _semana_feriado_updt').checked = true
+    } else if (horario.dia_semana === "final_semana_feriado"){
+        document.getElementById('final_semana_feriado_updt').checked = true
     }
 
     modal_backdrop.style.display = 'block'
@@ -314,7 +315,7 @@ const enviarUpdateHorario = () => {
         hora_chegada: hora_chegadaUpdate,
         id_rota: select_value,
     };
-    apiPostBack.updateHorario(id, enviar)
+    apiPut.updateHorario(id, enviar)
     closeUpdadeModal()
 }
 
@@ -362,9 +363,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     await addOptionRotas();
     const submit = document.getElementById('submit');
-    submit.addEventListener('click', (event) => {
+    submit.addEventListener('click', async (event) => {
         event.preventDefault();
-        addNewHorarioOnibus();
+        await addNewHorarioOnibus();
     });
     await addRotasHorariosEdit()
     editButton()

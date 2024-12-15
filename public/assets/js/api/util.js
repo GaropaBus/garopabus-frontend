@@ -1,5 +1,5 @@
 
-export const addNomeRota = async (rotasList) => {
+export const addNomeRotas = async (rotasList) => {
     if (!Array.isArray(rotasList)) {
         throw new Error('O argumento fornecido não é um array.');
     }
@@ -9,6 +9,13 @@ export const addNomeRota = async (rotasList) => {
     });
 
     return rotasList; // Retorna a lista atualizada
+};
+
+export const addNomeRota = async (rota) => {
+
+    rota.nome = `${rota.bairro_origem} - ${rota.bairro_destino}${rota.id_rota_principal ? ` (${rota.nome_variacao})` : ''}`;
+
+    return rota; // Retorna a lista atualizada
 };
 
 export const addNomeRotasFiltradas = async (rotasList) => {

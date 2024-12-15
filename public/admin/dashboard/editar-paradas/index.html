@@ -14,9 +14,8 @@
 </head>
 <body>
     <nav>
-        <a href="../index.html"><button>Voltar</button></a>
+        <a href="../../dashboard/"><button>Voltar</button></a>
     </nav>
-
     <div class="form-section">
         <h2>Adicionar Parada</h2>
         <form class="inputs">
@@ -26,25 +25,12 @@
             </div>
 
             <div class="link-open">
-                <label for="descricao">Link open street do google maps</label>
-                <input type="text" id="descricao" placeholder="https://www.google.com/maps/@-28.0260705,-48.618851,3a,75y,194.3h,100.13t/data=!3m7!1e1!3m5!1sKT_HQCArsCkpi4wBk72Q8A!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D-10.132474522730263%26panoid%3DKT_HQCArsCkpi4wBk72Q8A%26yaw%3D194.3036097239491!7i16384!8i8192?coh=205410&entry=ttu&g_ep=EgoyMDI0MDkzMC4wIKXMDSoASAFQAw%3D%3D">
+                <label for="link-open-street">Link open street do google maps (se não viver coloque nada)</label>
+                <input type="text" id="link-open-street" placeholder="https://www.google.com/maps/@-28.0260705,-48.618851,3a,75y,194.3h,100.13t/data=!3m7!1e1!3m5!1sKT_HQCArsCkpi4wBk72Q8A!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D-10.132474522730263%26panoid%3DKT_HQCArsCkpi4wBk72Q8A%26yaw%3D194.3036097239491!7i16384!8i8192?coh=205410&entry=ttu&g_ep=EgoyMDI0MDkzMC4wIKXMDSoASAFQAw%3D%3D">
             </div>
 
-            <fieldset>
-                <legend for="rotas">Rotas</legend>
-                <div class="grup-select-rotas">
-                    <select name="rotas" id="rotas">
-                        <option value="null" disabled selected>Selecione uma rota</option>
-                    </select>
-                    <button id="selecionar-rota">Selecionar Rota</button>
-                </div>
-                <div id="selected-rotas">
-                    <!-- Dados vindo do js -->
-                </div>
-            </fieldset>
-
             <div class="submit-button">
-                <button type="submit">Adicionar</button>
+                <button id="submit">Adicionar</button>
             </div>
         </form>
     </div>

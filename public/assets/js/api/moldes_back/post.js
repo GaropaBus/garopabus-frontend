@@ -2,10 +2,31 @@ import * as util from '../util.js'
 
 const token = sessionStorage.getItem('token')
 
-export const updateHorario = async (id, dados) => {
-    console.log(id)
-    console.log(dados)
+export const postNewHorario = async (dados) => {
+  try {
+    const response = await fetch(`https://dev.api.garopabus.uk/api/horarios/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          "dia_semana": dados.dia_semana,
+          "hora_partida": dados.hora_partida,
+          "hora_chegada": dados.hora_chegada,
+          "id_rota": dados.id_rota
+        })
+    });
+
+    if (!response.ok) {
+        throw new Error(`Erro: ${response.status} - ${response.statusText}`);
+    }
+  } catch (error) {
+      console.error('Erro:', error.message);
+  }
 }
+
 
 export const Token = async (username, password) => {
     try {
@@ -32,7 +53,7 @@ export const Token = async (username, password) => {
     }
   };
 
-  export async function getRotasListFiltrada(params) {
+  export const getRotasListFiltrada = async (params) => {
     try {
         const response = await fetch('https://dev.api.garopabus.uk/api/rotas/filtrar/', {
             method: 'POST',
@@ -52,9 +73,66 @@ export const Token = async (username, password) => {
         }
 
         const data = await response.json();
-        return await util.addNomeRota(data);
+        return await util.addNomeRotas(data);
     } catch (error) {
         console.error('Erro ao buscar as rotas:', error.message);
     }
 }
 
+
+export const postPontoOnibus = async (dados) => {
+  try {
+    const response = await fetch('https://dev.api.garopabus.uk/api/pontos_onibus/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          "latitude": dados.latitude,
+          "longitude": dados.longitude,
+          "link_maps": dados.link_maps
+        })
+    });
+
+    if (!response.ok) {
+      const errorResponse = await response.json(); // Detalhes do erro
+      console.error('Erro detalhado do servidor:', errorResponse);
+      throw new Error(`Erro: ${response.status} - ${response.statusText}`);
+  }
+  
+  } catch (error) {
+      console.error('Erro:', error.message);
+  }
+}
+
+export const postNewRota = async (dados) => {
+  try {
+    const response = await fetch('https://dev.api.garopabus.uk/api/rotas/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          "bairro_origem": dados.bairro_origem,
+          "bairro_destino": dados.bairro_destino,
+          "nome_variacao": dados.nome_variacao,
+          "tipo": dados.tipo,
+          "status": dados.status,
+          "id_rota_principal": dados.id_rota_principal,
+        })
+    });
+
+    if (!response.ok) {
+      const errorResponse = await response.json(); // Detalhes do erro
+      console.error('Erro detalhado do servidor:', errorResponse);
+      throw new Error(`Erro: ${response.status} - ${response.statusText}`);
+    }
+  
+  } catch (error) {
+      console.error('Erro:', error.message);
+  }
+}

@@ -2,7 +2,7 @@
 import * as util from '../util.js'
 
 // api de rotas 
-export const getRotasList = async (tipo = '') => {
+export const getRotasList = async () => {
     try {
         const response = await fetch('https://dev.api.garopabus.uk/api/rotas/', {
             method: 'GET',
@@ -16,7 +16,7 @@ export const getRotasList = async (tipo = '') => {
         }
 
         const data = await response.json();
-        return await util.addNomeRota(data);
+        return await util.addNomeRotas(data);
     } catch (error) {
         console.error('Erro ao buscar as rotas:', error.message);
     }
@@ -41,9 +41,6 @@ export const getRotasFiltradas = async () => {
         console.error('Erro ao buscar as rotas:', error.message);
     }
 }
-
-
-
 
 export const getVariacaoRota = async (rota_id) => {
     const rotas = await getRotasList()
@@ -70,7 +67,7 @@ export const getRota = async (rota_id) => {
         }
 
         const data = await response.json();
-        return await util.addNomeRotasFiltradas(data);
+        return await util.addNomeRota(data);
     } catch (error) {
         console.error('Erro ao buscar as rotas:', error.message);
     }
@@ -90,7 +87,7 @@ export const getHorariosList = async () => {
         }
 
         const data = await response.json();
-        return await util.addNomeRotasFiltradas(data);
+        return data;
     } catch (error) {
         console.error('Erro ao buscar os horarios:', error.message);
     }
