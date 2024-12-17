@@ -74,12 +74,16 @@ const attCordsMarkerUSer = (coordinates) => {
 
 // Inicialize o Mapbox
 mapboxgl.accessToken = "pk.eyJ1IjoibmF0YW5rb25pZyIsImEiOiJjbTFrc25mNXUwMWo1MmtvZzd5azBoZXI4In0.lo8p-OeLIoIVWAl5SdVsow";
-
+const bounds = [
+  [-48.804805894138106, -28.21629387616003],
+  [-48.5596734459338, -27.927902200784235]
+];
 const map = new mapboxgl.Map({
   container: "map",
-  style: "mapbox://styles/mapbox/streets-v11",
+  style: "mapbox://styles/natankonig/cm3t1dmi8002m01qsf07y0o6d",
   center: [-48.67506218376818, -28.09891989595239],
-  zoom: 15,
+  zoom: 12,
+   maxBounds: bounds 
 });
 
 
