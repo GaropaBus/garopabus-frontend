@@ -83,7 +83,7 @@ const map = new mapboxgl.Map({
   style: "mapbox://styles/natankonig/cm3t1dmi8002m01qsf07y0o6d",
   center: [-48.67506218376818, -28.09891989595239],
   zoom: 12,
-   maxBounds: bounds 
+  maxBounds: bounds 
 });
 
 
