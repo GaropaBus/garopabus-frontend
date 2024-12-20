@@ -34,11 +34,16 @@
       // Inicialize o Mapbox
       mapboxgl.accessToken =
       "pk.eyJ1IjoibmF0YW5rb25pZyIsImEiOiJjbTFrc25mNXUwMWo1MmtvZzd5azBoZXI4In0.lo8p-OeLIoIVWAl5SdVsow";
+      const bounds = [
+        [-48.82116, -28.16977],
+        [-48.49197, -27.92301]
+    ];
       const map = new mapboxgl.Map({
         container: "map",
         style: "mapbox://styles/natankonig/cm3t1dmi8002m01qsf07y0o6d",
         center: [-48.628226014644234, -28.02787236965428], // Inicializa com o centro em Nova Iorque
         zoom: 12,
+        maxBounds:bounds 
       });
       
       // Waypoints (pontos de interesse)
