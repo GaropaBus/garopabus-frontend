@@ -59,22 +59,24 @@
         <nav>
             <button id="garopabus-map">
                 <i class="fa-regular fa-map fa-fw"></i>
-                <div>
-                    Mapa
-                </div>
-            </button>
-            <button id="garopabus-rotas">
+                <div id="navbar-map"></div>
+                <!-- Mapa -->
+              </button>
+              <button id="garopabus-rotas">
                 <i class="fa fa-bus"></i>
-                <div>
-                    Rotas
-                </div>
-            </button>
-            <button id="garopabus-ajuda">
+                <div id="navbar-routes"></div>
+                <!-- Rotas -->
+              </button>
+              <button id="garopabus-ajuda">
                 <i class="fas fa-info-circle"></i>
-                <div>
-                    Ajuda
-                </div>
-            </button>
+                <div id="navbar-help"></div>
+                <!-- Ajuda -->
+              </button>
+              <button id="garopabus-configuracao">
+                <i class="fa-solid fa-gear"></i>
+                <div id="navbar-settings"></div>
+                <!-- Configurações -->
+              </button>
         </nav>
         
         <div id="install-container" style="display:none; background-color:#f0f0f0; padding:15px; text-align:center; position:fixed; bottom:0; width:100%; z-index:1000;">
@@ -160,6 +162,7 @@
 
         <script type="module" src="../../assets/js/user/rotas-onibus.js"></script>
         <script src="../../assets/js/user/nav.js"></script>
+        <script type="module" src="../../assets/js/user/language.js"></script>
         <script>
             if ('serviceWorker' in navigator) {
                 window.addEventListener('load', () => {
