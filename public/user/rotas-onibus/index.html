@@ -83,86 +83,11 @@
             <p id="install-message">Instale o Garopabus no seu celular!</p>
             <button id="install-button" style="background-color:#007bff; color:white; border:none; padding:8px 15px; margin-left:10px;">Instalar</button>
         </div>
-        
-        <script>
-            const installContainer = document.getElementById('install-container');
-            const installButton = document.getElementById('install-button');
-            const installMessage = document.getElementById('install-message');
-            let deferredPrompt;
-        
-            // Detecta dispositivos iOS
-            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-        
-            // Detecta dispositivos Android
-            const isAndroid = /Android/.test(navigator.userAgent);
-        
-            // Função para mostrar banner de instalação
-            function showInstallBanner() {
-                if (isIOS || isAndroid) {
-                    installContainer.style.display = 'block';
-                }
-        
-                if (isIOS) {
-                    // Instruções específicas para iOS
-                    installMessage.innerHTML = 'Para instalar, toque no botão de compartilhamento e selecione "Adicionar à Tela de Início"';
-                }
-            }
-        
-            // Evento para Android (beforeinstallprompt)
-            window.addEventListener('beforeinstallprompt', (e) => {
-                // Previne comportamento padrão
-                e.preventDefault();
-                
-                // Armazena o evento
-                deferredPrompt = e;
-                
-                // Mostra banner de instalação
-                showInstallBanner();
-            });
-        
-            // Listener para botão de instalação
-            installButton.addEventListener('click', async () => {
-                if (isIOS) {
-                    // Para iOS, apenas esconde o banner
-                    installContainer.style.display = 'none';
-                } else if (isAndroid && deferredPrompt) {
-                    // Para Android, mostra prompt de instalação
-                    try {
-                        // Mostra prompt de instalação
-                        await deferredPrompt.prompt();
-                        
-                        // Espera escolha do usuário
-                        const { outcome } = await deferredPrompt.userChoice;
-                        
-                        if (outcome === 'accepted') {
-                            console.log('Usuário aceitou a instalação');
-                        } else {
-                            console.log('Usuário rejeitou a instalação');
-                        }
-                        
-                        // Limpa o prompt
-                        deferredPrompt = null;
-                        
-                        // Esconde o container
-                        installContainer.style.display = 'none';
-                    } catch (error) {
-                        console.error('Erro ao mostrar prompt de instalação:', error);
-                    }
-                }
-            });
-        
-            // Evento quando app é instalado
-            window.addEventListener('appinstalled', (evt) => {
-                installContainer.style.display = 'none';
-            });
-        
-            // Chama função ao carregar a página
-            window.addEventListener('load', showInstallBanner);
-        </script>
 
         <script type="module" src="../../assets/js/user/rotas-onibus.js"></script>
         <script src="../../assets/js/user/nav.js"></script>
         <script type="module" src="../../assets/js/user/language.js"></script>
+        <script src="../../assets/js/user/webapp.js"></script>
         <script>
             if ('serviceWorker' in navigator) {
                 window.addEventListener('load', () => {
