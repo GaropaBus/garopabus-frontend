@@ -1,10 +1,11 @@
+import { API_BASE_URL } from '../../config.js';
 import * as apiGet from "../api/get.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
     const lista_aviso = document.getElementById("lista-avisos");
     if (!lista_aviso) {
-      console.error("Elemento 'lista-avisos' não encontrado.");
-      return;
+        console.error("Elemento 'lista-avisos' não encontrado.");
+        return;
     }
 
     lista_aviso.textContent = "";
@@ -12,7 +13,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const avisos = await apiGet.getAvisos().catch((error) => {
         console.error("Erro ao buscar avisos:", error);
         return [];
-      });
+    });
 
     for (const aviso_element of avisos) {
         const aviso = document.createElement("div");
@@ -95,7 +96,7 @@ async function subscribeUserToPush() {
 // Função para buscar a chave pública VAPID do backend
 async function getVapidKey() {
     try {
-        const response = await fetch('https://dev.api.garopabus.uk/api/subscription-notification/vapid-key/');
+        const response = await fetch(`${API_BASE_URL}/api/subscription-notification/vapid-key/`);
         if (!response.ok) throw new Error('Falha ao buscar chave VAPID');
         const data = await response.json();
         return await data.vapid_public_key;
@@ -109,7 +110,7 @@ async function getVapidKey() {
 async function sendSubscriptionToBackend(subscription) {
     try {
         const data = subscription.toJSON();
-        const response = await fetch('https://dev.api.garopabus.uk/api/subscription-notification/', {
+        const response = await fetch(`${API_BASE_URL}/api/subscription-notification/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
