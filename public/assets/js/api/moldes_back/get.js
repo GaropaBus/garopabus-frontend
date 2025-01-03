@@ -133,41 +133,6 @@ export const getHorariosRota = async (rota_name) => {
     }
 };
 
-export const getPontosTrajeto = async () => {
-    const pontos_trajeto = [
-        {
-            id: 1,
-            ordem: 1,
-            latitude: "-28.02746079165392",
-            longitude: "-48.62894836820254",
-            id_rota: 1
-        },
-        {
-            id: 2,
-            ordem: 2,
-            latitude: "-28.025598241783666",
-            longitude: "-48.628410903411876",
-            id_rota: 1
-        },
-        {
-            id: 3,
-            ordem: 3,
-            latitude: "-28.026523938849035",
-            longitude: "-48.621591752515485",
-            id_rota: 1
-        },
-    ]
-
-    return pontos_trajeto
-}
-
-export const getPontosTrajetoRota = async (rota_id) => {
-    const pontos_trajeto = await getPontosTrajeto()
-    const pontos_trajeto_rota = pontos_trajeto.find(ponto_trajeto => ponto_trajeto.id_rota === rota_id)
-
-    return pontos_trajeto_rota
-}
-
 export const getTokenValid = async (token) => {
     try {
       const response = await fetch(`https://dev.api.garopabus.uk/api/token/validate/`, {
@@ -194,3 +159,30 @@ export const getTokenValid = async (token) => {
       throw error; // Re-throw the error for client-side handling
     }
   };
+
+
+  export const getPontoOnibus = async () => {
+    try {
+        const response = await fetch(`https://dev.api.garopabus.uk/api/pontos_onibus/`, { // URL corrigida
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+    
+        if (!response.ok) {
+          if (response.status === 401) {
+            // Handle 401 (Unauthorized) response
+            throw new Error("Token inválido. Por favor, faça login novamente.");
+          } else {
+            throw new Error(`Erro: ${response.status} - ${response.statusText}`);
+          }
+        }
+    
+        const data = await response.json();
+        return data;
+      } catch (error) {
+        console.error('Erro:', error.message);
+        throw error; // Re-throw the error for client-side handling
+    }
+};

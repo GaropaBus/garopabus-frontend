@@ -1,0 +1,115 @@
+body {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+main {
+  height: 100vh;
+  display: flex;
+  position: relative;
+}
+
+nav{
+  margin: 0 !important;
+}
+
+#map {
+  flex: 1;
+  height: 100%;
+}
+
+#icons {
+  background-color: white;
+  border-radius: 20px;
+  padding: 20px;
+  position: absolute;
+  top: 30px;
+  right: 50px;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.296);
+  z-index: 2;
+
+}
+
+#icons button {
+  padding: 15px;
+  border-radius: 10px;
+}
+
+/* Estilização do tooltip */
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip-text {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  padding: 5px 10px;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%; /* Ajuste a posição */
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+/* Mostra o tooltip ao passar o mouse */
+.tooltip:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* CSS da tela de paradas */
+
+#screen-paradas{
+  width: 40%;
+  background-color: white;
+  box-shadow: 0px 0px 20px 0px rgb(132, 132, 132);
+  z-index: 1;
+  display: none;
+}
+
+#screen-paradas .header {
+  display: flex;
+  padding: 20px;
+}
+
+#screen-paradas #fechar{
+  background-color: rgb(214, 2, 2);
+  border-radius: 10px;
+  width: 40px;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  &:hover{
+    background-color: rgb(192, 2, 2);
+  }
+} 
+
+#screen-paradas h1{
+  flex: 1;
+  text-align: center;
+}
+
+#screen-paradas fieldset {
+  margin: 20px;
+  display: flex;
+  gap: 20px;
+}
+
+#screen-paradas fieldset button{
+  padding: 10px 20px;
+}
