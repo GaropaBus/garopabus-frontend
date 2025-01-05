@@ -60,7 +60,6 @@ export const getRotasListFiltrada = async (params) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
       },
       body: JSON.stringify({
         "bairro_origem": (params.bairro_origem ? params.bairro_origem : ''),

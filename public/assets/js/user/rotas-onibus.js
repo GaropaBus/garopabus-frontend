@@ -1,4 +1,5 @@
 import * as apiGet from '../api/get.js';
+import * as apiPost from '../api/moldes_back/post.js'
 
 
 // Função genérica para preencher a tabela
@@ -47,11 +48,60 @@ const preencherTabelaRotas = (rotas, tbody) => {
     });
 };
 
+const verificarBordas = (tbody) => {
+    // Selecionar todas as linhas visíveis
+    const linhasVisiveis = Array.from(tbody.querySelectorAll('tr')).filter(
+        (linha) => linha.style.display !== 'none'
+    );
+
+    // Remover bordas de todas as linhas
+    linhasVisiveis.forEach((linha) => {
+        linha.style.borderBottom = '1px solid #ddd'; // Borda padrão
+    });
+
+    // Verificar se existe apenas um elemento visível
+    if (linhasVisiveis.length === 1) {
+        // Remover a borda do único elemento visível
+        linhasVisiveis[0].style.borderBottom = 'none';
+    } else if (linhasVisiveis.length > 1) {
+        // Remover a borda apenas do último elemento visível
+        const ultimaLinha = linhasVisiveis[linhasVisiveis.length - 1];
+        ultimaLinha.style.borderBottom = 'none';
+    }
+};
+
+const filtrarRotas = (texto, tbody) => {
+    // Converter o texto da pesquisa para minúsculas
+    const filtro = texto.toLowerCase();
+
+    // Selecionar todas as linhas da tabela
+    const linhas = tbody.querySelectorAll('tr');
+
+    linhas.forEach((linha) => {
+        // Selecionar a primeira célula da linha (nome da rota)
+        const nomeRota = linha.querySelector('.item-nome-rota');
+
+        if (nomeRota) {
+            // Verificar se o texto da rota inclui o filtro
+            const rotaTexto = nomeRota.textContent.toLowerCase();
+            if (rotaTexto.includes(filtro)) {
+                linha.style.display = ''; // Mostrar a linha
+            } else {
+                linha.style.display = 'none'; // Ocultar a linha
+            }
+        }
+    });
+
+    verificarBordas(tbody);
+};
+
 document.addEventListener('DOMContentLoaded', async () => {
     try {
         // Obter dados das rotas do backend
-        const rotas_partindo = await apiGet.getRotasOnibusPartindoGaropaba();
-        const rotas_sentido = await apiGet.getRotasOnibusSentidoGaropaba();
+        const rotas_partindo = await apiPost.getRotasListFiltrada({tipo: 'principal', bairro_origem: 'Garopaba'});
+        const rotas_sentido = await apiPost.getRotasListFiltrada({tipo: 'principal', bairro_destino: 'Garopaba'});
+        const searchInput = document.getElementById('search-input');
+
 
         // Selecionar os elementos do tbody das tabelas
         const tbody_partindo = document.getElementById("tabelaRotasPartindo");
@@ -60,6 +110,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Preencher as tabelas com os dados
         preencherTabelaRotas(rotas_partindo, tbody_partindo);
         preencherTabelaRotas(rotas_sentido, tbody_sentido);
+
+        searchInput.addEventListener('input', () => {
+            const texto = searchInput.value;
+        
+            // Filtrar ambas as tabelas com base no texto
+            filtrarRotas(texto, tbody_partindo);
+            filtrarRotas(texto, tbody_sentido);
+        });
     } catch (error) {
         console.error("Erro ao carregar as rotas:", error);
     }

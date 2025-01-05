@@ -26,11 +26,11 @@
     align-items: center;
     justify-content: space-between;
     padding: 7.5px 0;
-    border-top: 2px solid #dddddd84;
+    border-bottom: 2px solid #dddddd84;
 }
 
-.route-itens table tr:first-child {
-    border-top: none;
+.route-itens table tr:last-child {
+    border-bottom: none;
 }
 
 .route-itens table td{

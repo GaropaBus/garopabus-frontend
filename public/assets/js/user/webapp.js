@@ -1,12 +1,7 @@
 const installContainer = document.getElementById('install-container');
+const modal_backdrop = document.getElementById('modal-backdrop');
 const installButton = document.getElementById('install-button');
 const installMessage = document.getElementById('install-message');
-
-// Botão para fechar o banner
-const closeButton = document.createElement('button');
-closeButton.textContent = 'Fechar';
-closeButton.style = 'background-color: #ccc; color: black; border: none; padding: 8px 15px; margin-left: 10px;';
-installContainer.appendChild(closeButton);
 
 let deferredPrompt;
 
@@ -23,6 +18,9 @@ function showInstallBanner() {
 
     // Verifica se já foi instalado (ou rejeitado) anteriormente
     const isInstalled = localStorage.getItem('isAppInstalled') === 'true';
+    
+    // Verifica se o modal já foi fechado
+    const installBannerHidden = sessionStorage.getItem('installBannerHidden') === 'true'
 
     if (isStandalone || isInstalled) {
         // Não exibe o banner se o app já está instalado ou rodando como PWA
@@ -30,8 +28,9 @@ function showInstallBanner() {
     }
 
     // Verifica se o dispositivo é iOS ou Android
-    if (isIOS || isAndroid) {
+    if ((isIOS || isAndroid) && installBannerHidden) {
         installContainer.style.display = 'block';
+        modal_backdrop.style.display = 'block';
     }
 
     if (isIOS) {
@@ -83,12 +82,16 @@ installButton.addEventListener('click', async () => {
     }
 });
 
-// Listener para o botão de fechar
-closeButton.addEventListener('click', () => {
+const close_install_container = () => {
     // Esconde o banner temporariamente
     installContainer.style.display = 'none';
+    modal_backdrop.style.display = 'none';
     sessionStorage.setItem('installBannerHidden', 'true');
-});
+}
+
+// Listener para o botão de fechar
+document.getElementById('close-button').addEventListener('click', close_install_container);
+document.getElementById('modal-backdrop').addEventListener('click', close_install_container)
 
 // Evento quando app é instalado
 window.addEventListener('appinstalled', () => {
