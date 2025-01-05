@@ -2,7 +2,6 @@ const btn_ajuda = document.getElementById("garopabus-ajuda");
 const btn_rotas = document.getElementById("garopabus-rotas");
 const btn_map = document.getElementById("garopabus-map");
 const btn_settings = document.getElementById("garopabus-configuracao");
-console.log(btn_settings)
 
 const verificarLink = () => {
     switch (window.location.pathname) {

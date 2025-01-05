@@ -45,17 +45,38 @@ self.addEventListener('fetch', (event) => {
 
 // Limpar caches antigos
 self.addEventListener('activate', (event) => {
-    const cacheWhitelist = [CACHE_NAME];
-
     event.waitUntil(
         caches.keys().then((cacheNames) => {
             return Promise.all(
                 cacheNames.map((cacheName) => {
-                    if (cacheWhitelist.indexOf(cacheName) === -1) {
+                    if (cacheName !== CACHE_NAME) {
+                        console.log('Deleting old cache:', cacheName);
                         return caches.delete(cacheName);
                     }
                 })
             );
         })
     );
+
+    // Garante que o Service Worker mais recente controla imediatamente
+    self.clients.claim();
+});
+
+// Listener para receber notificações push
+self.addEventListener('push', function(event) {
+    const data = event.data.json(); // Parseia os dados enviados pelo backend
+    const options = {
+        body: data.body,
+        icon: data.icon, // Ícone da notificação
+        data: { url: data.click_action }, // URL para onde o usuário será redirecionado ao clicar
+    };
+    event.waitUntil(self.registration.showNotification(data.title, options));
+});
+
+// Listener para ações quando a notificação for clicada
+self.addEventListener('notificationclick', function(event) {
+    event.notification.close();
+    if (event.notification.data.url) {
+        event.waitUntil(clients.openWindow(event.notification.data.url));
+    }
 });

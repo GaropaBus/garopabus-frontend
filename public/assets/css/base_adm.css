@@ -200,3 +200,9 @@ fieldset{
 #close-button:hover {
     color: red;
 }
+
+.inp-checkbox{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}

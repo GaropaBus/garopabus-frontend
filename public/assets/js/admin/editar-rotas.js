@@ -23,6 +23,7 @@ btn_AddRota_AddVariacao.addEventListener('change', () => {
 
 // add nova rota
 const addNewRota = async () => {
+    const tem_variacao = document.getElementById('tem-variacao')
     const bairro_origem = document.getElementById('bairro-origem').value
     const bairro_destino = document.getElementById('bairro-destino').value
 
@@ -30,15 +31,27 @@ const addNewRota = async () => {
         alert('Alguma campo não foi preenchido')
         return
     }
-
-    const enviar = {
-        bairro_origem: bairro_origem,
-        bairro_destino: bairro_destino,
-        nome_variacao: null,
-        tipo: "principal",
-        status: true,
-        id_rota_principal: null,
+    let enviar
+    if (tem_variacao.checked === true){
+        enviar = {
+            bairro_origem: bairro_origem,
+            bairro_destino: bairro_destino,
+            nome_variacao: "Direto",
+            tipo: "principal",
+            status: true,
+            id_rota_principal: null,
+        }
+    } else {
+        enviar = {
+            bairro_origem: bairro_origem,
+            bairro_destino: bairro_destino,
+            nome_variacao: null,
+            tipo: "principal",
+            status: true,
+            id_rota_principal: null,
+        }
     }
+    
 
     await apiPost.postNewRota(enviar)
 }
