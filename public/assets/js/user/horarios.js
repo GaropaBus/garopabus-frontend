@@ -30,6 +30,7 @@ const preencherTabelaHorariosSemana = () => {
 
         const tdHorarioChegada = document.createElement('td');
         tdHorarioChegada.textContent = horario.hora_chegada;
+        tdHorarioChegada.classList.add('esconder')
         tr.appendChild(tdHorarioChegada);
 
         tbody_semana.appendChild(tr);
@@ -59,6 +60,7 @@ const preencherTabelaHorariosFeriado = () => {
 
         const tdHorarioChegada = document.createElement('td');
         tdHorarioChegada.textContent = horario.hora_chegada;
+        tdHorarioChegada.classList.add('esconder')
         tr.appendChild(tdHorarioChegada);
 
         tbody_feriado.appendChild(tr);
