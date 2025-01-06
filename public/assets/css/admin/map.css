@@ -9,7 +9,7 @@ main {
   position: relative;
 }
 
-nav{
+nav {
   margin: 0 !important;
 }
 
@@ -33,7 +33,6 @@ nav{
 
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.296);
   z-index: 2;
-
 }
 
 #icons button {
@@ -72,7 +71,7 @@ nav{
 
 /* CSS da tela de paradas */
 
-#screen-paradas{
+#screen-paradas {
   width: 40%;
   background-color: white;
   box-shadow: 0px 0px 20px 0px rgb(132, 132, 132);
@@ -85,7 +84,7 @@ nav{
   padding: 20px;
 }
 
-#screen-paradas #fechar{
+#screen-paradas #fechar {
   background-color: rgb(214, 2, 2);
   border-radius: 10px;
   width: 40px;
@@ -94,12 +93,12 @@ nav{
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  &:hover{
+  &:hover {
     background-color: rgb(192, 2, 2);
   }
-} 
+}
 
-#screen-paradas h1{
+#screen-paradas h1 {
   flex: 1;
   text-align: center;
 }
@@ -110,6 +109,6 @@ nav{
   gap: 20px;
 }
 
-#screen-paradas fieldset button{
+#screen-paradas fieldset button {
   padding: 10px 20px;
 }

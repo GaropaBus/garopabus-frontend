@@ -99,7 +99,7 @@ const addedMarkers = [];
 
 // Função para verificar se um marcador já existe em uma coordenada específica
 function hasMarkerAt(lng, lat) {
-  return addedMarkers.some(coord => coord.lng === lng && coord.lat === lat);
+  return addedMarkers.some((coord) => coord.lng === lng && coord.lat === lat);
 }
 
 // Adiciona os pontos de ônibus ao mapa
@@ -115,7 +115,8 @@ busStops.forEach(function (stop) {
     el.style.height = "20px";
     el.style.backgroundColor = "rgba(255, 255, 255, 0.7)";
     el.style.borderRadius = "5px";
-    el.style.backgroundImage = "url(../../../../../../assets/images/icon_bus.png)";
+    el.style.backgroundImage =
+      "url(../../../../../../assets/images/icon_bus.png)";
     el.style.backgroundSize = "80%";
     el.style.backgroundRepeat = "no-repeat";
     el.style.backgroundPosition = "center";
@@ -125,15 +126,17 @@ busStops.forEach(function (stop) {
     new mapboxgl.Marker(el)
       .setLngLat([stop.longitude, stop.latitude])
       .setPopup(
-        new mapboxgl.Popup({ offset: 25 })
-          .setHTML(`<h3>${stop.title}</h3><p>${stop.description}</p>`)
+        new mapboxgl.Popup({ offset: 25 }).setHTML(
+          `<h3>${stop.title}</h3><p>${stop.description}</p>`
+        )
       )
       .addTo(map);
 
     // Armazena as coordenadas do marcador
     addedMarkers.push({ lng: stop.longitude, lat: stop.latitude });
   } else {
-    console.log(`Já existe um marcador em [${stop.longitude}, ${stop.latitude}].`);
+    console.log(
+      `Já existe um marcador em [${stop.longitude}, ${stop.latitude}].`
+    );
   }
 });
-

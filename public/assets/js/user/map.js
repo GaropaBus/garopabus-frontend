@@ -80,7 +80,6 @@ const map = new mapboxgl.Map({
   maxZoom: 16, // Nível máximo de zoom (visão próxima)
 });
 
-
 // Waypoints (pontos de interesse)
 const waypoints = [
   "-48.62894836820254, -28.02746079165392",

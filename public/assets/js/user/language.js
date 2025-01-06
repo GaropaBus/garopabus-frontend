@@ -27,21 +27,21 @@ export const translatePage = (language, langs) => {
       wprefix = wprefix.join("-");
       if (data[prefix]) {
         switch (prefix) {
-          case "metadata":
-            document.title = data[prefix][wprefix];
-            break;
-          case "navbar":
-            element.innerHTML = data[prefix][wprefix];
-            break;
-          case "label":
-            element.innerHTML = data[prefix][wprefix];
-            break;
-          case "placeholder":
-            element.placeholder = data[prefix][wprefix];
-            break;
-          default:
-            console.log("Chave não encontrada:", key);
-            break;
+        case "metadata":
+          document.title = data[prefix][wprefix];
+          break;
+        case "navbar":
+          element.innerHTML = data[prefix][wprefix];
+          break;
+        case "label":
+          element.innerHTML = data[prefix][wprefix];
+          break;
+        case "placeholder":
+          element.placeholder = data[prefix][wprefix];
+          break;
+        default:
+          console.log("Chave não encontrada:", key);
+          break;
         }
       }
     }

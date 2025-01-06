@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
   const buttons = document.querySelectorAll(".dashboard-btn");
 
   buttons.forEach((button) => {
@@ -7,4 +7,4 @@ document.addEventListener('DOMContentLoaded', () => {
       window.location.href = url;
     });
   });
-})
+});

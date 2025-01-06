@@ -1,4 +1,4 @@
-import * as apiPost from '../api/moldes_back/post.js';
+import * as apiPost from "../api/moldes_back/post.js";
 
 window.onload = async () => {
   const form = document.getElementById("auth-form");
@@ -12,7 +12,7 @@ window.onload = async () => {
       const token = await apiPost.Token(username, password);
 
       if (token) {
-        sessionStorage.setItem('token', token)
+        sessionStorage.setItem("token", token);
         location.href = "/admin/dashboard";
       } else {
         // Tratamento de erro: Token não obtido

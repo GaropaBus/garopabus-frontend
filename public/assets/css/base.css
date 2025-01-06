@@ -1,21 +1,20 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .container {
-    font-family: Arial, sans-serif;
-    background-color: #F6F8F9;
-    padding-bottom: 60px;
-    max-width: 1000px;
-    margin: auto;
-    min-height: 100vh;
+  font-family: Arial, sans-serif;
+  background-color: #f6f8f9;
+  padding-bottom: 60px;
+  max-width: 1000px;
+  margin: auto;
+  min-height: 100vh;
 }
 
-nav{
-    max-width: 1000px;
-    margin: auto;
+nav {
+  max-width: 1000px;
+  margin: auto;
 }
-
