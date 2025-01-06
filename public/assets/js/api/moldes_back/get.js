@@ -185,3 +185,29 @@ export const getTokenValid = async (token) => {
         throw error; // Re-throw the error for client-side handling
     }
 };
+
+export const getHorariosNomeRota = async (nome) => {
+    try {
+        const response = await fetch(`${API_BASE_URL}/api/horarios/rota/${nome}`, { // URL corrigida
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+    
+        if (!response.ok) {
+          if (response.status === 401) {
+            // Handle 401 (Unauthorized) response
+            throw new Error("Token inválido. Por favor, faça login novamente.");
+          } else {
+            throw new Error(`Erro: ${response.status} - ${response.statusText}`);
+          }
+        }
+    
+        const data = await response.json();
+        return data;
+      } catch (error) {
+        console.error('Erro:', error.message);
+        throw error; // Re-throw the error for client-side handling
+    }
+} 

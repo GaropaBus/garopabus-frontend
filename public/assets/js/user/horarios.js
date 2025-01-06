@@ -1,31 +1,35 @@
-import * as apiGet from '../api/get.js';
+import * as apiGet from '../api/moldes_back/get.js';
 
-let rota; 
+let rota_nome;
+let horarios;
+let variacao;
 
 const tbody_semana = document.getElementById('weekSchedule-tbody');
 const tbody_feriado = document.getElementById('weekendSchedule-tbody');
 
 const preencherTabelaHorariosSemana = () => {
-    if (!rota || !rota.horarios_semana) {
+    if (!horarios.dias_uteis) {
         console.error("Dados da rota ou horários não encontrados");
         return;
     }
 
     tbody_semana.innerHTML = '';
 
-    for (const horario of rota.horarios_semana) {
+    for (const horario of horarios.dias_uteis) {
         const tr = document.createElement('tr');
 
-        const tdVariacao = document.createElement('td');
-        tdVariacao.textContent = horario.variacao;
-        tr.appendChild(tdVariacao);
+        if (!variacao){
+            const tdVariacao = document.createElement('td');
+            tdVariacao.textContent = horario.tipo_variacao;
+            tr.appendChild(tdVariacao);
+        }
 
         const tdHorarioPartida = document.createElement('td');
-        tdHorarioPartida.textContent = horario.horarioPartida;
+        tdHorarioPartida.textContent = horario.hora_partida;
         tr.appendChild(tdHorarioPartida);
 
         const tdHorarioChegada = document.createElement('td');
-        tdHorarioChegada.textContent = horario.horarioChegada;
+        tdHorarioChegada.textContent = horario.hora_chegada;
         tr.appendChild(tdHorarioChegada);
 
         tbody_semana.appendChild(tr);
@@ -33,42 +37,50 @@ const preencherTabelaHorariosSemana = () => {
 };
 
 const preencherTabelaHorariosFeriado = () => {
-    if (!rota || !rota.horarios_feriado) {
+    if (!horarios.fim_semana) {
         console.error("Dados da rota ou horários não encontrados");
         return;
     }
 
     tbody_feriado.innerHTML = '';
 
-    for (const horario of rota.horarios_feriado) {
+    for (const horario of horarios.fim_semana) {
         const tr = document.createElement('tr');
 
-        const tdVariacao = document.createElement('td');
-        tdVariacao.textContent = horario.variacao;
-        tr.appendChild(tdVariacao);
+        if (!variacao){
+            const tdVariacao = document.createElement('td');
+            tdVariacao.textContent = horario.tipo_variacao;
+            tr.appendChild(tdVariacao);
+        }
 
         const tdHorarioPartida = document.createElement('td');
-        tdHorarioPartida.textContent = horario.horarioPartida;
+        tdHorarioPartida.textContent = horario.hora_partida;
         tr.appendChild(tdHorarioPartida);
 
         const tdHorarioChegada = document.createElement('td');
-        tdHorarioChegada.textContent = horario.horarioChegada;
+        tdHorarioChegada.textContent = horario.hora_chegada;
         tr.appendChild(tdHorarioChegada);
 
         tbody_feriado.appendChild(tr);
     }
 };
 
+const formatarString = (str) => {
+    // Dividir a string no caractere "-"
+    const partes = str.split('-');
+
+    // Capitalizar a primeira letra de cada parte e unir com " - "
+    return partes
+        .map((parte) => parte.charAt(0).toUpperCase() + parte.slice(1))
+        .join(' - ');
+};
+
 // Função para preencher o nome da rota
 const preencherNomeRota = () => {
     const routeNameElement = document.getElementById('routeName');
 
-    if (!rota || !rota.nome) {
-        console.error("Nome da rota não encontrado");
-        return;
-    }
     // Preenche o nome da rota
-    routeNameElement.textContent = rota.nome;
+    routeNameElement.textContent = rota_nome;
 };
 
 // Função para obter dados da API e inicializar o preenchimento
@@ -76,11 +88,19 @@ const inicializarPagina = async () => {
     try {
         const urlParams = new URLSearchParams(window.location.search);
         const rota_url = urlParams.get('rota') || 'Desconhecida';
+        horarios = await apiGet.getHorariosNomeRota(rota_url)
+        rota_nome = formatarString(rota_url)
+        variacao = horarios.dias_uteis[0].tipo_variacao === null
 
-        rota = await apiGet.getRotaSelecionada(rota_url); // Salvar a primeira rota na variável global
+        if (variacao){
+            const ths = document.querySelectorAll('.variacao')
+            ths.forEach(element => {
+                element.style.display = 'none'
+            })
+        }
 
-        const tituloPagina = document.title = `GaropaBus | ${rota.nome}`; 
-
+        document.title = `GaropaBus | ${rota_nome}`; 
+        
         preencherTabelaHorariosSemana(); // Preencher tabela de horários
         preencherNomeRota(); // Preencher nome da rota
         preencherTabelaHorariosFeriado();
@@ -155,7 +175,6 @@ container.addEventListener('touchend', () => {
     if (Math.abs(diffX) > Math.abs(diffY)) {
         // Verificar se o swipe foi para a direita
         if (diffX > threshold) {
-            console.log('Swipe para a direita!');
             weekSchedule.style.display = 'block';
             weekendSchedule.style.display = 'none';
             
@@ -164,7 +183,6 @@ container.addEventListener('touchend', () => {
         }
         // Verificar se o swipe foi para a esquerda
         else if (diffX < -threshold) {
-            console.log('Swipe para a esquerda!');
             weekSchedule.style.display = 'none';
             weekendSchedule.style.display = 'block';
             

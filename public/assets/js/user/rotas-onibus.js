@@ -1,4 +1,4 @@
-import * as apiGet from '../api/get.js';
+import * as apiGet from '../api/moldes_back/get.js';
 import * as apiPost from '../api/moldes_back/post.js'
 
 
@@ -126,18 +126,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 // Função para redirecionar para o link específico utilizando query strings
 export const showSchedule = async (routeId) => {
     try {
-        // Garantir que rotas é um array
-        const rotas = await apiGet.getRotasOnibus()
+        
 
-        if (!Array.isArray(rotas)) {
-            console.error('Rotas não são um array!');
-            return;
-        }
-
-        const selectedRoute = rotas.find(route => route.id === routeId);
+        const selectedRoute = await apiGet.getRota(routeId)
 
         if (selectedRoute) {
-            const routeName = encodeURIComponent(selectedRoute.nome.replace(/\s+/g, ''));
+            const routeName = encodeURIComponent(selectedRoute.nome.replace(/\s+/g, '').toLowerCase());
             const link = `/user/horarios/?rota=${routeName}`;
             window.location.assign(link);
         } else {
