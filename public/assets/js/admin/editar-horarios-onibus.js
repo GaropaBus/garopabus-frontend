@@ -97,6 +97,7 @@ const addNewHorarioOnibus = async () => {
         hora_chegada: hora_chegada,
         id_rota: select_value,
     };
+    console.log(enviar)
 
     await apiPostBack.postNewHorario(enviar)
     clearInformacoes()
@@ -111,19 +112,15 @@ const addRotasHorariosEdit = async () => {
         try {
             // Obter os horários (com variações) de cada rota
             const horarios_rota = await apiGetBack.getHorariosRota(
-                `${rota.bairro_origem.replace(/\s+/g, '').toLowerCase()}-${rota.bairro_destino.replace(/\s+/g, '').toLowerCase()}`
+                `${rota.bairro_origem.toLowerCase()}-${rota.bairro_destino.toLowerCase()}`
             );
+            console.log(horarios_rota)
 
-            // Validar se o retorno é um array
-            if (!Array.isArray(horarios_rota) || horarios_rota.length === 0) {
-                console.warn(`Horários não encontrados para a rota: ${rota.nome}`);
-                continue;
-            }
 
             let horariosDiaUtilHtml = '';
             let horariosFimDeSemanaHtml = '';
 
-            horarios_rota.forEach(horario => {
+            horarios_rota.dias_uteis.forEach(horario => {
                 const horarioHtml = `
                     <div class="edit-time" data-id="${horario.id}">
                         <p id="variacao">${horario.tipo_variacao}</p>
@@ -131,11 +128,18 @@ const addRotasHorariosEdit = async () => {
                         <p>Chegada: <span>${horario.hora_chegada}</span></p>
                     </div>
                 `;
-                if (horario.dia_semana === 'dia_util') {
-                    horariosDiaUtilHtml += horarioHtml;
-                } else if (horario.dia_semana === 'final_semana_feriado') {
-                    horariosFimDeSemanaHtml += horarioHtml;
-                }
+                horariosDiaUtilHtml += horarioHtml;
+            });
+
+            horarios_rota.fim_semana.forEach(horario => {
+                const horarioHtml = `
+                    <div class="edit-time" data-id="${horario.id}">
+                        <p id="variacao">${horario.tipo_variacao}</p>
+                        <p>Partida: <span>${horario.hora_partida}</span></p>
+                        <p>Chegada: <span>${horario.hora_chegada}</span></p>
+                    </div>
+                `;
+                horariosFimDeSemanaHtml += horarioHtml;
             });
 
             const edit_item = `
