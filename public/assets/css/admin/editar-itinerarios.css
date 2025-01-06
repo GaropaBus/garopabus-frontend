@@ -1,59 +1,57 @@
-.dias{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+.dias {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.dia{
-    display: flex;
-    align-items: center;
-    gap: 10px;
+.dia {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-.horarios{
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+.horarios {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
-
-.edit-tipo-dia{
-    margin-top: 15px;
+.edit-tipo-dia {
+  margin-top: 15px;
 }
 
-.edit-tipo-dia h4{
-    margin-bottom: 7.5px;
+.edit-tipo-dia h4 {
+  margin-bottom: 7.5px;
 }
 
-.edit-times{
-    flex: 1;
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 15px;
+.edit-times {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
 }
 
-.edit-time{
-    padding: 7.5px;
-    background-color: #444;
-    color: white;
-    border-radius: 10px ;
-    display: flex;
-    flex-direction: column;
-    gap: 7.5px;
-    cursor: pointer;
-
+.edit-time {
+  padding: 7.5px;
+  background-color: #444;
+  color: white;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 7.5px;
+  cursor: pointer;
 }
 
-#variacao{
-    padding-bottom: 5px;
-    border-bottom: 1px solid rgb(255, 255, 255);
+#variacao {
+  padding-bottom: 5px;
+  border-bottom: 1px solid rgb(255, 255, 255);
 }
 
-.edit-mode:hover{
-    background-color: rgba(16, 182, 16, 0.721) !important;
+.edit-mode:hover {
+  background-color: rgba(16, 182, 16, 0.721) !important;
 }
 
-.delete-mode:hover{
-    background-color: #c00;
+.delete-mode:hover {
+  background-color: #c00;
 }

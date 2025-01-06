@@ -9,3 +9,5 @@ npm install
 cp .env.example .env
 npm run dev
 ```
+
+#### Sempre execute `npm run check`  antes de dar commit, para se certificar que o codigo esta formatado corretamente!

@@ -7,17 +7,17 @@ export const isCoordinate = async (str) => {
 
   // Verifica se a string corresponde ao formato esperado
   if (!regex.test(cleanedStr)) {
-      return false;
+    return false;
   }
 
   // Separa latitude e longitude e converte para números
-  const [latitude, longitude] = cleanedStr.split(',').map(coord => parseFloat(coord.trim()));
-
+  const [latitude, longitude] = cleanedStr
+    .split(",")
+    .map((coord) => parseFloat(coord.trim()));
 
   // Valida se estão dentro dos intervalos permitidos
   const isValidLatitude = latitude >= -90 && latitude <= 90;
   const isValidLongitude = longitude >= -180 && longitude <= 180;
 
-  
   return isValidLatitude && isValidLongitude;
 };

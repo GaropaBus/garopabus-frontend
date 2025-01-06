@@ -1,31 +1,31 @@
 {
-    "metadata": {
-      "title-map": "GaropaBus - Map",
-      "title-routes": "GaropaBus - Routes",
-      "title-hours": "GaropaBus - Hours",
-      "title-help": "GaropaBus - Help",
+  "metadata": {
+    "title-map": "GaropaBus - Map",
+    "title-routes": "GaropaBus - Routes",
+    "title-hours": "GaropaBus - Hours",
+    "title-help": "GaropaBus - Help",
     "title-settings": "GaropaBus - Settings"
-    },
-    "navbar": {
-      "map": "Map",
-      "routes": "Routes",
-      "help": "Help",
+  },
+  "navbar": {
+    "map": "Map",
+    "routes": "Routes",
+    "help": "Help",
     "settings": "Settings"
-    },
-    "label": {
-      "title-routes": "Bus routes",
-      "title-hours": "Bus hours",
-      "title-help": "Notices",
-      "title-contact": "Contact information",
-      "description-contact": "For complaints or suggestions",
-      "button-contact": "Contact",
-      "form-outgaropaba": "Departing from Garopaba",
-      "form-togaropaba": "To Garopaba",
-      "tab-week": "Week",
-      "tab-weekend": "Weekend/Holiday",
-      "settings-language": "Language"
-    },
-    "placeholder": {
-      "search-routes": "Search for routes"
-    }
+  },
+  "label": {
+    "title-routes": "Bus routes",
+    "title-hours": "Bus hours",
+    "title-help": "Notices",
+    "title-contact": "Contact information",
+    "description-contact": "For complaints or suggestions",
+    "button-contact": "Contact",
+    "form-outgaropaba": "Departing from Garopaba",
+    "form-togaropaba": "To Garopaba",
+    "tab-week": "Week",
+    "tab-weekend": "Weekend/Holiday",
+    "settings-language": "Language"
+  },
+  "placeholder": {
+    "search-routes": "Search for routes"
   }
+}

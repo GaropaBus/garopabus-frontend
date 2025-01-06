@@ -1,54 +1,50 @@
-
-
-
-
-.info p{
-    overflow-wrap: break-word;
+.info p {
+  overflow-wrap: break-word;
 }
 
 #trajetoTable {
-    width: 100%;
+  width: 100%;
 }
 
 #trajetoTable td {
-    text-align: center; 
-    padding: 10px; 
-    max-width: 100%;
+  text-align: center;
+  padding: 10px;
+  max-width: 100%;
 }
 
-.name-item{
-    display: flex;
-    align-items: center;
-    gap: 5px;
+.name-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
-.title{
-    margin-bottom: 20px;
+.title {
+  margin-bottom: 20px;
 }
 
-.title input[type=checkbox]{
-    display: none;
+.title input[type="checkbox"] {
+  display: none;
 }
 
-.title-rotas{
-    display: flex;
-    gap: 10px;
-    font-size: 1.5rem;
-    font-weight: bold;
-    &::before{
-        content: "Adicionar Rota";
-        text-decoration: underline;
-    }   
-    &::after{
-        content: "Adicionar Variação em uma Rota";
-    }   
+.title-rotas {
+  display: flex;
+  gap: 10px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  &::before {
+    content: "Adicionar Rota";
+    text-decoration: underline;
+  }
+  &::after {
+    content: "Adicionar Variação em uma Rota";
+  }
 }
 
-.title input[type='checkbox']:checked + .title-rotas{
-    &::after{
-        text-decoration: underline;
-    }
-    &::before{
-        text-decoration: none;
-    }
+.title input[type="checkbox"]:checked + .title-rotas {
+  &::after {
+    text-decoration: underline;
+  }
+  &::before {
+    text-decoration: none;
+  }
 }
