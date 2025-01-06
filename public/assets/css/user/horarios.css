@@ -1,69 +1,72 @@
-body{
-    padding-bottom: 0 !important;
+body {
+  padding-bottom: 0 !important;
 }
 
 main {
-    height: calc(100vh - 80px - 32px); /* Altura total da tela menos header e nav */
+  height: calc(
+    100vh - 80px - 32px
+  ); /* Altura total da tela menos header e nav */
 }
 
 /* Escolhas de tipo de horário */
-.escolha-tipo-horario{
-    display: flex;
+.escolha-tipo-horario {
+  display: flex;
 }
 
-.escolha-tipo-horario .tab{
-    margin: 0 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.escolha-tipo-horario .tab {
+  margin: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Tabela de horários */
-#weekSchedule, #weekendSchedule{
-    width: 90%;
-    margin: auto;
-    background-color: #fff;
-    border-radius: 10px;
-    padding: 10px;
-    margin-top: 1rem;
+#weekSchedule,
+#weekendSchedule {
+  width: 90%;
+  margin: auto;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 1rem;
 }
 
 table {
-    width: 100%;
-    border-collapse: collapse;
-    table-layout: fixed; /* Uniformiza as colunas */
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed; /* Uniformiza as colunas */
 }
 
-th, td {
-    padding: 0.75rem;
-    text-align: center;
-    vertical-align: middle;
-    white-space: normal; /* Permite quebra de linhas */
-    word-wrap: break-word;
-    overflow-wrap: break-word;
+th,
+td {
+  padding: 0.75rem;
+  text-align: center;
+  vertical-align: middle;
+  white-space: normal; /* Permite quebra de linhas */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 thead th {
-    width: 33.33%; /* Define larguras iguais para todas as colunas */
+  width: 33.33%; /* Define larguras iguais para todas as colunas */
 }
 
 tbody tr {
-    border-top: 1px solid #ddd;
+  border-top: 1px solid #ddd;
 }
 
-
 .tab {
-    cursor: pointer;
-    padding: 1rem;
-    flex: 1;
-    text-align: center;
+  cursor: pointer;
+  padding: 1rem;
+  flex: 1;
+  text-align: center;
 }
 
 .tab.active {
-    border-bottom: 2px solid #007bff;
-    font-weight: bold;
+  border-bottom: 2px solid #007bff;
+  font-weight: bold;
 }
 
 .esconder {
-    display: none !important;
+  display: none !important;
 }
