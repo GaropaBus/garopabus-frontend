@@ -129,7 +129,8 @@ export const getHorariosRota = async (rota_name) => {
         const data = await response.json();
         return data;
     } catch (error) {
-        console.error('Erro ao buscar os horarios:', error.message);
+        console.error('Erro:', error.message);
+        throw error; // Re-throw the error for client-side handling
     }
 };
 
