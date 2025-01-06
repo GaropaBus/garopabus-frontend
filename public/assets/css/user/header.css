@@ -1,69 +1,70 @@
 header {
-    padding: 1rem;
+  padding: 1rem;
 }
 
-header .main-title{
-    display: flex;
-    align-items: center;
+header .main-title {
+  display: flex;
+  align-items: center;
 }
 
 header h1 {
-    font-size: 1.125rem;
-    font-weight: bold;
-    margin: auto;
+  font-size: 1.125rem;
+  font-weight: bold;
+  margin: auto;
 }
 
-header .search-container, header .title-horario{
-    margin-top: 15px;
-    background-color: #EBEDED;
-    display: flex;
-    align-items: center;
-    padding: 5px;
-    border-radius: 30px;
+header .search-container,
+header .title-horario {
+  margin-top: 15px;
+  background-color: #ebeded;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  border-radius: 30px;
 }
 
 header .title-horario {
-    display: flex;
-    align-items: center;
-    font-size: 0.875rem;
-    justify-content: center;
-    margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  font-size: 0.875rem;
+  justify-content: center;
+  margin-bottom: 1rem;
 }
 
-header .title-horario h3{
-    font-weight: normal;
-    color: #7E8A8C;
-    font-size: 0.875rem;
+header .title-horario h3 {
+  font-weight: normal;
+  color: #7e8a8c;
+  font-size: 0.875rem;
 }
 
-header .search-container input{
-    margin: 0 !important;
-    height: 22px;
-    width: 85%;
-    background-color: transparent;
-    border: none;
+header .search-container input {
+  margin: 0 !important;
+  height: 22px;
+  width: 85%;
+  background-color: transparent;
+  border: none;
 
-    &:focus{
-        outline: none; /* Remove o contorno padrão de foco */
-    }
+  &:focus {
+    outline: none; /* Remove o contorno padrão de foco */
+  }
 }
 
-header .search-container i{
-    margin: 0 10px 0 10px;
-    font-size: 15px;
+header .search-container i {
+  margin: 0 10px 0 10px;
+  font-size: 15px;
 }
 
-header button{
-    border: none;
-    background-color: transparent;
+header button {
+  border: none;
+  background-color: transparent;
 }
 
 header #img-logo-garopabus {
-    margin: auto;
-    width: 75%;
-    height: 150px; 
-    background-image: url('../../images/Logo_garopabus_horizontal.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+  margin: auto;
+  width: 75%;
+  height: 150px;
+  background-image: url("../../images/Logo_garopabus_horizontal.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }

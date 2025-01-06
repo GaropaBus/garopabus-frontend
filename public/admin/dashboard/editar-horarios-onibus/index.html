@@ -1,18 +1,45 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>GaropaBus | Gestão de Itinerários</title>
-    <link rel="icon" type="image/png" sizes="32x32" href="../../assets/images/favicon-32x32.png"> 
-    <link rel="icon" type="image/png" sizes="192x192" href="../../assets/images/android-chrome-192x192.png"> 
-    <link rel="apple-touch-icon" sizes="180x180" href="../../assets/images/apple-touch-icon.png"> 
-    <link rel="icon" type="image/x-icon" href="../../assets/images/favicon.ico">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="../../assets/images/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="../../assets/images/android-chrome-192x192.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="../../assets/images/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="../../assets/images/favicon.ico"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
     <link rel="stylesheet" href="../../../assets/css/gestao_adm.css" />
-    <link rel="stylesheet" href="../../../assets/css/admin/editar-itinerarios.css">
-    <link rel="stylesheet" href="../../../assets/css/base_adm.css">
-    <script src="../../../assets/js/admin/verificacao.js" type="module"></script>
+    <link
+      rel="stylesheet"
+      href="../../../assets/css/admin/editar-itinerarios.css"
+    />
+    <link rel="stylesheet" href="../../../assets/css/base_adm.css" />
+    <script
+      src="../../../assets/js/admin/verificacao.js"
+      type="module"
+    ></script>
   </head>
   <body>
     <header>
@@ -48,11 +75,23 @@
           <fieldset class="dias">
             <legend>Dia(s)</legend>
             <div class="dia">
-              <input class="inp-dia"  type="radio" name="tipo-dia" id="dia-util" data-tipoDia="dia_util"/>
+              <input
+                class="inp-dia"
+                type="radio"
+                name="tipo-dia"
+                id="dia-util"
+                data-tipoDia="dia_util"
+              />
               <label for="dia-util">Dias Uteis</label>
             </div>
             <div class="dia">
-              <input class="inp-dia" type="radio" name="tipo-dia" id="final_semana_feriado" data-tipoDia="final_semana_feriado"/>
+              <input
+                class="inp-dia"
+                type="radio"
+                name="tipo-dia"
+                id="final_semana_feriado"
+                data-tipoDia="final_semana_feriado"
+              />
               <label for="final_semana_feriado">Final de Semana/Feriado</label>
             </div>
           </fieldset>
@@ -62,10 +101,10 @@
           </div>
         </form>
       </div>
-    
+
       <div class="edit-section" id="edit-section">
-        <h2 >Horarios já cadastrados</h2>
-        
+        <h2>Horarios já cadastrados</h2>
+
         <!-- Repita .parada-item para mais itens -->
       </div>
     </main>
@@ -73,7 +112,8 @@
     <div id="modal">
       <div id="modal-header">
         <div>
-            <h2>Editando horário id <span id="id-horario-selecionado"></span></h2><i class="fa fa-x" id="close-button" onclick="closeUpdadeModal()"></i>
+          <h2>Editando horário id <span id="id-horario-selecionado"></span></h2>
+          <i class="fa fa-x" id="close-button" onclick="closeUpdadeModal()"></i>
         </div>
       </div>
       <div id="modal-main">
@@ -81,36 +121,57 @@
           <form class="inputs">
             <div>
               <label for="rotas_updt">Rotas</label>
-              <select name="rotas_updt" id="rotas_updt">
-              </select>
+              <select name="rotas_updt" id="rotas_updt"></select>
             </div>
-  
+
             <fieldset class="submit-button">
               <legend>Horários</legend>
               <div class="horarios">
                 <div>
                   <label for="horario-partida_updt"> Partida</label>
-                  <input type="time" name="horario_updt" id="horario-partida_updt" />
+                  <input
+                    type="time"
+                    name="horario_updt"
+                    id="horario-partida_updt"
+                  />
                 </div>
                 <div>
                   <label for="horario-chegada"> Chegada</label>
-                  <input type="time" name="horario_updt" id="horario-chegada_updt" />
+                  <input
+                    type="time"
+                    name="horario_updt"
+                    id="horario-chegada_updt"
+                  />
                 </div>
               </div>
             </fieldset>
-  
+
             <fieldset class="dias">
               <legend>Dia(s)</legend>
               <div class="dia">
-                <input class="inp-dia_updt"  type="radio" name="tipo-dia_updt" id="dia-util_updt" data-tipoDia="dia_util"/>
+                <input
+                  class="inp-dia_updt"
+                  type="radio"
+                  name="tipo-dia_updt"
+                  id="dia-util_updt"
+                  data-tipoDia="dia_util"
+                />
                 <label for="dia-util">Dias Uteis</label>
               </div>
               <div class="dia">
-                <input class="inp-dia_updt" type="radio" name="tipo-dia_updt" id="final_semana_feriado_updt" data-tipoDia="final_semana_feriado"/>
-                <label for="final_semana_feriado">Final de Semana/Feriado</label>
+                <input
+                  class="inp-dia_updt"
+                  type="radio"
+                  name="tipo-dia_updt"
+                  id="final_semana_feriado_updt"
+                  data-tipoDia="final_semana_feriado"
+                />
+                <label for="final_semana_feriado"
+                  >Final de Semana/Feriado</label
+                >
               </div>
             </fieldset>
-  
+
             <div class="submit-button">
               <button id="submit_updt">Confirmar mudanças</button>
             </div>
@@ -119,6 +180,9 @@
       </div>
     </div>
 
-    <script src="../../../assets/js/admin/editar-horarios-onibus.js" type="module"></script>
+    <script
+      src="../../../assets/js/admin/editar-horarios-onibus.js"
+      type="module"
+    ></script>
   </body>
 </html>

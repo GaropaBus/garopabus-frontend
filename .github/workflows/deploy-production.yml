@@ -3,7 +3,7 @@ name: Deploy to VPS
 on:
   push:
     branches:
-      - main  # Roda o CI/CD apenas para a branch "main"
+      - main # Roda o CI/CD apenas para a branch "main"
 
 jobs:
   build:
@@ -42,8 +42,8 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.SSH_KEY }}
           port: 22
-          source: "docker-compose.yml"
-          target: "/home/${{ secrets.VPS_USER }}/garopabus-files/frontend/"
+          source: 'docker-compose.yml'
+          target: '/home/${{ secrets.VPS_USER }}/garopabus-files/frontend/'
 
       - name: Deploy Docker containers on VPS
         uses: appleboy/ssh-action@master
