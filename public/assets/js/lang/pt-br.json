@@ -1,31 +1,31 @@
 {
-    "metadata": {
-      "title-map": "GaropaBus - Mapa",
-      "title-routes": "GaropaBus - Rotas",
-      "title-hours": "GaropaBus - Horários",
-      "title-help": "GaropaBus - Ajuda",
-      "title-settings": "GaropaBus - Configurações"
-    },
-    "navbar": {
-      "map": "Mapa",
-      "routes": "Rotas",
-      "help": "Ajuda",
-      "settings": "Configurações"
-    },
-    "label": {
-      "title-routes": "Rota dos ônibus",
-      "title-hours": "Horários dos ônibus",
-      "title-help": "Avisos",
-      "title-contact": "Informações de contato",
-      "description-contact": "Para reclamações ou sugestões",
-      "button-contact": "Contato",
-      "form-outgaropaba": "Partindo de Garopaba",
-      "form-togaropaba": "Sentido para Garopaba",
-      "tab-week": "Semana",
-      "tab-weekend": "Fim de Semana/Feriado",
-      "settings-language": "Idioma"
-    },
-    "placeholder": {
-      "search-routes": "Procure por rotas"
-    }
+  "metadata": {
+    "title-map": "GaropaBus - Mapa",
+    "title-routes": "GaropaBus - Rotas",
+    "title-hours": "GaropaBus - Horários",
+    "title-help": "GaropaBus - Ajuda",
+    "title-settings": "GaropaBus - Configurações"
+  },
+  "navbar": {
+    "map": "Mapa",
+    "routes": "Rotas",
+    "help": "Ajuda",
+    "settings": "Configurações"
+  },
+  "label": {
+    "title-routes": "Rota dos ônibus",
+    "title-hours": "Horários dos ônibus",
+    "title-help": "Avisos",
+    "title-contact": "Informações de contato",
+    "description-contact": "Para reclamações ou sugestões",
+    "button-contact": "Contato",
+    "form-outgaropaba": "Partindo de Garopaba",
+    "form-togaropaba": "Sentido para Garopaba",
+    "tab-week": "Semana",
+    "tab-weekend": "Fim de Semana/Feriado",
+    "settings-language": "Idioma"
+  },
+  "placeholder": {
+    "search-routes": "Procure por rotas"
   }
+}

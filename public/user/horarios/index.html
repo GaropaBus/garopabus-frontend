@@ -1,15 +1,32 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title id="metadata-title-hours"></title>
     <!-- GaropaBus - Horarios -->
-    <link rel="icon" type="image/png" sizes="32x32" href="../../assets/images/favicon-32x32.png"> 
-    <link rel="icon" type="image/png" sizes="192x192" href="../../assets/images/android-chrome-192x192.png"> 
-    <link rel="apple-touch-icon" sizes="180x180" href="../../assets/images/apple-touch-icon.png"> 
-    <link rel="icon" type="image/x-icon" href="../../assets/images/favicon.ico">
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="../../assets/images/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="../../assets/images/android-chrome-192x192.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="../../assets/images/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="../../assets/images/favicon.ico"
+    />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
@@ -19,86 +36,85 @@
     <link rel="stylesheet" href="../../assets/css/base.css" />
   </head>
 
-<body>
+  <body>
     <div class="container">
-        <header>
-            <div class="main-title">
-              <button onclick="goBack()" class="btn-voltar">
-                <i class="fa fa-long-arrow-left" style="font-size: 20px"></i>
-              </button>
-              <h1 id="label-title-hours"></h1>
-              <!-- Horários de Ônibus -->
-              <i class="fa fa-bus" style="margin-right: 0"></i>
-            </div>
-            <div class="title-horario">
-              <h3 id="routeName"></h3>
-              <!-- Preenchido pelo client-side -->
-            </div>
-          </header>
-          <main>
-            <div class="schedule-view" id="scheduleView">
-              <!-- Tabs -->
-              <div class="escolha-tipo-horario">
-                <div
-                  class="tab active"
-                  onclick="changeTab('semana')"
-                  id="label-tab-week"
-                ></div>
-                <!-- Semana -->
-                <div
-                  class="tab"
-                  onclick="changeTab('feriado')"
-                  id="label-tab-weekend"
-                ></div>
-                <!-- Fim de Semana/Feriado -->
-              </div>
-              <!-- Tabela de horários -->
-              <div id="weekSchedule">
-                <table>
-                  <thead>
-                    <tr>
-                      <th class="variacao">Variação</th>
-                      <th>Horário Partida</th>
-                      <th class="esconder">Horário Chegada</th>
-                    </tr>
-                  </thead>
-                  <tbody id="weekSchedule-tbody">
-                    
-                  </tbody>
-                </table>
-              </div>
-              <div id="weekendSchedule" style="display: none">
-                <table>
-                  <thead>
-                    <tr>
-                      <th class="variacao">Variação</th>
-                      <th>Horário Partida</th>
-                      <th class="esconder">Horário Chegada</th>
-                    </tr>
-                  </thead>
-                  <tbody id="weekendSchedule-tbody">
-                    
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </main>
-    </div>
+      <header>
+        <div class="main-title">
+          <button onclick="goBack()" class="btn-voltar">
+            <i class="fa fa-long-arrow-left" style="font-size: 20px"></i>
+          </button>
+          <h1 id="label-title-hours"></h1>
+          <!-- Horários de Ônibus -->
+          <i class="fa fa-bus" style="margin-right: 0"></i>
+        </div>
+        <div class="title-horario">
+          <h3 id="routeName"></h3>
+          <!-- Preenchido pelo client-side -->
+        </div>
+      </header>
+      <main>
+        <div class="schedule-view" id="scheduleView">
+          <!-- Tabs -->
+          <div class="escolha-tipo-horario">
+            <div
+              class="tab active"
+              onclick="changeTab('semana')"
+              id="label-tab-week"
+            ></div>
+            <!-- Semana -->
+            <div
+              class="tab"
+              onclick="changeTab('feriado')"
+              id="label-tab-weekend"
+            ></div>
+            <!-- Fim de Semana/Feriado -->
+          </div>
+          <!-- Tabela de horários -->
+          <div id="weekSchedule">
+            <table>
+              <thead>
+                <tr>
+                  <th class="variacao">Variação</th>
+                  <th>Horário Partida</th>
+                  <th class="esconder">Horário Chegada</th>
+                </tr>
+              </thead>
+              <tbody id="weekSchedule-tbody"></tbody>
+            </table>
+          </div>
+          <div id="weekendSchedule" style="display: none">
+            <table>
+              <thead>
+                <tr>
+                  <th class="variacao">Variação</th>
+                  <th>Horário Partida</th>
+                  <th class="esconder">Horário Chegada</th>
+                </tr>
+              </thead>
+              <tbody id="weekendSchedule-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </main>
     </div>
     <script type="module" src="../../assets/js/user/horarios.js"></script>
     <script type="module" src="../../assets/js/user/language.js"></script>
     <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/service-worker.js')
-                    .then((registration) => {
-                        console.log('Service Worker registrado com sucesso:', registration.scope);
-                    })
-                    .catch((error) => {
-                        console.log('Falha no registro do Service Worker:', error);
-                    });
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker
+            .register("/service-worker.js")
+            .then((registration) => {
+              console.log(
+                "Service Worker registrado com sucesso:",
+                registration.scope
+              );
+            })
+            .catch((error) => {
+              console.log("Falha no registro do Service Worker:", error);
             });
-        }
+        });
+      }
     </script>
-</body>
+  </body>
 </html>
