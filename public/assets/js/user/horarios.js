@@ -90,7 +90,7 @@ const inicializarPagina = async () => {
   try {
     const urlParams = new URLSearchParams(window.location.search);
     const rota_url = urlParams.get("rota") || "Desconhecida";
-    horarios = await apiGet.getHorariosNomeRota(rota_url);
+    horarios = await apiGet.getHorariosRota(rota_url);
     rota_nome = formatarString(rota_url);
     variacao = horarios.dias_uteis[0].tipo_variacao === null;
 
