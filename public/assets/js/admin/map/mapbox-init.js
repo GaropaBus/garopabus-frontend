@@ -82,7 +82,7 @@ export function ativarCapturaCoordenadas() {
     container_map.style.cursor = "pointer !important";
     ativarCaptura = true;
 
-    map.once("click", (event) => {
+    map.once("click", async (event) => {
       const coordinates = event.lngLat;
 
       // Cria o elemento HTML para o marcador
@@ -106,7 +106,7 @@ export function ativarCapturaCoordenadas() {
         .setLngLat([coordinates.lng, coordinates.lat])
         .addTo(map);
 
-      tratarClick(coordinates);
+      await tratarClick(coordinates);
 
       ativarCaptura = false; // Desativa a captura após um clique
     });
