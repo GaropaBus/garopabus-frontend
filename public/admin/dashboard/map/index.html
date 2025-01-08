@@ -48,14 +48,25 @@
       <div id="screen-paradas">
         <div class="header">
           <div id="fechar"><i class="fa fa-x"></i></div>
-          <h1>Ediar Paradas</h1>
+          <h1>Editar Paradas</h1>
         </div>
         <fieldset>
-          <legend>Mostar</legend>
-          <select name="select-rotas" id="select-rotas">
-            <option value="null">Todos</option>
-          </select>
-          <button>Mostrar Paradas</button>
+          <legend>Mostrar</legend>
+          <div class="row">
+            <select name="select-rotas" id="select-rotas">
+              <option value="null">Todos</option>
+            </select>
+            <button id="mostrar-paradas">Mostrar Paradas</button>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Adicionar</legend>
+          <div class="column">
+            <button id="adicionar-parada-click">Adicionar por click</button>
+            <button id="adicionar-parada-coord">
+              Adicionar por coordenada
+            </button>
+          </div>
         </fieldset>
       </div>
     </main>
