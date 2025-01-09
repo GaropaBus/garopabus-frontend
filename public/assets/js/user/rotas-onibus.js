@@ -1,5 +1,6 @@
 import * as apiGet from "../api/moldes_back/get.js";
 import * as apiPost from "../api/moldes_back/post.js";
+import { formatRouteNameForUrl } from "../api/util.js";
 
 // Função genérica para preencher a tabela
 const preencherTabelaRotas = (rotas, tbody) => {
@@ -133,9 +134,8 @@ export const showSchedule = async (routeId) => {
     const selectedRoute = await apiGet.getRota(routeId);
 
     if (selectedRoute) {
-      const routeName = encodeURIComponent(
-        selectedRoute.nome.replace(/\s+/g, "").toLowerCase()
-      );
+      console.log(selectedRoute.nome);
+      const routeName = formatRouteNameForUrl(selectedRoute.nome);
       const link = `/user/horarios/?rota=${routeName}`;
       window.location.assign(link);
     } else {

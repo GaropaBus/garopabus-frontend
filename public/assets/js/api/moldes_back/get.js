@@ -133,7 +133,7 @@ export const getHorariosRota = async (rota_name) => {
     return data;
   } catch (error) {
     console.error("Erro:", error.message);
-    throw error; // Re-throw the error for client-side handling
+    throw error;
   }
 };
 
