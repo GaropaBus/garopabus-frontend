@@ -2,6 +2,7 @@ import * as apiGetBack from "../api/moldes_back/get.js";
 import * as apiPostBack from "../api/moldes_back/post.js";
 import * as apiDelete from "../api/moldes_back/delete.js";
 import * as apiPut from "../api/moldes_back/put.js";
+import { formatRouteNameForUrl } from "../api/util.js";
 
 // adicionar algum horario
 const addOptionRotas = async () => {
@@ -111,8 +112,9 @@ const addRotasHorariosEdit = async () => {
   for (const rota of rotas_principais) {
     try {
       // Obter os horários (com variações) de cada rota
+      let rota_nome = `${rota.bairro_origem.toLowerCase()}-X-${rota.bairro_destino.toLowerCase()}`;
       const horarios_rota = await apiGetBack.getHorariosRota(
-        `${rota.bairro_origem.toLowerCase()}-${rota.bairro_destino.toLowerCase()}`
+        `${formatRouteNameForUrl(rota_nome)}`
       );
       console.log(horarios_rota);
 
