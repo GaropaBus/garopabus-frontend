@@ -19,17 +19,17 @@ function showInstallBanner() {
   // Verifica se já foi instalado (ou rejeitado) anteriormente
   const isInstalled = localStorage.getItem("isAppInstalled") === "true";
 
-  // Verifica se o modal já foi fechado
+  // Verifica se o modal já foi fechado nesta sessão
   const installBannerHidden =
     sessionStorage.getItem("installBannerHidden") === "true";
 
-  if (isStandalone || isInstalled) {
-    // Não exibe o banner se o app já está instalado ou rodando como PWA
+  if (isStandalone || isInstalled || installBannerHidden) {
+    // Não exibe o banner se o app já está instalado, rodando como PWA ou o banner foi fechado nesta sessão
     return;
   }
 
   // Verifica se o dispositivo é iOS ou Android
-  if ((isIOS || isAndroid) && installBannerHidden) {
+  if (isIOS || isAndroid) {
     installContainer.style.display = "block";
     modal_backdrop.style.display = "block";
   }
@@ -107,4 +107,4 @@ window.addEventListener("appinstalled", () => {
 });
 
 // Chama função ao carregar a página
-window.addEventListener("load", showInstallBanner);
+window.addEventListener("DOMContentLoaded", showInstallBanner);
