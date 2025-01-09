@@ -11,7 +11,7 @@ export const addNomeRotas = async (rotasList) => {
 };
 
 export const addNomeRota = async (rota) => {
-  rota.nome = `${rota.bairro_origem} - ${rota.bairro_destino}${rota.id_rota_principal ? ` (${rota.nome_variacao})` : ""}`;
+  rota.nome = `${rota.bairro_origem} -x- ${rota.bairro_destino}${rota.id_rota_principal ? ` (${rota.nome_variacao})` : ""}`;
 
   return rota; // Retorna a lista atualizada
 };
@@ -25,4 +25,14 @@ export const addNomeRotasFiltradas = async (rotasList) => {
     element.nome = `${element.bairro_origem} - ${element.bairro_destino}${element.id_rota_principal ? ` (${element.nome_variacao})` : ""}`;
   });
   return rotasList; // Retorna a lista atualizada
+};
+
+// Função para formatar o nome da rota para a URL
+export const formatRouteNameForUrl = (routeName) => {
+  return routeName
+    .replace(/\s*\/\s*/g, "-") // Substitui / por -
+    .replace(/\s*-\s*/g, "-") // Normaliza os hífens
+    .replace(/\s+/g, "-") // Substitui espaços por -
+    .replace(/-+/g, "-") // Remove hífens duplicados
+    .trim();
 };
