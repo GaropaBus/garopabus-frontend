@@ -2,6 +2,7 @@
   "name": "Garopabus",
   "short_name": "Garopabus",
   "start_url": "/user/rotas-onibus/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#000000",
