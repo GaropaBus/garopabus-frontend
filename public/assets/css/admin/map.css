@@ -105,10 +105,20 @@ nav {
 
 #screen-paradas fieldset {
   margin: 20px;
+}
+
+#screen-paradas .row {
   display: flex;
   gap: 20px;
 }
 
-#screen-paradas fieldset button {
+#screen-paradas .column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+#screen-paradas button {
   padding: 10px 20px;
+  max-width: 250px;
 }
