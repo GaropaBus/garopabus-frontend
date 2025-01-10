@@ -1,5 +1,5 @@
 import { API_BASE_URL } from "../config.js";
-import * as apiGet from "../api/get.js";
+import * as apiGet from "../api/moldes_back/get.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const lista_aviso = document.getElementById("lista-avisos");
@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   lista_aviso.textContent = "";
 
-  const avisos = await apiGet.getAvisos().catch((error) => {
+  const avisos = await apiGet.getNotificationsList().catch((error) => {
     console.error("Erro ao buscar avisos:", error);
     return [];
   });
@@ -31,11 +31,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     aviso_information.classList.add("aviso-information");
     const h3_title = document.createElement("h3");
     h3_title.textContent = aviso_element.title;
-    const p_desc = document.createElement("p");
-    p_desc.textContent = aviso_element.desc;
+    const p_message = document.createElement("p");
+    p_message.textContent = aviso_element.message;
+    p_message.classList.add("custom-message-font");
 
     aviso_information.appendChild(h3_title);
-    aviso_information.appendChild(p_desc);
+    aviso_information.appendChild(p_message);
 
     aviso.appendChild(aviso_information);
 

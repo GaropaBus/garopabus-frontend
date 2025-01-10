@@ -53,6 +53,11 @@ p {
   gap: 20px;
 }
 
+.custom-message-font {
+  font-size: 12px;
+  font-weight: bold;
+}
+
 .info-circle {
   background-color: transparent;
   border: 2px solid #fcaf2c;
