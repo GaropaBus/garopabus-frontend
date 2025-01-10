@@ -1,3 +1,7 @@
+.hidden {
+  display: none;
+}
+
 .route-list,
 .schedule-view {
   padding: 1rem;
@@ -88,4 +92,43 @@
 
 .icon {
   margin-right: 0.5rem;
+}
+
+.languages-box {
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 1rem;
+}
+
+.language-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+  transition: background-color 0.3s ease;
+}
+
+.language-item:hover {
+  background-color: #f1f1f1;
+}
+
+.language-item input[type="radio"] {
+  margin-right: 8px;
+}
+
+.language-item label {
+  flex: 1;
+  font-size: 1rem;
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+.language-item i {
+  font-size: 1.5rem;
+  margin-left: 10px;
 }
