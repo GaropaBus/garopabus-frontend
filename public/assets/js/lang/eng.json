@@ -4,13 +4,12 @@
     "title-routes": "GaropaBus - Routes",
     "title-hours": "GaropaBus - Timetables",
     "title-help": "GaropaBus - Help",
-    "title-settings": "GaropaBus - Settings"
+    "title-notfound": "GaropaBus - Not found"
   },
   "navbar": {
     "map": "Map",
     "routes": "Routes",
-    "help": "Help",
-    "settings": "Settings"
+    "help": "Help"
   },
   "label": {
     "title-routes": "Bus Routes",
@@ -25,6 +24,7 @@
     "title-help": "Notices",
     "title-contact": "Contact Information",
     "description-contact": "For complaints or suggestions",
+    "description-notfound": "The page you are looking for does not exist",
     "button-contact": "Contact",
     "settings-language": "Language"
   },

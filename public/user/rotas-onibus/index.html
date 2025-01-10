@@ -8,8 +8,12 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
-    <link rel="manifest" href="../../manifest.json" />
-    <title>Rotas de Ônibus</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css"
+    />
+    <!-- GaropaBus - Rotas de Ônibus -->
+    <title id="metadata-title-routes"></title>
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <meta name="apple-mobile-web-app-title" content="Garopabus" />
@@ -60,6 +64,24 @@
         </div>
       </header>
 
+      <div class="languages-box hidden">
+        <div class="language-item">
+          <input type="radio" name="language" id="pt-br" />
+          <label for="pt-br">Português (Brasil)</label>
+          <i class="fi fi-br"></i>
+        </div>
+        <div class="language-item">
+          <input type="radio" name="language" id="esp" />
+          <label for="esp">Español</label>
+          <i class="fi fi-es"></i>
+        </div>
+        <div class="language-item">
+          <input type="radio" name="language" id="eng" />
+          <label for="eng">English</label>
+          <i class="fi fi-us"></i>
+        </div>
+      </div>
+
       <div class="listas-rotas">
         <div class="route-list">
           <h2 id="label-form-outgaropaba"></h2>
@@ -98,11 +120,6 @@
           <i class="fas fa-info-circle"></i>
           <div id="navbar-help"></div>
           <!-- Ajuda -->
-        </button>
-        <button id="garopabus-configuracao">
-          <i class="fa-solid fa-gear"></i>
-          <div id="navbar-settings"></div>
-          <!-- Configurações -->
         </button>
       </nav>
       <div id="modal-backdrop"></div>
