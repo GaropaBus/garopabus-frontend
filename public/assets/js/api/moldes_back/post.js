@@ -135,7 +135,7 @@ export const postNewRota = async (dados) => {
   }
 };
 
-export const postRotaPontoOnibusFiltrar = async (params) => {
+export const getRotaPontoOnibusFiltrar = async (params) => {
   try {
     const response = await fetch(`${API_BASE_URL}/api/rotas_ponto_onibus/filtrar/`, {
       method: "POST",
@@ -144,8 +144,8 @@ export const postRotaPontoOnibusFiltrar = async (params) => {
         "Accept": "application/json",
       },
       body: JSON.stringify({
-        id_rota: params.id_rota ? params.id_rota : null,
-        id_ponto_onibus: params.id_ponto_onibus ? params.id_ponto_onibus : null
+        rota_id: params.id_rota ? params.id_rota : null,
+        ponto_onibus_id: params.id_ponto_onibus ? params.id_ponto_onibus : null
       }),
     });
 
@@ -157,6 +157,32 @@ export const postRotaPontoOnibusFiltrar = async (params) => {
 
     const data = await response.json();
     return await util.addNomeRotasPontoOnibosFiltrar(data);
+  } catch (error) {
+    console.error("Erro:", error.message);
+  }
+};
+
+export const postNewRotasPontoOnibus = async (dados) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/rotas_ponto_onibus/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        rota_id: dados.id_rota,
+        ponto_onibus_id: dados.id_ponto_onibus,
+        ordem: null,
+      }),
+    });
+
+    if (!response.ok) {
+      const errorResponse = await response.json(); // Detalhes do erro
+      console.error("Erro detalhado do servidor:", errorResponse);
+      throw new Error(`Erro: ${response.status} - ${response.statusText}`);
+    }
   } catch (error) {
     console.error("Erro:", error.message);
   }

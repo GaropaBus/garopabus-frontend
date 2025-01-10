@@ -39,7 +39,7 @@ export const formatRouteNameForUrl = (routeName) => {
 
 export const addNomeRotasPontoOnibosFiltrar = async (rotasList) => {
   rotasList.forEach((element) => {
-    element.id_rota.nome = `${element.id_rota.bairro_origem} - ${element.id_rota.bairro_destino}${element.id_rota.id_rota_principal ? ` (${element.id_rota.nome_variacao})` : ""}`;
+    element.rota.nome = `${element.rota.bairro_origem} - ${element.rota.bairro_destino}${element.rota.id_rota_principal ? ` (${element.rota.nome_variacao})` : ""}`;
   });
   return rotasList; // Retorna a lista atualizada
 };

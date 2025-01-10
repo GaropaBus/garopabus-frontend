@@ -2,6 +2,7 @@ import * as apiGet from "../../api/moldes_back/get.js";
 import * as mapbox from "./mapbox-init.js";
 import * as util from "../util.js ";
 import * as apiPost from "../../api/moldes_back/post.js";
+import * as apiDelete from "../../api/moldes_back/delete.js";
 
 let rotas = [];
 let enviar;
@@ -12,7 +13,7 @@ const mostrarParadas = async () => {
     mapbox.addBusStops(await apiGet.getPontoOnibus());
   } else {
     mapbox.addBusStopsSpecificRoute(
-      await apiPost.postRotaPontoOnibusFiltrar({ id_rota: rota_id })
+      await apiPost.getRotaPontoOnibusFiltrar({ id_rota: rota_id })
     );
   }
 };
@@ -122,7 +123,7 @@ const addParadaCoord = async () => {
 
 export async function deleteParada(id) {
   if (confirm(`Deseja Excluir a para de id ${id}?`)) {
-    console.log(id);
+    apiDelete.deletePontoOnibus(id);
   }
 }
 
@@ -149,12 +150,14 @@ const deleteButton = () => {
 
 const deleteRotaPontoOnibus = (id) => {
   if (focus_btn_deleteRotaPontoOnibus) {
-    console.log(id);
+    if (confirm(`Deseja excluir a junção de id ${id}`)){
+      apiDelete.deleteRotasPontoOnibus(id);
+    }
   }
 };
 
 export const addSobreRotasParadas = async (id_parada) => {
-  const rotas_paradas = await apiPost.postRotaPontoOnibusFiltrar({
+  const rotas_paradas = await apiPost.getRotaPontoOnibusFiltrar({
     id_ponto_onibus: id_parada,
   });
   const lista_rotas_parada = document.getElementById("lista-rotas-parada");
@@ -162,8 +165,10 @@ export const addSobreRotasParadas = async (id_parada) => {
   for (const element of rotas_paradas) {
     const li = document.createElement("li");
     li.classList.add("rota-passa-parada");
-    li.textContent = element.id_rota.nome;
-    li.onclick = () => deleteRotaPontoOnibus(element.id);
+    li.textContent = element.rota.nome;
+    li.addEventListener("click", () => {
+      deleteRotaPontoOnibus(element.id);
+    });
     lista_rotas_parada.appendChild(li);
   }
 };
@@ -205,9 +210,13 @@ const adiconar_rota_ponto_onibus = () => {
     alert("O ID do ponto de ônibus é inválido.");
     return;
   }
+  const dados = {
+    id_rota: id_rota,
+    id_ponto_onibus: id_ponto_onibus,
+  };
 
   // Debug para verificar os valores convertidos
-  console.log(id_rota_numero, id_ponto_onibus);
+  apiPost.postNewRotasPontoOnibus(dados);
   clear_adiconar_rota_ponto_onibus();
 };
 

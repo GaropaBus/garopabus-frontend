@@ -56,10 +56,10 @@ export async function addBusStops(pontos_onibus) {
 
       const sobre_rotas_btn_popup = document.createElement("button");
       sobre_rotas_btn_popup.textContent = "Sobre Rotas";
-      sobre_rotas_btn_popup.addEventListener("click", () => {
+      sobre_rotas_btn_popup.addEventListener("click", async () => {
         document.getElementById("parada_id").textContent = stop.id;
         paradas.openModal(2);
-        paradas.addSobreRotasParadas(stop.id);
+        await paradas.addSobreRotasParadas(stop.id);
       });
 
       div_popup.appendChild(delete_btn_popup);
@@ -111,16 +111,16 @@ export async function addBusStopsSpecificRoute(pontos_onibus) {
       const delete_btn_popup = document.createElement("button");
       delete_btn_popup.textContent = "Excluir";
       delete_btn_popup.addEventListener("click", () => {
-        paradas.deleteParada(stop.id_ponto_onibus.id);
+        paradas.deleteParada(stop.ponto_onibus.id);
       });
 
       const sobre_rotas_btn_popup = document.createElement("button");
       sobre_rotas_btn_popup.textContent = "Sobre Rotas";
-      sobre_rotas_btn_popup.addEventListener("click", () => {
+      sobre_rotas_btn_popup.addEventListener("click", async () => {
         document.getElementById("parada_id").textContent =
-          stop.id_ponto_onibus.id;
+          stop.ponto_onibus.id;
         paradas.openModal(2);
-        paradas.addSobreRotasParadas(stop.id_ponto_onibus.id);
+        await paradas.addSobreRotasParadas(stop.ponto_onibus.id);
       });
 
       div_popup.appendChild(delete_btn_popup);
@@ -129,8 +129,8 @@ export async function addBusStopsSpecificRoute(pontos_onibus) {
       // Cria o marcador
       const marker = new mapboxgl.Marker(el)
         .setLngLat([
-          stop.id_ponto_onibus.longitude,
-          stop.id_ponto_onibus.latitude,
+          stop.ponto_onibus.longitude,
+          stop.ponto_onibus.latitude,
         ])
         .setPopup(
           new mapboxgl.Popup({ offset: 25 }).setDOMContent(div_popup) // Usando setDOMContent
