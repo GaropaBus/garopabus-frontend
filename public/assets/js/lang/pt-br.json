@@ -15,14 +15,17 @@
   "label": {
     "title-routes": "Rota dos ônibus",
     "title-hours": "Horários dos ônibus",
+    "form-outgaropaba": "Sentido Bairros",
+    "form-togaropaba": "Sentido Garopaba",
+    "tab-week": "Semana",
+    "tab-weekend": "Fim de Semana/Feriado",
+    "route-variation": "Variação",
+    "departure-time": "Horário Partida",
+    "arrival-time": "Horário Chegada",
     "title-help": "Avisos",
     "title-contact": "Informações de contato",
     "description-contact": "Para reclamações ou sugestões",
     "button-contact": "Contato",
-    "form-outgaropaba": "Partindo de Garopaba",
-    "form-togaropaba": "Sentido para Garopaba",
-    "tab-week": "Semana",
-    "tab-weekend": "Fim de Semana/Feriado",
     "settings-language": "Idioma"
   },
   "placeholder": {

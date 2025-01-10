@@ -15,17 +15,20 @@
   "label": {
     "title-routes": "Ruta de los autobuses",
     "title-hours": "Horarios de los autobuses",
+    "form-outgaropaba": "Hacia los Barrios",
+    "form-togaropaba": "Hacia Garopaba",
+    "tab-week": "Días Laborales",
+    "tab-weekend": "Fin de Semana/Feriado",
+    "route-variation": "Variación",
+    "departure-time": "Hora de Salida",
+    "arrival-time": "Hora de Llegada",
     "title-help": "Avisos",
     "title-contact": "Información de contacto",
     "description-contact": "Para quejas o sugerencias",
     "button-contact": "Contacto",
-    "form-outgaropaba": "Partiendo de Garopaba",
-    "form-togaropaba": "Sentido a Garopaba",
-    "tab-week": "Semana",
-    "tab-weekend": "Fin de semana/Feriado",
     "settings-language": "Idioma"
   },
   "placeholder": {
-    "search-routes": "Busca rutas"
+    "search-routes": "Buscar rutas"
   }
 }
