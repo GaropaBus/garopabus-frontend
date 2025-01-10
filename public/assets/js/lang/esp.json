@@ -26,7 +26,10 @@
     "description-contact": "Para quejas o sugerencias",
     "description-notfound": "La página que buscas no existe",
     "button-contact": "Contacto",
-    "settings-language": "Idioma"
+    "settings-language": "Idioma",
+    "title-page-not-found": "Página no encontrada",
+    "description-page-not-found": "¡Ups! Parece que te has perdido. La página que buscas no existe o ha sido movida.",
+    "back-to-homepage": "Volver a la página principal"
   },
   "placeholder": {
     "search-routes": "Buscar rutas"

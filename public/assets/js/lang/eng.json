@@ -26,7 +26,10 @@
     "description-contact": "For complaints or suggestions",
     "description-notfound": "The page you are looking for does not exist",
     "button-contact": "Contact",
-    "settings-language": "Language"
+    "settings-language": "Language",
+    "title-page-not-found": "Page Not Found",
+    "description-page-not-found": "Oops! It looks like you're lost. The page you are looking for doesn't exist or has been moved.",
+    "back-to-homepage": "Back to Homepage"
   },
   "placeholder": {
     "search-routes": "Search for routes"
