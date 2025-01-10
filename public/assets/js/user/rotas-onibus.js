@@ -106,7 +106,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       tipo: "principal",
       bairro_destino: "Garopaba",
     });
-    const searchInput = document.getElementById("search-input");
+    const searchInput = document.getElementById("placeholder-search-routes");
 
     // Selecionar os elementos do tbody das tabelas
     const tbody_partindo = document.getElementById("tabelaRotasPartindo");

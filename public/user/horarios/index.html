@@ -4,11 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="manifest" href="../../manifest.json" />
+    <!-- GaropaBus - Horarios -->
     <title id="metadata-title-hours"></title>
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <meta name="apple-mobile-web-app-title" content="Garopabus" />
-    <!-- GaropaBus - Horarios -->
     <link
       rel="icon"
       type="image/png"
@@ -49,7 +49,6 @@
           </button>
           <h1 id="label-title-hours"></h1>
           <!-- Horários de Ônibus -->
-          <i class="fa fa-bus" style="margin-right: 0"></i>
         </div>
         <div class="title-horario">
           <h3 id="routeName"></h3>
@@ -78,9 +77,9 @@
             <table>
               <thead>
                 <tr>
-                  <th class="variacao">Variação</th>
-                  <th>Horário Partida</th>
-                  <th class="esconder">Horário Chegada</th>
+                  <th class="variacao" id="label-route-variation"></th>
+                  <th id="label-departure-time"></th>
+                  <th class="esconder" id="label-arrival-time"></th>
                 </tr>
               </thead>
               <tbody id="weekSchedule-tbody"></tbody>
@@ -90,9 +89,9 @@
             <table>
               <thead>
                 <tr>
-                  <th class="variacao">Variação</th>
-                  <th>Horário Partida</th>
-                  <th class="esconder">Horário Chegada</th>
+                  <th class="variacao" id="label-route-variation"></th>
+                  <th id="label-departure-time"></th>
+                  <th class="esconder" id="label-arrival-time"></th>
                 </tr>
               </thead>
               <tbody id="weekendSchedule-tbody"></tbody>
