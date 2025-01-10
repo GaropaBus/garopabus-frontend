@@ -134,3 +134,30 @@ export const postNewRota = async (dados) => {
     console.error("Erro:", error.message);
   }
 };
+
+export const postRotaPontoOnibusFiltrar = async (params) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/rotas_ponto_onibus/filtrar/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+      },
+      body: JSON.stringify({
+        id_rota: params.id_rota ? params.id_rota : null,
+        id_ponto_onibus: params.id_ponto_onibus ? params.id_ponto_onibus : null
+      }),
+    });
+
+    if (!response.ok){
+      const errorResponse = await response.json(); // Detalhes do erro
+      console.error("Erro detalhado do servidor:", errorResponse);
+      throw new Error(`Erro: ${response.status} - ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    return await util.addNomeRotasPontoOnibosFiltrar(data);
+  } catch (error) {
+    console.error("Erro:", error.message);
+  }
+};

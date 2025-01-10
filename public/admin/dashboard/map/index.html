@@ -46,10 +46,10 @@
     <main>
       <div id="map"></div>
       <div id="screen-paradas">
-        <div class="header">
+        <header>
           <div id="fechar"><i class="fa fa-x"></i></div>
           <h1>Editar Paradas</h1>
-        </div>
+        </header>
         <fieldset>
           <legend>Mostrar</legend>
           <div class="row">
@@ -88,38 +88,70 @@
     </nav>
     <div id="modal-backdrop" onclick="closeModal()"></div>
     <div id="modal">
-      <div id="modal-header">
-        <div>
-          <h2>Adicionar Nova Parada</h2>
-          <i class="fa fa-x" id="close-button" onclick="closeModal()"></i>
+      <div id="add-parada-coord-modal">
+        <div id="modal-header">
+          <div>
+            <h2>Adicionar Nova Parada</h2>
+            <i class="fa fa-x" id="close-button" onclick="closeModal()"></i>
+          </div>
+        </div>
+        <div id="modal-main">
+          <div>
+            <form class="inputs">
+              <div>
+                <label for="coordenada-parada-add">Coordenadas</label>
+                <input
+                  type="text"
+                  id="coordenada-parada-add"
+                  placeholder="-28.026097, -48.618925"
+                />
+              </div>
+
+              <div class="link-open">
+                <label for="link-open-street-parada-add"
+                  >Link open street do google maps (se não viver coloque
+                  nada)</label
+                >
+                <input
+                  type="text"
+                  id="link-open-street-parada-add"
+                  placeholder="https://www.google.com/maps/@-28.0260705,-48.618851,3a,75y,194.3h,100.13t/data=!3m7!1e1!3m5!1sKT_HQCArsCkpi4wBk72Q8A!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D-10.132474522730263%26panoid%3DKT_HQCArsCkpi4wBk72Q8A%26yaw%3D194.3036097239491!7i16384!8i8192?coh=205410&entry=ttu&g_ep=EgoyMDI0MDkzMC4wIKXMDSoASAFQAw%3D%3D"
+                />
+              </div>
+              <div class="submit-button">
+                <button id="submit-new-parada">Adicionar</button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
-      <div id="modal-main">
-        <div>
-          <form class="inputs">
-            <div>
-              <label for="coordenada-parada-add">Coordenadas</label>
-              <input
-                type="text"
-                id="coordenada-parada-add"
-                placeholder="-28.026097, -48.618925"
-              />
-            </div>
-    
-            <div class="link-open">
-              <label for="link-open-street-parada-add"
-                >Link open street do google maps (se não viver coloque nada)</label
+      <div id="sorbre-rotas-popup-modal">
+        <div id="modal-header">
+          <div>
+            <h2>Sobre Rotas parada <span id="parada_id"></span></h2>
+            <i class="fa fa-x" id="close-button" onclick="closeModal()"></i>
+          </div>
+        </div>
+        <div id="modal-main">
+          <div id="add-delete">
+            <fieldset id="rotas-passam-parada">
+              <legend>Rotas que passam na parada</legend>
+              <ul id="lista-rotas-parada"></ul>
+              <button id="excluir-jucao" class="delete-btn">Excluir</button>
+            </fieldset>
+            <fieldset id="add-rota-passa-parada">
+              <legend>Adicionar rota que passa na parada</legend>
+              <select name="rotas-sobre-rotas" id="rotas-sobre-rotas">
+                <option value="null">Selecione uma Rota</option>
+              </select>
+              <button
+                id="btn-add-rotas-sobre-rotas"
+                class="btn-add-rotas-sobre-rotas"
               >
-              <input
-                type="text"
-                id="link-open-street-parada-add"
-                placeholder="https://www.google.com/maps/@-28.0260705,-48.618851,3a,75y,194.3h,100.13t/data=!3m7!1e1!3m5!1sKT_HQCArsCkpi4wBk72Q8A!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D-10.132474522730263%26panoid%3DKT_HQCArsCkpi4wBk72Q8A%26yaw%3D194.3036097239491!7i16384!8i8192?coh=205410&entry=ttu&g_ep=EgoyMDI0MDkzMC4wIKXMDSoASAFQAw%3D%3D"
-              />
-            </div>
-            <div class="submit-button">
-              <button id="submit-new-parada">Adicionar</button>
-            </div>
-          </form>
+                Adicionar
+              </button>
+            </fieldset>
+          </div>
         </div>
       </div>
     </div>

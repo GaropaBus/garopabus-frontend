@@ -26,3 +26,10 @@ export const addNomeRotasFiltradas = async (rotasList) => {
   });
   return rotasList; // Retorna a lista atualizada
 };
+
+export const addNomeRotasPontoOnibosFiltrar = async (rotasList) => {
+  rotasList.forEach((element) => {
+    element.id_rota.nome = `${element.id_rota.bairro_origem} - ${element.id_rota.bairro_destino}${element.id_rota.id_rota_principal ? ` (${element.id_rota.nome_variacao})` : ""}`;
+  });
+  return rotasList; // Retorna a lista atualizada
+};

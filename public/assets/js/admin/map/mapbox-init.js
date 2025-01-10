@@ -1,5 +1,5 @@
 import * as apiGet from "../../api/moldes_back/get.js";
-import tratarClick from "./paradas.js";
+import * as paradas from "./paradas.js";
 
 // Inicialize o Mapbox
 mapboxgl.accessToken =
@@ -18,59 +18,139 @@ export let map = new mapboxgl.Map({
   maxBounds: bounds,
 });
 
-// Array para armazenar as coordenadas dos marcadores adicionados
-export const addedMarkers = [];
-
-// Função para verificar se um marcador já existe em uma coordenada específica
-function hasMarkerAt(lng, lat) {
-  return addedMarkers.some((coord) => coord.lng === lng && coord.lat === lat);
-}
-
 // Adiciona os pontos de ônibus ao mapa
-export async function addBusStops() {
-  try {
-    const busStops = await apiGet.getPontoOnibus();
+// Array para armazenar os objetos Marker
 
+let markers = [];
+
+export async function addBusStops(pontos_onibus) {
+  try {
+    const busStops = pontos_onibus;
     busStops.forEach(function (stop) {
       // Verifica se já existe um marcador nas coordenadas
-      if (!hasMarkerAt(stop.longitude, stop.latitude)) {
-        // Cria um elemento HTML para o ícone do ponto de ônibus
-        const el = document.createElement("div");
-        el.className = "bus-stop-marker";
+      // Cria um elemento HTML para o ícone do ponto de ônibus
+      const el = document.createElement("div");
+      el.className = "bus-stop-marker";
 
-        // Estilos do marcador
-        el.style.width = "20px";
-        el.style.height = "20px";
-        el.style.backgroundColor = "rgba(255, 255, 255, 0.7)";
-        el.style.borderRadius = "5px";
-        el.style.backgroundImage =
-          "url(../../../../../../assets/images/icon_bus.png)";
-        el.style.backgroundSize = "80%";
-        el.style.backgroundRepeat = "no-repeat";
-        el.style.backgroundPosition = "center";
-        el.style.filter = "invert(1)";
+      // Estilos do marcador
+      el.style.width = "20px";
+      el.style.height = "20px";
+      el.style.backgroundColor = "rgba(255, 255, 255, 0.7)";
+      el.style.borderRadius = "5px";
+      el.style.backgroundImage =
+        "url(../../../../../../assets/images/icon_bus.png)";
+      el.style.backgroundSize = "80%";
+      el.style.backgroundRepeat = "no-repeat";
+      el.style.backgroundPosition = "center";
+      el.style.filter = "invert(1)";
 
-        // Adiciona o marcador ao mapa
-        new mapboxgl.Marker(el)
-          .setLngLat([stop.longitude, stop.latitude])
-          .setPopup(
-            new mapboxgl.Popup({ offset: 25 }).setHTML(
-              `<h3>${stop.title}</h3><p>${stop.description}</p>`
-            )
-          )
-          .addTo(map);
+      // Cria o HTML do popup
+      const div_popup = document.createElement("div");
+      div_popup.classList.add("botoes-popup");
 
-        // Armazena as coordenadas do marcador
-        addedMarkers.push({ lng: stop.longitude, lat: stop.latitude });
-      } else {
-        console.log(
-          `Já existe um marcador em [${stop.longitude}, ${stop.latitude}].`
-        );
-      }
+      const delete_btn_popup = document.createElement("button");
+      delete_btn_popup.textContent = "Excluir";
+      delete_btn_popup.addEventListener("click", () => {
+        paradas.deleteParada(stop.id);
+      });
+
+      const sobre_rotas_btn_popup = document.createElement("button");
+      sobre_rotas_btn_popup.textContent = "Sobre Rotas";
+      sobre_rotas_btn_popup.addEventListener("click", () => {
+        document.getElementById("parada_id").textContent = stop.id;
+        paradas.openModal(2);
+        paradas.addSobreRotasParadas(stop.id);
+      });
+
+      div_popup.appendChild(delete_btn_popup);
+      div_popup.appendChild(sobre_rotas_btn_popup);
+
+      // Cria o marcador
+      const marker = new mapboxgl.Marker(el)
+        .setLngLat([stop.longitude, stop.latitude])
+        .setPopup(
+          new mapboxgl.Popup({ offset: 25 }).setDOMContent(div_popup) // Usando setDOMContent
+        )
+        .addTo(map);
+
+      // Armazena o marcador
+      markers.push(marker);
+      // Armazena as coordenadas do marcador
     });
   } catch (error) {
     console.error("Erro ao carregar os pontos de ônibus:", error);
   }
+}
+
+export async function addBusStopsSpecificRoute(pontos_onibus) {
+  try {
+    const busStops = pontos_onibus;
+    busStops.forEach(function (stop) {
+      // Verifica se já existe um marcador nas coordenadas
+
+      // Cria um elemento HTML para o ícone do ponto de ônibus
+      const el = document.createElement("div");
+      el.className = "bus-stop-marker";
+
+      // Estilos do marcador
+      el.style.width = "20px";
+      el.style.height = "20px";
+      el.style.backgroundColor = "rgba(255, 255, 255, 0.7)";
+      el.style.borderRadius = "5px";
+      el.style.backgroundImage =
+        "url(../../../../../../assets/images/icon_bus.png)";
+      el.style.backgroundSize = "80%";
+      el.style.backgroundRepeat = "no-repeat";
+      el.style.backgroundPosition = "center";
+      el.style.filter = "invert(1)";
+
+      // Cria o HTML do popup
+      const div_popup = document.createElement("div");
+      div_popup.classList.add("botoes-popup");
+
+      const delete_btn_popup = document.createElement("button");
+      delete_btn_popup.textContent = "Excluir";
+      delete_btn_popup.addEventListener("click", () => {
+        paradas.deleteParada(stop.id_ponto_onibus.id);
+      });
+
+      const sobre_rotas_btn_popup = document.createElement("button");
+      sobre_rotas_btn_popup.textContent = "Sobre Rotas";
+      sobre_rotas_btn_popup.addEventListener("click", () => {
+        document.getElementById("parada_id").textContent =
+          stop.id_ponto_onibus.id;
+        paradas.openModal(2);
+        paradas.addSobreRotasParadas(stop.id_ponto_onibus.id);
+      });
+
+      div_popup.appendChild(delete_btn_popup);
+      div_popup.appendChild(sobre_rotas_btn_popup);
+
+      // Cria o marcador
+      const marker = new mapboxgl.Marker(el)
+        .setLngLat([
+          stop.id_ponto_onibus.longitude,
+          stop.id_ponto_onibus.latitude,
+        ])
+        .setPopup(
+          new mapboxgl.Popup({ offset: 25 }).setDOMContent(div_popup) // Usando setDOMContent
+        )
+        .addTo(map);
+
+      // Armazena o marcador
+      markers.push(marker);
+    });
+  } catch (error) {
+    console.error("Erro ao carregar os pontos de ônibus:", error);
+  }
+}
+
+// Função para deletar todos os marcadores
+export function removeAllMarkers() {
+  markers.forEach((marker) => {
+    marker.remove(); // Remove o marcador do mapa
+  });
+  markers = []; // Limpa o array de marcadores
 }
 
 // Função para ativar/desativar o evento de clique no mapa
@@ -106,7 +186,7 @@ export function ativarCapturaCoordenadas() {
         .setLngLat([coordinates.lng, coordinates.lat])
         .addTo(map);
 
-      await tratarClick(coordinates);
+      await paradas.tratarClick(coordinates);
 
       ativarCaptura = false; // Desativa a captura após um clique
     });
