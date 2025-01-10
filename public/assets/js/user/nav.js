@@ -4,17 +4,17 @@ const btn_map = document.getElementById("garopabus-map");
 
 const verificarLink = () => {
   switch (window.location.pathname) {
-    case "/user/ajuda/":
-      btn_ajuda.classList.add("active");
-      break;
-    case "/user/rotas-onibus/":
-      btn_rotas.classList.add("active");
-      break;
-    case "/user/map/":
-      btn_map.classList.add("active");
-      break;
-    default:
-      break;
+  case "/user/ajuda/":
+    btn_ajuda.classList.add("active");
+    break;
+  case "/user/rotas-onibus/":
+    btn_rotas.classList.add("active");
+    break;
+  case "/user/map/":
+    btn_map.classList.add("active");
+    break;
+  default:
+    break;
   }
 };
 document.addEventListener("DOMContentLoaded", () => {

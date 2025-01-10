@@ -27,21 +27,21 @@ export const translatePage = (language, langs) => {
       wprefix = wprefix.join("-");
       if (data[prefix]) {
         switch (prefix) {
-          case "metadata":
-            document.title = data[prefix][wprefix];
-            break;
-          case "navbar":
-            element.innerHTML = data[prefix][wprefix];
-            break;
-          case "label":
-            element.innerHTML = data[prefix][wprefix];
-            break;
-          case "placeholder":
-            element.placeholder = data[prefix][wprefix];
-            break;
-          default:
-            console.log("Chave não encontrada:", key);
-            break;
+        case "metadata":
+          document.title = data[prefix][wprefix];
+          break;
+        case "navbar":
+          element.innerHTML = data[prefix][wprefix];
+          break;
+        case "label":
+          element.innerHTML = data[prefix][wprefix];
+          break;
+        case "placeholder":
+          element.placeholder = data[prefix][wprefix];
+          break;
+        default:
+          console.log("Chave não encontrada:", key);
+          break;
         }
       }
     }
@@ -58,17 +58,17 @@ export const changeLanguage = async (newLanguage) => {
     const languageSettings = document.getElementById("language-settings");
     if (languageSettings) {
       switch (newLanguage) {
-        case "pt-br":
-          languageSettings.className = "fi fi-br";
-          break;
-        case "esp":
-          languageSettings.className = "fi fi-es";
-          break;
-        case "eng":
-          languageSettings.className = "fi fi-us";
-          break;
-        default:
-          console.error("Idioma não suportado.");
+      case "pt-br":
+        languageSettings.className = "fi fi-br";
+        break;
+      case "esp":
+        languageSettings.className = "fi fi-es";
+        break;
+      case "eng":
+        languageSettings.className = "fi fi-us";
+        break;
+      default:
+        console.error("Idioma não suportado.");
       }
     }
 
@@ -106,17 +106,17 @@ window.onload = async () => {
     const languageSettings = document.getElementById("language-settings");
     if (languageSettings) {
       switch (language) {
-        case "pt-br":
-          languageSettings.className = "fi fi-br";
-          break;
-        case "esp":
-          languageSettings.className = "fi fi-es";
-          break;
-        case "eng":
-          languageSettings.className = "fi fi-us";
-          break;
-        default:
-          console.error("Idioma não suportado.");
+      case "pt-br":
+        languageSettings.className = "fi fi-br";
+        break;
+      case "esp":
+        languageSettings.className = "fi fi-es";
+        break;
+      case "eng":
+        languageSettings.className = "fi fi-us";
+        break;
+      default:
+        console.error("Idioma não suportado.");
       }
     }
 
@@ -135,17 +135,17 @@ const languagesBox = document.querySelector(".languages-box");
 if (languageSettings) {
   const lang = await currentLanguage();
   switch (lang) {
-    case "pt-br":
-      languageSettings.className = "fi fi-br";
-      break;
-    case "esp":
-      languageSettings.className = "fi fi-es";
-      break;
-    case "eng":
-      languageSettings.className = "fi fi-us";
-      break;
-    default:
-      console.error("Idioma não suportado.");
+  case "pt-br":
+    languageSettings.className = "fi fi-br";
+    break;
+  case "esp":
+    languageSettings.className = "fi fi-es";
+    break;
+  case "eng":
+    languageSettings.className = "fi fi-us";
+    break;
+  default:
+    console.error("Idioma não suportado.");
   }
 
   languageSettings.addEventListener("click", () => {
