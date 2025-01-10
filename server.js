@@ -1,7 +1,5 @@
 import express from "express";
-import https from "https";
 import http from "http";
-import fs from "fs";
 import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -18,6 +16,11 @@ const port = process.env.PORT || 8080;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/", express.static(path.join(__dirname, "/public")));
+
+// Error 404 - Página não encontrada
+app.use((req, res) => {
+  res.status(404).sendFile(path.join(__dirname, "public", "404.html"));
+});
 
 // Criar o servidor HTTP
 http.createServer(app).listen(port, () => {

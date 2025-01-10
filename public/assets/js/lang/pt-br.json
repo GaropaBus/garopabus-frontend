@@ -4,13 +4,12 @@
     "title-routes": "GaropaBus - Rotas",
     "title-hours": "GaropaBus - Horários",
     "title-help": "GaropaBus - Ajuda",
-    "title-settings": "GaropaBus - Configurações"
+    "title-notfound": "GaropaBus - Não encontrado"
   },
   "navbar": {
     "map": "Mapa",
     "routes": "Rotas",
-    "help": "Ajuda",
-    "settings": "Configurações"
+    "help": "Ajuda"
   },
   "label": {
     "title-routes": "Rota dos ônibus",
@@ -18,6 +17,7 @@
     "title-help": "Avisos",
     "title-contact": "Informações de contato",
     "description-contact": "Para reclamações ou sugestões",
+    "description-notfound": "A página que você procura não existe",
     "button-contact": "Contato",
     "form-outgaropaba": "Partindo de Garopaba",
     "form-togaropaba": "Sentido para Garopaba",
