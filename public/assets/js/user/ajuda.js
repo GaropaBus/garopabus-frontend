@@ -1,4 +1,4 @@
-import { API_BASE_URL } from "../../config.js";
+import { API_BASE_URL } from "../config.js";
 import * as apiGet from "../api/get.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -144,5 +144,30 @@ function urlBase64ToUint8Array(base64String) {
   return new Uint8Array([...rawData].map((char) => char.charCodeAt(0)));
 }
 
-// Inicializa o sistema de notificações push
+// Inicializa o sistema de notificações push e modal de informações de contato
+initModal();
 initPushNotifications();
+
+// Controle do Modal
+function initModal() {
+  const modal = document.getElementById("modal-contato");
+  const btnContato = document.getElementById("label-button-contact");
+  const closeBtn = document.querySelector(".close-modal");
+
+  if (!modal || !btnContato || !closeBtn) {
+    console.error("Elementos do modal não encontrados.");
+    return;
+  }
+  btnContato.addEventListener("click", () => {
+    modal.style.display = "flex";
+    console.log("Clicou");
+  });
+  closeBtn.addEventListener("click", () => {
+    modal.style.display = "none";
+  });
+  window.addEventListener("click", (event) => {
+    if (event.target === modal) {
+      modal.style.display = "none";
+    }
+  });
+}

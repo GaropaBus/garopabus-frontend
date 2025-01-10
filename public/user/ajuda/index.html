@@ -79,6 +79,24 @@
       </main>
     </div>
 
+    <!-- Modal de Contato -->
+    <div id="modal-contato" class="modal">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h2 id="label-title-contact"></h2>
+        <div class="contato-info">
+          <div class="contato-item">
+            <i class="fa fa-phone"></i>
+            <p>+55 (48) 99119-3856</p>
+          </div>
+          <div class="contato-item">
+            <i class="fa fa-envelope"></i>
+            <p>garopabus@gmail.com</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Navegação -->
     <nav>
       <button id="garopabus-map">
@@ -104,9 +122,9 @@
     </nav>
 
     <!-- Scripts -->
-    <script type="module" src="../../assets/js/user/ajuda.js"></script>
-    <script src="../../assets/js/user/nav.js"></script>
-    <script type="module" src="../../assets/js/user/language.js"></script>
+    <script defer src="../../assets/js/user/nav.js"></script>
+    <script defer type="module" src="../../assets/js/user/language.js"></script>
+    <script defer type="module" src="../../assets/js/user/ajuda.js"></script>
     <script>
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", () => {
