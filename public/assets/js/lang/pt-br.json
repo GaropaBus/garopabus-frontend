@@ -4,26 +4,32 @@
     "title-routes": "GaropaBus - Rotas",
     "title-hours": "GaropaBus - Horários",
     "title-help": "GaropaBus - Ajuda",
-    "title-settings": "GaropaBus - Configurações"
+    "title-notfound": "GaropaBus - Não encontrado"
   },
   "navbar": {
     "map": "Mapa",
     "routes": "Rotas",
-    "help": "Ajuda",
-    "settings": "Configurações"
+    "help": "Ajuda"
   },
   "label": {
     "title-routes": "Rota dos ônibus",
     "title-hours": "Horários dos ônibus",
+    "form-outgaropaba": "Sentido Bairros",
+    "form-togaropaba": "Sentido Garopaba",
+    "tab-week": "Semana",
+    "tab-weekend": "Fim de Semana/Feriado",
+    "route-variation": "Variação",
+    "departure-time": "Horário Partida",
+    "arrival-time": "Horário Chegada",
     "title-help": "Avisos",
     "title-contact": "Informações de contato",
     "description-contact": "Para reclamações ou sugestões",
+    "description-notfound": "A página que você procura não existe",
     "button-contact": "Contato",
-    "form-outgaropaba": "Partindo de Garopaba",
-    "form-togaropaba": "Sentido para Garopaba",
-    "tab-week": "Semana",
-    "tab-weekend": "Fim de Semana/Feriado",
-    "settings-language": "Idioma"
+    "settings-language": "Idioma",
+    "title-page-not-found": "Página não encontrada",
+    "description-page-not-found": "Ops! Parece que você se perdeu. A página que você está procurando não existe ou foi movida.",
+    "back-to-homepage": "Voltar para a página inicial"
   },
   "placeholder": {
     "search-routes": "Procure por rotas"

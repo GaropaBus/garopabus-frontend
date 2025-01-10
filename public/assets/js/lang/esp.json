@@ -4,28 +4,34 @@
     "title-routes": "GaropaBus - Rutas",
     "title-hours": "GaropaBus - Horarios",
     "title-help": "GaropaBus - Ayuda",
-    "title-settings": "GaropaBus - Configuración"
+    "title-notfound": "GaropaBus - No encontrado"
   },
   "navbar": {
     "map": "Mapa",
     "routes": "Rutas",
-    "help": "Ayuda",
-    "settings": "Configuración"
+    "help": "Ayuda"
   },
   "label": {
     "title-routes": "Ruta de los autobuses",
     "title-hours": "Horarios de los autobuses",
+    "form-outgaropaba": "Hacia los Barrios",
+    "form-togaropaba": "Hacia Garopaba",
+    "tab-week": "Días Laborales",
+    "tab-weekend": "Fin de Semana/Feriado",
+    "route-variation": "Variación",
+    "departure-time": "Hora de Salida",
+    "arrival-time": "Hora de Llegada",
     "title-help": "Avisos",
     "title-contact": "Información de contacto",
     "description-contact": "Para quejas o sugerencias",
+    "description-notfound": "La página que buscas no existe",
     "button-contact": "Contacto",
-    "form-outgaropaba": "Partiendo de Garopaba",
-    "form-togaropaba": "Sentido a Garopaba",
-    "tab-week": "Semana",
-    "tab-weekend": "Fin de semana/Feriado",
-    "settings-language": "Idioma"
+    "settings-language": "Idioma",
+    "title-page-not-found": "Página no encontrada",
+    "description-page-not-found": "¡Ups! Parece que te has perdido. La página que buscas no existe o ha sido movida.",
+    "back-to-homepage": "Volver a la página principal"
   },
   "placeholder": {
-    "search-routes": "Busca rutas"
+    "search-routes": "Buscar rutas"
   }
 }

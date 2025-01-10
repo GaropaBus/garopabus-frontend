@@ -92,7 +92,10 @@ const inicializarPagina = async () => {
     const rota_url = urlParams.get("rota") || "Desconhecida";
     horarios = await apiGet.getHorariosRota(rota_url);
     rota_nome = formatarString(rota_url);
-    variacao = horarios.dias_uteis[0].tipo_variacao === null;
+    variacao =
+      horarios.dias_uteis && horarios.dias_uteis.length > 0
+        ? horarios.dias_uteis[0].tipo_variacao === null
+        : true;
 
     if (variacao) {
       const ths = document.querySelectorAll(".variacao");

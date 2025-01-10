@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title id="title-page-not-found"></title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+      }
+
+      body {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #f5f7ff;
+      }
+
+      .container {
+        text-align: center;
+        padding: 20px;
+        max-width: 600px;
+      }
+
+      .error-code {
+        font-size: 120px;
+        font-weight: bold;
+        color: #1e3a8a;
+        margin-bottom: 20px;
+        line-height: 1;
+      }
+
+      .error-message {
+        font-size: 24px;
+        color: #1e3a8a;
+        margin-bottom: 30px;
+      }
+
+      .error-description {
+        color: #64748b;
+        margin-bottom: 40px;
+        font-size: 16px;
+        line-height: 1.6;
+      }
+
+      .home-button {
+        display: inline-block;
+        padding: 15px 30px;
+        background-color: #1e3a8a;
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+      }
+
+      .home-button:hover {
+        background-color: #2563eb;
+      }
+
+      .illustration {
+        width: 300px;
+        max-width: 100%;
+        height: auto;
+        margin-bottom: 30px;
+      }
+
+      @media (max-width: 768px) {
+        .error-code {
+          font-size: 80px;
+        }
+
+        .error-message {
+          font-size: 20px;
+        }
+
+        .container {
+          padding: 20px;
+        }
+
+        .illustration {
+          width: 200px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <img
+        src="/assets/images/Logo_garopabus_horizontal.png"
+        alt="Ilustração 404"
+        class="illustration"
+      />
+      <div class="error-code">404</div>
+      <h1 class="error-message" id="label-title-page-not-found"></h1>
+      <p class="error-description" id="label-description-page-not-found"></p>
+      <a href="/" class="home-button" id="label-back-to-homepage"></a>
+    </div>
+    <script type="module" src="../../assets/js/user/language.js"></script>
+  </body>
+</html>

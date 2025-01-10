@@ -515,14 +515,6 @@ export const getAvisos = async () => {
       title: "Interrompimento de horário",
       desc: "A partir de 31/11 o horário das 14:30 sentido Garopaba X Campo Duna, irá deixar de existir.",
     },
-    {
-      title: "Interrompimento de horário",
-      desc: "A partir de 31/11 o horário das 14:30 sentido Garopaba X Campo Duna, irá deixar de existir.",
-    },
-    {
-      title: "Interrompimento de horário",
-      desc: "A partir de 31/11 o horário das 14:30 sentido Garopaba X Campo Duna, irá deixar de existir.",
-    },
   ];
   return avisos;
 };

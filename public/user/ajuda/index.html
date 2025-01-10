@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="manifest" href="../../manifest.json" />
+    <!-- GaropaBus - Ajuda -->
     <title id="metadata-title-help">GaropaBus - Ajuda</title>
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
@@ -79,6 +80,24 @@
       </main>
     </div>
 
+    <!-- Modal de Contato -->
+    <div id="modal-contato" class="modal">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h2 id="label-title-contact"></h2>
+        <div class="contato-info">
+          <div class="contato-item">
+            <i class="fa fa-phone"></i>
+            <p>+55 (48) 99119-3856</p>
+          </div>
+          <div class="contato-item">
+            <i class="fa fa-envelope"></i>
+            <p>garopabus@gmail.com</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Navegação -->
     <nav>
       <button id="garopabus-map">
@@ -96,17 +115,12 @@
         <div id="navbar-help"></div>
         <!-- Ajuda -->
       </button>
-      <button id="garopabus-configuracao">
-        <i class="fa-solid fa-gear"></i>
-        <div id="navbar-settings"></div>
-        <!-- Configurações -->
-      </button>
     </nav>
 
     <!-- Scripts -->
-    <script type="module" src="../../assets/js/user/ajuda.js"></script>
-    <script src="../../assets/js/user/nav.js"></script>
-    <script type="module" src="../../assets/js/user/language.js"></script>
+    <script defer src="../../assets/js/user/nav.js"></script>
+    <script defer type="module" src="../../assets/js/user/language.js"></script>
+    <script defer type="module" src="../../assets/js/user/ajuda.js"></script>
     <script>
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", () => {
