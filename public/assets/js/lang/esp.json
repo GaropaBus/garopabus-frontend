@@ -14,6 +14,10 @@
   "label": {
     "title-routes": "Ruta de los autobuses",
     "title-hours": "Horarios de los autobuses",
+    "title-help": "Avisos",
+    "title-contact": "Información de contacto",
+    "title-page-not-found": "Página no encontrada",
+    "title-install": "Instale la aplicación",
     "form-outgaropaba": "Hacia los Barrios",
     "form-togaropaba": "Hacia Garopaba",
     "tab-week": "Días Laborales",
@@ -21,15 +25,17 @@
     "route-variation": "Variación",
     "departure-time": "Hora de Salida",
     "arrival-time": "Hora de Llegada",
-    "title-help": "Avisos",
-    "title-contact": "Información de contacto",
     "description-contact": "Para quejas o sugerencias",
     "description-notfound": "La página que buscas no existe",
-    "button-contact": "Contacto",
-    "settings-language": "Idioma",
-    "title-page-not-found": "Página no encontrada",
     "description-page-not-found": "¡Ups! Parece que te has perdido. La página que buscas no existe o ha sido movida.",
-    "back-to-homepage": "Volver a la página principal"
+    "description-install": "Instale la aplicación para acceder a la funcionalidad sin conexión",
+    "button-contact": "Contacto",
+    "button-install": "Instalar",
+    "settings-language": "Idioma",
+    "back-to-homepage": "Volver a la página principal",
+    "install-text": "¿Desea instalar la aplicación GaropaBus?",
+    "install-accept": "Aceptar",
+    "install-cancel": "Rechazar"
   },
   "placeholder": {
     "search-routes": "Buscar rutas"

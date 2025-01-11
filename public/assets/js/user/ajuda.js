@@ -151,23 +151,49 @@ initPushNotifications();
 
 // Controle do Modal
 function initModal() {
-  const modal = document.getElementById("modal-contato");
+  const modalContato = document.getElementById("modal-contato");
   const btnContato = document.getElementById("label-button-contact");
-  const closeBtn = document.querySelector(".close-modal");
+  const closeBtnContato = document.querySelector(".close-modal-contato");
 
-  if (!modal || !btnContato || !closeBtn) {
+  const modalInstalacao = document.getElementById("modal-install");
+  const btnInstalacao = document.getElementById("label-button-install");
+  const closeBtnInstalacao = document.querySelector(".close-modal-install");
+  const cancelBtnInstalacao = document.querySelector("#label-install-cancel");
+
+  if (
+    !modalContato ||
+    !btnContato ||
+    !closeBtnContato ||
+    !modalInstalacao ||
+    !btnInstalacao ||
+    !closeBtnInstalacao ||
+    !cancelBtnInstalacao
+  ) {
     console.error("Elementos do modal não encontrados.");
     return;
   }
   btnContato.addEventListener("click", () => {
-    modal.style.display = "flex";
+    modalContato.style.display = "flex";
   });
-  closeBtn.addEventListener("click", () => {
-    modal.style.display = "none";
+  closeBtnContato.addEventListener("click", () => {
+    modalContato.style.display = "none";
+  });
+  btnInstalacao.addEventListener("click", () => {
+    modalInstalacao.style.display = "flex";
+  });
+  closeBtnInstalacao.addEventListener("click", () => {
+    modalInstalacao.style.display = "none";
+  });
+  cancelBtnInstalacao.addEventListener("click", () => {
+    modalInstalacao.style.display = "none";
   });
   window.addEventListener("click", (event) => {
-    if (event.target === modal) {
-      modal.style.display = "none";
+    if (event.target === modalContato) {
+      modalContato.style.display = "none";
+    }
+
+    if (event.target === modalInstalacao) {
+      modalInstalacao.style.display = "none";
     }
   });
 }

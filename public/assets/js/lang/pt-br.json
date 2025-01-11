@@ -14,6 +14,10 @@
   "label": {
     "title-routes": "Rota dos ônibus",
     "title-hours": "Horários dos ônibus",
+    "title-help": "Avisos",
+    "title-contact": "Informações de contato",
+    "title-page-not-found": "Página não encontrada",
+    "title-install": "Instale o aplicativo",
     "form-outgaropaba": "Sentido Bairros",
     "form-togaropaba": "Sentido Garopaba",
     "tab-week": "Semana",
@@ -21,15 +25,17 @@
     "route-variation": "Variação",
     "departure-time": "Horário Partida",
     "arrival-time": "Horário Chegada",
-    "title-help": "Avisos",
-    "title-contact": "Informações de contato",
     "description-contact": "Para reclamações ou sugestões",
     "description-notfound": "A página que você procura não existe",
-    "button-contact": "Contato",
-    "settings-language": "Idioma",
-    "title-page-not-found": "Página não encontrada",
     "description-page-not-found": "Ops! Parece que você se perdeu. A página que você está procurando não existe ou foi movida.",
-    "back-to-homepage": "Voltar para a página inicial"
+    "description-install": "Instale o aplicativo para ter acesso a funcionalidade sem conexão",
+    "button-contact": "Contato",
+    "button-install": "Instalar",
+    "settings-language": "Idioma",
+    "back-to-homepage": "Voltar para a página inicial",
+    "install-text": "Deseja instalar o aplicativo GaropaBus?",
+    "install-accept": "Aceitar",
+    "install-cancel": "Recusar"
   },
   "placeholder": {
     "search-routes": "Procure por rotas"
