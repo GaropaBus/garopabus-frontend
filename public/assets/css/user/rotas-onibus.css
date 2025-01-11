@@ -128,7 +128,16 @@
   align-items: center;
 }
 
-.language-item i {
-  font-size: 1.5rem;
-  margin-left: 10px;
+.language-item img {
+  width: 24px;
+  height: auto;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.flag {
+  width: 24px;
+  height: auto;
+  display: inline-block;
+  vertical-align: middle;
 }
