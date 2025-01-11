@@ -87,6 +87,7 @@ p {
   align-items: center;
   border-radius: 8px;
   justify-content: space-around;
+  text-align: center;
 }
 
 .contato-container .icon-contato {
@@ -191,6 +192,7 @@ p {
   align-items: center;
   border-radius: 8px;
   justify-content: space-around;
+  text-align: center;
 }
 
 .instalacao-container .icon-instalacao {
