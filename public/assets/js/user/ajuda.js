@@ -157,6 +157,7 @@ function initModal() {
 
   const modalInstalacao = document.getElementById("modal-install");
   const btnInstalacao = document.getElementById("label-button-install");
+  const installBtnInstalacao = document.querySelector("#label-install-accept");
   const closeBtnInstalacao = document.querySelector(".close-modal-install");
   const cancelBtnInstalacao = document.querySelector("#label-install-cancel");
 
@@ -166,6 +167,7 @@ function initModal() {
     !closeBtnContato ||
     !modalInstalacao ||
     !btnInstalacao ||
+    !installBtnInstalacao ||
     !closeBtnInstalacao ||
     !cancelBtnInstalacao
   ) {
@@ -180,6 +182,10 @@ function initModal() {
   });
   btnInstalacao.addEventListener("click", () => {
     modalInstalacao.style.display = "flex";
+  });
+  installBtnInstalacao.addEventListener("click", () => {
+    modalInstalacao.style.display = "none";
+    // FAZ A FUNÇÃO DE INSTALAÇÃO AQUI NATANAEL MEU GARANHÃO
   });
   closeBtnInstalacao.addEventListener("click", () => {
     modalInstalacao.style.display = "none";
