@@ -8,7 +8,7 @@ let rotas = [];
 let enviar;
 
 const mostrarParadas = async () => {
-  const rota_id = document.getElementById("select-rotas").value;
+  const rota_id = document.getElementById("select-rotas-ponto-onibus").value;
   if (rota_id === "null") {
     mapbox.addBusStops(await apiGet.getPontoOnibus());
   } else {
@@ -150,7 +150,7 @@ const deleteButton = () => {
 
 const deleteRotaPontoOnibus = (id) => {
   if (focus_btn_deleteRotaPontoOnibus) {
-    if (confirm(`Deseja excluir a junção de id ${id}`)){
+    if (confirm(`Deseja excluir a junção de id ${id}`)) {
       apiDelete.deleteRotasPontoOnibus(id);
     }
   }
@@ -224,13 +224,15 @@ const adiconar_rota_ponto_onibus = () => {
 document.addEventListener("DOMContentLoaded", async () => {
   try {
     rotas = await apiGet.getRotasList();
-    const select_rotas = document.getElementById("select-rotas");
-    for (const rota of rotas) {
-      const opt = document.createElement("option");
-      opt.value = rota.id;
-      opt.textContent = rota.nome;
-      select_rotas.appendChild(opt);
-    }
+    const selects_rotas = document.querySelectorAll(".select-rotas");
+    selects_rotas.forEach((element) => {
+      for (const rota of rotas) {
+        const opt = document.createElement("option");
+        opt.value = rota.id;
+        opt.textContent = rota.nome;
+        element.appendChild(opt);
+      }
+    });
   } catch (error) {
     console.error("Erro ao carregar as rotas:", error);
     alert("Falha ao carregar as rotas. Tente novamente.");
@@ -240,8 +242,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   const adicionarParadaBtn = document.getElementById("adicionar-parada-click");
   if (adicionarParadaBtn) {
     adicionarParadaBtn.addEventListener("click", () => {
-      if (mapbox && typeof mapbox.ativarCapturaCoordenadas === "function") {
-        mapbox.ativarCapturaCoordenadas();
+      if (
+        mapbox &&
+        typeof mapbox.ativarCapturaPontoOnibusCoordenadas === "function"
+      ) {
+        mapbox.ativarCapturaPontoOnibusCoordenadas();
       } else {
         console.error(
           "Função ativarCapturaCoordenadas não encontrada no módulo mapbox."

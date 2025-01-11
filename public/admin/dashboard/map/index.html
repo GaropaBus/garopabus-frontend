@@ -45,15 +45,19 @@
   <body>
     <main>
       <div id="map"></div>
-      <div id="screen-paradas">
+      <div id="screen-paradas" class="tela-secundaria">
         <header>
-          <div id="fechar"><i class="fa fa-x"></i></div>
+          <div class="fechar-tela-secundaria"><i class="fa fa-x"></i></div>
           <h1>Editar Paradas</h1>
         </header>
         <fieldset>
           <legend>Mostrar</legend>
           <div class="row">
-            <select name="select-rotas" id="select-rotas">
+            <select
+              name="select-rotas"
+              id="select-rotas-ponto-onibus"
+              class="select-rotas"
+            >
               <option value="null">Todos</option>
             </select>
             <button id="mostrar-paradas">Mostrar Paradas</button>
@@ -67,6 +71,39 @@
               Adicionar por coordenada
             </button>
           </div>
+        </fieldset>
+      </div>
+      <div id="screen-pontos-trajeto" class="tela-secundaria">
+        <header>
+          <div class="fechar-tela-secundaria"><i class="fa fa-x"></i></div>
+          <h1>Editar Pontos Trajeto</h1>
+        </header>
+        <fieldset>
+          <legend>Mostar</legend>
+          <div class="column">
+            <select
+              name="select-rotas"
+              id="select-rotas-pontos-trajeto"
+              class="select-rotas"
+            >
+              <option value="null">Selecione alguma rota</option>
+            </select>
+            <button id="mostrar-paradas">Mostrar rota no mapa</button>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Pontos Trajeto Rota Selecionada</legend>
+          <table id="trajetoTable">
+            <thead>
+              <tr>
+                <th>Ordem</th>
+                <th>Lat</th>
+                <th>Lng</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
         </fieldset>
       </div>
     </main>
@@ -167,6 +204,10 @@
     <script
       type="module"
       src="../../../assets/js/admin/map/paradas.js"
+    ></script>
+    <script
+      type="module"
+      src="../../../assets/js/admin/map/pontos-trajeto.js"
     ></script>
   </body>
 </html>

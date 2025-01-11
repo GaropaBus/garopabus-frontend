@@ -1,5 +1,6 @@
 import * as apiGet from "../../api/moldes_back/get.js";
 import * as paradas from "./paradas.js";
+import * as util from "../util.js";
 
 // Inicialize o Mapbox
 mapboxgl.accessToken =
@@ -117,8 +118,7 @@ export async function addBusStopsSpecificRoute(pontos_onibus) {
       const sobre_rotas_btn_popup = document.createElement("button");
       sobre_rotas_btn_popup.textContent = "Sobre Rotas";
       sobre_rotas_btn_popup.addEventListener("click", async () => {
-        document.getElementById("parada_id").textContent =
-          stop.ponto_onibus.id;
+        document.getElementById("parada_id").textContent = stop.ponto_onibus.id;
         paradas.openModal(2);
         await paradas.addSobreRotasParadas(stop.ponto_onibus.id);
       });
@@ -128,10 +128,7 @@ export async function addBusStopsSpecificRoute(pontos_onibus) {
 
       // Cria o marcador
       const marker = new mapboxgl.Marker(el)
-        .setLngLat([
-          stop.ponto_onibus.longitude,
-          stop.ponto_onibus.latitude,
-        ])
+        .setLngLat([stop.ponto_onibus.longitude, stop.ponto_onibus.latitude])
         .setPopup(
           new mapboxgl.Popup({ offset: 25 }).setDOMContent(div_popup) // Usando setDOMContent
         )
@@ -154,13 +151,13 @@ export function removeAllMarkers() {
 }
 
 // Função para ativar/desativar o evento de clique no mapa
-let ativarCaptura = false;
+let ativarCapturaPontoOnibus = false;
 
-export function ativarCapturaCoordenadas() {
-  if (!ativarCaptura) {
+export function ativarCapturaPontoOnibusCoordenadas() {
+  if (!ativarCapturaPontoOnibus) {
     const container_map = document.getElementById("map");
     container_map.style.cursor = "pointer !important";
-    ativarCaptura = true;
+    ativarCapturaPontoOnibus = true;
 
     map.once("click", async (event) => {
       const coordinates = event.lngLat;
@@ -188,9 +185,94 @@ export function ativarCapturaCoordenadas() {
 
       await paradas.tratarClick(coordinates);
 
-      ativarCaptura = false; // Desativa a captura após um clique
+      ativarCapturaPontoOnibus = false; // Desativa a captura após um clique
     });
   } else {
     alert("A captura já está ativada. Clique no mapa.");
   }
+}
+
+const addMarkerPontoTrajeto = (pontos_trajeto) => {
+  pontos_trajeto.forEach((ponto) => {
+    // Cria um elemento HTML para o ícone do ponto de ônibus
+    const el = document.createElement("div");
+    el.className = "ponto-trajeto";
+
+    // Estilos do marcador
+    el.textContent = ponto.ordem;
+
+    // Cria o HTML do popup
+    const div_popup = document.createElement("div");
+    div_popup.classList.add("botoes-popup");
+
+    const delete_btn_popup = document.createElement("button");
+    delete_btn_popup.textContent = "Excluir";
+
+    const sobre_rotas_btn_popup = document.createElement("button");
+    sobre_rotas_btn_popup.textContent = "Sobre Rotas";
+
+    div_popup.appendChild(delete_btn_popup);
+    div_popup.appendChild(sobre_rotas_btn_popup);
+
+    new mapboxgl.Marker(el)
+      .setLngLat([ponto.longitude, ponto.latitude])
+      .setPopup(new mapboxgl.Popup({ offset: 25 }).setDOMContent(div_popup))
+      .addTo(map);
+  });
+};
+
+export function addRotaMapSpecificRoute(pontos_trajeto) {
+  // Usa a função local para preparar os pontos
+  addMarkerPontoTrajeto(pontos_trajeto);
+  const waypoints = util.prepararPontosParaApi(pontos_trajeto).join(";");
+  const url = `https://api.mapbox.com/directions/v5/mapbox/driving/${waypoints}?geometries=geojson&overview=full&access_token=${mapboxgl.accessToken}`;
+
+  fetch(url)
+    .then((response) => response.json())
+    .then((data) => {
+      const route = data.routes[0].geometry.coordinates;
+
+      if (map.getSource("route")) {
+        map.getSource("route").setData({
+          type: "Feature",
+          geometry: {
+            type: "LineString",
+            coordinates: route,
+          },
+        });
+      } else {
+        map.addSource("route", {
+          type: "geojson",
+          data: {
+            type: "Feature",
+            geometry: {
+              type: "LineString",
+              coordinates: route,
+            },
+          },
+        });
+
+        map.addLayer(
+          {
+            id: "route1",
+            type: "line",
+            source: "route",
+            layout: {
+              "line-cap": "round",
+              "line-join": "round",
+            },
+            paint: {
+              "line-color": "#888",
+              "line-width": 8,
+            },
+          },
+          "aerialway"
+        );
+      }
+
+      const bounds = new mapboxgl.LngLatBounds();
+      route.forEach((coord) => bounds.extend(coord));
+      map.fitBounds(bounds, { padding: 20 });
+    })
+    .catch((error) => console.error("Erro ao adicionar rota:", error));
 }

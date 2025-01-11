@@ -2,15 +2,7 @@
   overflow-wrap: break-word;
 }
 
-#trajetoTable {
-  width: 100%;
-}
 
-#trajetoTable td {
-  text-align: center;
-  padding: 10px;
-  max-width: 100%;
-}
 
 .name-item {
   display: flex;
