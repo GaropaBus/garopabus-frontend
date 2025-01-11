@@ -184,8 +184,19 @@ function initModal() {
     modalInstalacao.style.display = "flex";
   });
   installBtnInstalacao.addEventListener("click", () => {
-    modalInstalacao.style.display = "none";
-    // FAZ A FUNÇÃO DE INSTALAÇÃO AQUI NATANAEL MEU GARANHÃO
+    const userAgent = navigator.userAgent;
+
+    if (/iPhone|iPad|iPod/i.test(userAgent)) {
+      // iPhone | iPad | iPod
+      modalInstalacao.style.display = "none";
+    } else if (/Android/i.test(userAgent)) {
+      // Android
+      modalInstalacao.style.display = "none";
+    } else {
+      // Outros
+      modalInstalacao.style.display = "none";
+      console.warn("Dispositivo não identificado como Android ou iOS.");
+    }
   });
   closeBtnInstalacao.addEventListener("click", () => {
     modalInstalacao.style.display = "none";
