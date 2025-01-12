@@ -59,13 +59,16 @@ export const changeLanguage = async (newLanguage) => {
     if (languageSettings) {
       switch (newLanguage) {
       case "pt-br":
-        languageSettings.className = "fi fi-br";
+        languageSettings.src = "../../assets/js/lang/br.svg";
+        languageSettings.className = "flag";
         break;
       case "esp":
-        languageSettings.className = "fi fi-es";
+        languageSettings.src = "../../assets/js/lang/es.svg";
+        languageSettings.className = "flag";
         break;
       case "eng":
-        languageSettings.className = "fi fi-us";
+        languageSettings.src = "../../assets/js/lang/us.svg";
+        languageSettings.className = "flag";
         break;
       default:
         console.error("Idioma não suportado.");
@@ -107,13 +110,16 @@ window.onload = async () => {
     if (languageSettings) {
       switch (language) {
       case "pt-br":
-        languageSettings.className = "fi fi-br";
+        languageSettings.src = "../../assets/js/lang/br.svg";
+        languageSettings.className = "flag";
         break;
       case "esp":
-        languageSettings.className = "fi fi-es";
+        languageSettings.src = "../../assets/js/lang/es.svg";
+        languageSettings.className = "flag";
         break;
       case "eng":
-        languageSettings.className = "fi fi-us";
+        languageSettings.src = "../../assets/js/lang/us.svg";
+        languageSettings.className = "flag";
         break;
       default:
         console.error("Idioma não suportado.");
@@ -136,13 +142,16 @@ if (languageSettings) {
   const lang = await currentLanguage();
   switch (lang) {
   case "pt-br":
-    languageSettings.className = "fi fi-br";
+    languageSettings.src = "../../assets/js/lang/br.svg";
+    languageSettings.className = "flag";
     break;
   case "esp":
-    languageSettings.className = "fi fi-es";
+    languageSettings.src = "../../assets/js/lang/es.svg";
+    languageSettings.className = "flag";
     break;
   case "eng":
-    languageSettings.className = "fi fi-us";
+    languageSettings.src = "../../assets/js/lang/us.svg";
+    languageSettings.className = "flag";
     break;
   default:
     console.error("Idioma não suportado.");
