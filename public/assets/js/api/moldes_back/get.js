@@ -211,3 +211,24 @@ export const getNotificationsList = async () => {
     throw error; // Re-throw the error for client-side handling
   }
 };
+
+export const GetPontosTrajetoRota = async (id) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/pontos_trajeto/rota-id/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Erro: ${response.status} - ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Erro ao buscar as notificações:", error.message);
+    throw error; // Re-throw the error for client-side handling
+  }
+};

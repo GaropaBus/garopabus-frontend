@@ -1,6 +1,7 @@
 import * as apiGet from "../../api/moldes_back/get.js";
 import * as paradas from "./paradas.js";
 import * as util from "../util.js";
+import * as pontosTrajeto from "./pontos-trajeto.js";
 
 // Inicialize o Mapbox
 mapboxgl.accessToken =
@@ -22,7 +23,7 @@ export let map = new mapboxgl.Map({
 // Adiciona os pontos de ônibus ao mapa
 // Array para armazenar os objetos Marker
 
-let markers = [];
+let markersBusStops = [];
 
 export async function addBusStops(pontos_onibus) {
   try {
@@ -75,7 +76,7 @@ export async function addBusStops(pontos_onibus) {
         .addTo(map);
 
       // Armazena o marcador
-      markers.push(marker);
+      markersBusStops.push(marker);
       // Armazena as coordenadas do marcador
     });
   } catch (error) {
@@ -135,7 +136,7 @@ export async function addBusStopsSpecificRoute(pontos_onibus) {
         .addTo(map);
 
       // Armazena o marcador
-      markers.push(marker);
+      markersBusStops.push(marker);
     });
   } catch (error) {
     console.error("Erro ao carregar os pontos de ônibus:", error);
@@ -143,11 +144,11 @@ export async function addBusStopsSpecificRoute(pontos_onibus) {
 }
 
 // Função para deletar todos os marcadores
-export function removeAllMarkers() {
-  markers.forEach((marker) => {
+export function removeAllMarkersBusStops() {
+  markersBusStops.forEach((marker) => {
     marker.remove(); // Remove o marcador do mapa
   });
-  markers = []; // Limpa o array de marcadores
+  markersBusStops = []; // Limpa o array de marcadores
 }
 
 // Função para ativar/desativar o evento de clique no mapa
@@ -191,6 +192,7 @@ export function ativarCapturaPontoOnibusCoordenadas() {
     alert("A captura já está ativada. Clique no mapa.");
   }
 }
+let MarkersPontosTrajeto = [];
 
 const addMarkerPontoTrajeto = (pontos_trajeto) => {
   pontos_trajeto.forEach((ponto) => {
@@ -207,21 +209,33 @@ const addMarkerPontoTrajeto = (pontos_trajeto) => {
 
     const delete_btn_popup = document.createElement("button");
     delete_btn_popup.textContent = "Excluir";
-
-    const sobre_rotas_btn_popup = document.createElement("button");
-    sobre_rotas_btn_popup.textContent = "Sobre Rotas";
+    delete_btn_popup.addEventListener("click", () => {
+      if(ponto.id === "null"){
+        alert("De f5 para poder excluir");
+      }
+      pontosTrajeto.deletePontoTrajeto(ponto.id);
+    });
 
     div_popup.appendChild(delete_btn_popup);
-    div_popup.appendChild(sobre_rotas_btn_popup);
 
-    new mapboxgl.Marker(el)
+    const marker = new mapboxgl.Marker(el)
       .setLngLat([ponto.longitude, ponto.latitude])
       .setPopup(new mapboxgl.Popup({ offset: 25 }).setDOMContent(div_popup))
       .addTo(map);
+
+    MarkersPontosTrajeto.push(marker);
   });
 };
 
 export function addRotaMapSpecificRoute(pontos_trajeto) {
+  // Verifica se o array está vazio ou indefinido
+  if (!pontos_trajeto || pontos_trajeto.length === 0) {
+    alert("Nenhum ponto de trajeto cadastrado");
+    removeRotaMapSpecificRoute();
+    removeMarkersPontoTrajeto();
+    return; // Interrompe a execução da função
+  }
+
   // Usa a função local para preparar os pontos
   addMarkerPontoTrajeto(pontos_trajeto);
   const waypoints = util.prepararPontosParaApi(pontos_trajeto).join(";");
@@ -275,4 +289,68 @@ export function addRotaMapSpecificRoute(pontos_trajeto) {
       map.fitBounds(bounds, { padding: 20 });
     })
     .catch((error) => console.error("Erro ao adicionar rota:", error));
+}
+
+export const removeMarkersPontoTrajeto = () => {
+  MarkersPontosTrajeto.forEach((marker) => {
+    marker.remove(); // Remove o marcador do mapa
+  });
+  MarkersPontosTrajeto = []; // Limpa o array de marcadores
+};
+
+export function removeRotaMapSpecificRoute() {
+  // Verifica se a camada "route1" existe no mapa
+  if (map.getLayer("route1")) {
+    map.removeLayer("route1"); // Remove a camada
+  }
+
+  // Verifica se a fonte "route" existe no mapa
+  if (map.getSource("route")) {
+    map.removeSource("route"); // Remove a fonte
+  }
+}
+
+let ativarCapturaPontoTrajeto = false;
+
+export function ativarCapturaPontoTrajetoCoordenadas() {
+  if (!ativarCapturaPontoTrajeto) {
+    const container_map = document.getElementById("map");
+    if (container_map) {
+      container_map.style.cursor = "pointer"; // Altera o cursor do mapa
+    }
+
+    ativarCapturaPontoTrajeto = true;
+
+    // Adiciona o evento de clique ao mapa
+    const onClick = async (event) => {
+      const coordinates = event.lngLat;
+
+      const el = document.createElement("div");
+      el.className = "ponto-trajeto";
+      el.textContent = "new";
+
+      const marker = new mapboxgl.Marker(el)
+        .setLngLat([coordinates.lng, coordinates.lat])
+        .setPopup(new mapboxgl.Popup({ offset: 25 }))
+        .addTo(map);
+
+      MarkersPontosTrajeto.push(marker);
+
+      // Tratar clique para atualizar o array e exibir as coordenadas
+      await pontosTrajeto.tratarClick(coordinates);
+
+      // Desativa a captura após um clique
+      ativarCapturaPontoTrajeto = false;
+      if (container_map) {
+        container_map.style.cursor = ""; // Restaura o cursor padrão
+      }
+
+      // Remove o evento "click" para evitar múltiplas capturas
+      map.off("click", onClick);
+    };
+
+    map.once("click", onClick); // Adiciona o evento de clique
+  } else {
+    alert("A captura já está ativada. Clique no mapa.");
+  }
 }

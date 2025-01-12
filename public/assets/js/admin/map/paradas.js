@@ -263,7 +263,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     .getElementById("mostrar-paradas")
     .addEventListener("click", async () => {
       // Remove todos os marcadores
-      mapbox.removeAllMarkers();
+      mapbox.removeAllMarkersBusStops();
 
       await mostrarParadas();
     });

@@ -1,21 +1,11 @@
 import * as mapbox from "./mapbox-init.js";
+import * as apiGet from "../../api/moldes_back/get.js";
 
-let pontos_trajeto = [
-  { id: 1, ordem: 1, latitude: "-28.02752694369635", longitude: "-48.62849684633679" },
-  { id: 2, ordem: 2, latitude: "-28.02691556577123", longitude: "-48.62882447884360" },
-  { id: 3, ordem: 3, latitude: "-28.02558635378873", longitude: "-48.62838150944791" },
-  { id: 4, ordem: 4, latitude: "-28.02637989232536", longitude: "-48.62256184293889" },
-  { id: 5, ordem: 5, latitude: "-28.02666762637399", longitude: "-48.62046900680693" },
-  { id: 6, ordem: 6, latitude: "-28.02586662097820", longitude: "-48.62026530117200" },
-  { id: 7, ordem: 7, latitude: "-28.02607780883985", longitude: "-48.61886446533597" },
-  { id: 8, ordem: 8, latitude: "-28.09934838638850", longitude: "-48.67372727400809" },
-];
+let pontos_trajeto = [];
+
+let rota_id;
 
 const addDataTable = (pontos_trajeto) => {
-  const tabela_pontos_trajeto = document
-    .getElementById("trajetoTable")
-    .querySelector("tbody");
-
   // Certifique-se de que o tbody existe
   if (!tabela_pontos_trajeto) {
     console.error(
@@ -30,6 +20,10 @@ const addDataTable = (pontos_trajeto) => {
   // Adiciona os dados na tabela
   pontos_trajeto.forEach((element) => {
     const tr = document.createElement("tr");
+    tr.draggable = true;
+
+    const td_id = document.createElement("td");
+    td_id.textContent = element.id;
 
     const td_ordem = document.createElement("td");
     td_ordem.textContent = element.ordem;
@@ -40,8 +34,7 @@ const addDataTable = (pontos_trajeto) => {
     const td_lng = document.createElement("td");
     td_lng.textContent = element.longitude;
 
-
-
+    tr.appendChild(td_id);
     tr.appendChild(td_ordem);
     tr.appendChild(td_lat);
     tr.appendChild(td_lng);
@@ -50,5 +43,166 @@ const addDataTable = (pontos_trajeto) => {
   });
 };
 
-mapbox.addRotaMapSpecificRoute(pontos_trajeto);
-addDataTable(pontos_trajeto);
+const selecionarRota = async () => {
+  if (document.getElementById("select-rotas-pontos-trajeto").value === "null") {
+    alert("Selecione uma rota");
+    return;
+  }
+  rota_id = parseInt(
+    document.getElementById("select-rotas-pontos-trajeto").value
+  );
+  pontos_trajeto = await apiGet.GetPontosTrajetoRota(rota_id);
+  addDataTable(pontos_trajeto);
+  mapbox.addRotaMapSpecificRoute(pontos_trajeto);
+  console.log(pontos_trajeto);
+};
+
+const arrumarArrayPontosTrajeto = () => {
+  // Obter todas as linhas da tabela
+  const rows = Array.from(tabela_pontos_trajeto.querySelectorAll("tr"));
+
+  // Reorganizar o array de pontos
+  pontos_trajeto = rows.map((row, index) => {
+    const latitude = row.children[2].textContent;
+    const longitude = row.children[3].textContent;
+
+    // Localiza o ponto correspondente no array original
+    const pontoExistente = pontos_trajeto.find(
+      (p) => p.latitude === latitude && p.longitude === longitude
+    );
+
+    return {
+      id: pontoExistente?.id || "null", // Mantém o ID ou cria um novo
+      ordem: index + 1, // Nova ordem
+      latitude,
+      longitude,
+      id_rota: pontoExistente?.id_rota || null, // Preserva o ID da rota
+    };
+  });
+
+  // Certifique-se de que todos os pontos estejam incluídos, mesmo os novos
+  pontos_trajeto.forEach((ponto) => {
+    if (
+      !pontos_trajeto.find(
+        (p) => p.latitude === ponto.latitude && p.longitude === ponto.longitude
+      )
+    ) {
+      pontos_trajeto.push({
+        ...ponto,
+        ordem: pontos_trajeto.length + 1, // Adiciona nova ordem
+      });
+    }
+  });
+
+  console.log("Array atualizado:", pontos_trajeto);
+
+  // Atualizar a tabela com os novos dados
+  addDataTable(pontos_trajeto);
+};
+
+export const tratarClick = async (coordinates) => {
+  if (!rota_id) {
+    alert("Selecione uma rota");
+    return;
+  }
+  const enviar = {
+    id_rota: rota_id,
+    latitude: `${coordinates.lat.toFixed(14)}`,
+    longitude: `${coordinates.lng.toFixed(14)}`,
+    ordem: null,
+  };
+  console.log("Ponto capturado:", enviar);
+  pontos_trajeto.push(enviar);
+  console.log(pontos_trajeto);
+  addDataTable(pontos_trajeto);
+  arrumarArrayPontosTrajeto();
+};
+
+const tabela_pontos_trajeto = document
+  .getElementById("trajetoTable")
+  .querySelector("tbody");
+
+let draggedRow = null;
+
+tabela_pontos_trajeto.addEventListener("dragstart", (event) => {
+  if (event.target.tagName === "TR") {
+    draggedRow = event.target;
+    draggedRow.classList.add("dragging");
+    event.dataTransfer.effectAllowed = "move";
+  }
+});
+
+export const deletePontoTrajeto = async (id) => {
+  console.log(id);
+};
+
+tabela_pontos_trajeto.addEventListener("dragover", (event) => {
+  event.preventDefault(); // Permite o "drop"
+  const draggingRow = tabela_pontos_trajeto.querySelector(".dragging");
+  const targetRow = event.target.closest("tr");
+  if (
+    targetRow &&
+    targetRow !== draggingRow &&
+    targetRow.parentNode.tagName === "TBODY"
+  ) {
+    const rect = targetRow.getBoundingClientRect();
+    const offset = event.clientY - rect.top;
+    const height = rect.height;
+    if (offset > height / 2) {
+      targetRow.after(draggingRow);
+    } else {
+      targetRow.before(draggingRow);
+    }
+  }
+});
+
+tabela_pontos_trajeto.addEventListener("dragend", () => {
+  if (draggedRow) {
+    draggedRow.classList.remove("dragging");
+    draggedRow = null;
+  }
+
+  arrumarArrayPontosTrajeto();
+});
+
+document.addEventListener("DOMContentLoaded", async () => {
+  document
+    .getElementById("atualizar-trajeto-rota")
+    .addEventListener("click", () => {
+      mapbox.removeMarkersPontoTrajeto();
+      mapbox.removeRotaMapSpecificRoute();
+      mapbox.addRotaMapSpecificRoute(pontos_trajeto);
+    });
+
+  document
+    .getElementById("mostrar-rota")
+    .addEventListener("click", async () => {
+      await selecionarRota();
+    });
+
+  // Configura o botão para capturar coordenadas ao clicar
+  const adicionarPontoTrajetoBtn = document.getElementById(
+    "adicionar-ponto-trajeto-click"
+  );
+  if (adicionarPontoTrajetoBtn) {
+    adicionarPontoTrajetoBtn.addEventListener("click", () => {
+      if (!rota_id) {
+        alert("Selecione uma rota");
+        return;
+      }
+      if (
+        mapbox &&
+        typeof mapbox.ativarCapturaPontoTrajetoCoordenadas === "function"
+      ) {
+        mapbox.ativarCapturaPontoTrajetoCoordenadas();
+      } else {
+        console.error(
+          "Função ativarCapturaCoordenadas não encontrada no módulo mapbox."
+        );
+        alert("Erro ao ativar a captura de coordenadas.");
+      }
+    });
+  } else {
+    console.error("Botão 'adicionar-ponto-trajeto-click' não encontrado.");
+  }
+});

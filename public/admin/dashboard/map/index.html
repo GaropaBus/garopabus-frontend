@@ -88,14 +88,20 @@
             >
               <option value="null">Selecione alguma rota</option>
             </select>
-            <button id="mostrar-paradas">Mostrar rota no mapa</button>
+            <button id="mostrar-rota">Mostrar rota</button>
           </div>
         </fieldset>
         <fieldset>
           <legend>Pontos Trajeto Rota Selecionada</legend>
+          <div id="comands" class="row">
+            <button id="adicionar-ponto-trajeto-click">Adicionar por click</button>
+            <button id="atualizar-trajeto-rota">Atualizar trajeto da rota</button>
+            <button>Salvar</button>
+          </div>
           <table id="trajetoTable">
             <thead>
               <tr>
+                <th>id</th>
                 <th>Ordem</th>
                 <th>Lat</th>
                 <th>Lng</th>
