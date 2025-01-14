@@ -15,6 +15,15 @@ const preencherTabelaHorariosSemana = () => {
 
   tbody_semana.innerHTML = "";
 
+  if (horarios.dias_uteis.length === 0) {
+    const tr = document.createElement("tr");
+    const td = document.createElement("td");
+    td.id = "label-no-schedule";
+    tr.appendChild(td);
+    tbody_semana.appendChild(tr);
+    return;
+  }
+
   for (const horario of horarios.dias_uteis) {
     const tr = document.createElement("tr");
 
@@ -44,6 +53,15 @@ const preencherTabelaHorariosFeriado = () => {
   }
 
   tbody_feriado.innerHTML = "";
+
+  if (horarios.fim_semana.length === 0) {
+    const tr = document.createElement("tr");
+    const td = document.createElement("td");
+    td.id = "label-no-schedule";
+    tr.appendChild(td);
+    tbody_feriado.appendChild(tr);
+    return;
+  }
 
   for (const horario of horarios.fim_semana) {
     const tr = document.createElement("tr");
@@ -104,7 +122,7 @@ const inicializarPagina = async () => {
       });
     }
 
-    document.title = `GaropaBus | ${rota_nome}`;
+    document.title = `GaropaBus - ${rota_nome}`;
 
     preencherTabelaHorariosSemana(); // Preencher tabela de horários
     preencherNomeRota(); // Preencher nome da rota

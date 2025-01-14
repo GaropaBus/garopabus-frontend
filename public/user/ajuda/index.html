@@ -77,13 +77,27 @@
             <button id="label-button-contact"></button>
           </div>
         </section>
+
+        <!-- Instalação -->
+        <section class="instalacao-container">
+          <div class="icon-instalacao">
+            <i class="fa fa-download"></i>
+          </div>
+          <div>
+            <h2 id="label-title-install"></h2>
+            <p id="label-description-install"></p>
+          </div>
+          <div>
+            <button id="label-button-install"></button>
+          </div>
+        </section>
       </main>
     </div>
 
     <!-- Modal de Contato -->
     <div id="modal-contato" class="modal">
       <div class="modal-content">
-        <span class="close-modal">&times;</span>
+        <span class="close-modal-contato">&times;</span>
         <h2 id="label-title-contact"></h2>
         <div class="contato-info">
           <div class="contato-item">
@@ -93,6 +107,27 @@
           <div class="contato-item">
             <i class="fa fa-envelope"></i>
             <p>garopabus@gmail.com</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal de Instalação -->
+    <div id="modal-install" class="modal">
+      <div class="modal-content">
+        <span class="close-modal-install">&times;</span>
+        <h2 id="label-title-install"></h2>
+        <div class="install-info">
+          <div class="install-text" id="label-install-text"></div>
+          <div class="install-btns">
+            <button
+              class="install-btn-accept"
+              id="label-install-accept"
+            ></button>
+            <button
+              class="install-btn-cancel"
+              id="label-install-cancel"
+            ></button>
           </div>
         </div>
       </div>
@@ -121,6 +156,7 @@
     <script defer src="../../assets/js/user/nav.js"></script>
     <script defer type="module" src="../../assets/js/user/language.js"></script>
     <script defer type="module" src="../../assets/js/user/ajuda.js"></script>
+    <script src="../../assets/js/user/terms.js"></script>
     <script>
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", () => {

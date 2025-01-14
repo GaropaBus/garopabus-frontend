@@ -14,6 +14,10 @@
   "label": {
     "title-routes": "Bus Routes",
     "title-hours": "Bus Timetables",
+    "title-help": "Notices",
+    "title-contact": "Contact Information",
+    "title-page-not-found": "Page Not Found",
+    "title-install": "Install the app",
     "form-outgaropaba": "To Neighborhoods",
     "form-togaropaba": "To Garopaba",
     "tab-week": "Weekday",
@@ -21,17 +25,27 @@
     "route-variation": "Variation",
     "departure-time": "Departure Time",
     "arrival-time": "Arrival Time",
-    "title-help": "Notices",
-    "title-contact": "Contact Information",
     "description-contact": "For complaints or suggestions",
     "description-notfound": "The page you are looking for does not exist",
-    "button-contact": "Contact",
-    "settings-language": "Language",
-    "title-page-not-found": "Page Not Found",
     "description-page-not-found": "Oops! It looks like you're lost. The page you are looking for doesn't exist or has been moved.",
-    "back-to-homepage": "Back to Homepage"
+    "description-install": "Install the app to access the offline functionality",
+    "button-contact": "Contact",
+    "button-install": "Install",
+    "settings-language": "Language",
+    "back-to-homepage": "Back to Homepage",
+    "install-text": "Do you want to install the GaropaBus app?",
+    "install-accept": "Accept",
+    "install-cancel": "Decline",
+    "no-schedule": "No schedule available"
   },
   "placeholder": {
     "search-routes": "Search for routes"
+  },
+  "terms": {
+    "modal-title": "Terms of Use and Privacy Policy",
+    "modal-description": "To continue, you need to accept the terms.",
+    "modal-link": "Read the full terms here",
+    "modal-checkbox-label": "I accept the Terms of Use and Privacy Policy",
+    "modal-confirm-button": "Accept"
   }
 }

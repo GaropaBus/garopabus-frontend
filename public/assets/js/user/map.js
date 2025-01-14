@@ -98,6 +98,16 @@ fetch(url)
     map.on("load", () => {
       iniciarMonitoramentoLocalizacao();
 
+      //  map.setFilter('poi-label', ['==', 'type', 'Bank']);
+
+      map.setFilter("poi-label", [
+        "any", // O operador 'any' permite que qualquer uma das condições seja verdadeira
+        ["==", ["get", "type"], "Bank"], // Exibe ícones com 'type' igual a 'Bank'
+        ["==", ["get", "type"], "Townhall"],
+        ["==", ["get", "type"], "Office"],
+        ["==", ["get", "type"], "Place Of Worship"], // Exibe ícones com 'type' começando com 'Townhall'
+      ]);
+
       map.addSource("route", {
         type: "geojson",
         data: {
