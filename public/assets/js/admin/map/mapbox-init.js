@@ -1,4 +1,3 @@
-import * as apiGet from "../../api/moldes_back/get.js";
 import * as paradas from "./paradas.js";
 import * as util from "../util.js";
 import * as pontosTrajeto from "./pontos-trajeto.js";

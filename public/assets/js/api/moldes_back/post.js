@@ -207,8 +207,7 @@ export const postNewPontosTrajetoMassa = async (pontos_trajeto) => {
       throw new Error(`Erro: ${response.status} - ${response.statusText}`);
     }
 
-    console.log("Resposta do servidor:", responseBody); // Exibe a resposta bem-sucedida no console
-    return responseBody; // Retorna a resposta se necessário
+    return responseBody.pontos; // Retorna a resposta se necessário
   } catch (error) {
     console.error("Erro:", error.message);
   }

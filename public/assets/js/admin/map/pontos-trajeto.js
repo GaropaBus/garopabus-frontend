@@ -57,8 +57,6 @@ const selecionarRota = async () => {
   pontos_trajeto_inalterada = [...pontos_trajeto];
   addDataTable(pontos_trajeto);
   mapbox.addRotaMapSpecificRoute(pontos_trajeto);
-  console.log(pontos_trajeto);
-  console.log(pontos_trajeto_inalterada);
 };
 
 const arrumarArrayPontosTrajeto = () => {
@@ -98,9 +96,6 @@ const arrumarArrayPontosTrajeto = () => {
     }
   });
 
-  console.log("Array atualizado:", pontos_trajeto);
-  console.log(pontos_trajeto_inalterada);
-
   // Atualizar a tabela com os novos dados
   addDataTable(pontos_trajeto);
 };
@@ -117,9 +112,6 @@ export const tratarClick = async (coordinates) => {
     ordem: null,
   };
   pontos_trajeto.push(enviar);
-  console.log(pontos_trajeto);
-  console.log(pontos_trajeto_inalterada);
-
   addDataTable(pontos_trajeto);
   arrumarArrayPontosTrajeto();
 };
@@ -139,9 +131,7 @@ tabela_pontos_trajeto.addEventListener("dragstart", (event) => {
 });
 
 export const deletePontoTrajeto = async (ordem) => {
-  pontos_trajeto.splice(ordem - 1, 1); // Remove 1 elemento a partir do índice 2
-  console.log(pontos_trajeto);
-  console.log(pontos_trajeto_inalterada);
+  pontos_trajeto.splice(ordem - 1, 1);
   addDataTable(pontos_trajeto);
   arrumarArrayPontosTrajeto();
 };
@@ -226,13 +216,15 @@ document.addEventListener("DOMContentLoaded", async () => {
         alert("Nenhuma alteração feita");
         return;
       }
-      if (pontos_trajeto.length === 0){
+      if (pontos_trajeto.length === 0) {
         alert("A lista não pode estar vazia");
         return;
       }
       if (confirm("Deseja salvar as alterções feitas?")) {
-        console.log("Enviar back:", pontos_trajeto);
-        apiPost.postNewPontosTrajetoMassa(pontos_trajeto);
+        pontos_trajeto =
+          await apiPost.postNewPontosTrajetoMassa(pontos_trajeto);
+        addDataTable(pontos_trajeto);
+        arrumarArrayPontosTrajeto();
       }
     });
 
