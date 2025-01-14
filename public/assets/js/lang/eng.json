@@ -35,7 +35,8 @@
     "back-to-homepage": "Back to Homepage",
     "install-text": "Do you want to install the GaropaBus app?",
     "install-accept": "Accept",
-    "install-cancel": "Decline"
+    "install-cancel": "Decline",
+    "no-schedule": "No schedule available"
   },
   "placeholder": {
     "search-routes": "Search for routes"

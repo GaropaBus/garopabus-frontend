@@ -35,7 +35,8 @@
     "back-to-homepage": "Voltar para a página inicial",
     "install-text": "Deseja instalar o aplicativo GaropaBus?",
     "install-accept": "Aceitar",
-    "install-cancel": "Recusar"
+    "install-cancel": "Recusar",
+    "no-schedule": "Nenhum horário disponível"
   },
   "placeholder": {
     "search-routes": "Procure por rotas"
