@@ -210,10 +210,8 @@ const addMarkerPontoTrajeto = (pontos_trajeto) => {
     const delete_btn_popup = document.createElement("button");
     delete_btn_popup.textContent = "Excluir";
     delete_btn_popup.addEventListener("click", () => {
-      if(ponto.id === "null"){
-        alert("De f5 para poder excluir");
-      }
-      pontosTrajeto.deletePontoTrajeto(ponto.id);
+      pontosTrajeto.deletePontoTrajeto(ponto.ordem);
+      marker.remove();
     });
 
     div_popup.appendChild(delete_btn_popup);
@@ -230,10 +228,14 @@ const addMarkerPontoTrajeto = (pontos_trajeto) => {
 export function addRotaMapSpecificRoute(pontos_trajeto) {
   // Verifica se o array está vazio ou indefinido
   if (!pontos_trajeto || pontos_trajeto.length === 0) {
-    alert("Nenhum ponto de trajeto cadastrado");
+    alert("Nenhum ponto de trajeto cadastrado, por isso não vai aparecer a rota");
     removeRotaMapSpecificRoute();
     removeMarkersPontoTrajeto();
-    return; // Interrompe a execução da função
+    return;
+  } else if (pontos_trajeto.length === 1) {
+    alert("Só tem um ponto de trajeto cadastrado, por isso não vai aparecer a rota");
+    addMarkerPontoTrajeto(pontos_trajeto);
+    return;
   }
 
   // Usa a função local para preparar os pontos
@@ -331,7 +333,7 @@ export function ativarCapturaPontoTrajetoCoordenadas() {
 
       const marker = new mapboxgl.Marker(el)
         .setLngLat([coordinates.lng, coordinates.lat])
-        .setPopup(new mapboxgl.Popup({ offset: 25 }))
+        .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML("<p>Para excluir atualize o trajeto da rota</p>"))
         .addTo(map);
 
       MarkersPontosTrajeto.push(marker);

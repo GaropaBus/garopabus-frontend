@@ -187,3 +187,29 @@ export const postNewRotasPontoOnibus = async (dados) => {
     console.error("Erro:", error.message);
   }
 };
+
+export const postNewPontosTrajetoMassa = async (pontos_trajeto) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/pontos_trajeto/editar-em-massa/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+        Accept: "application/json",
+      },
+      body: JSON.stringify(pontos_trajeto),
+    });
+
+    const responseBody = await response.json(); // Tenta converter a resposta para JSON
+
+    if (!response.ok) {
+      console.error("Erro detalhado do servidor:", responseBody);
+      throw new Error(`Erro: ${response.status} - ${response.statusText}`);
+    }
+
+    console.log("Resposta do servidor:", responseBody); // Exibe a resposta bem-sucedida no console
+    return responseBody; // Retorna a resposta se necessário
+  } catch (error) {
+    console.error("Erro:", error.message);
+  }
+};
