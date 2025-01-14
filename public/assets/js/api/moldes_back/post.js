@@ -137,19 +137,24 @@ export const postNewRota = async (dados) => {
 
 export const getRotaPontoOnibusFiltrar = async (params) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/api/rotas_ponto_onibus/filtrar/`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-      },
-      body: JSON.stringify({
-        rota_id: params.id_rota ? params.id_rota : null,
-        ponto_onibus_id: params.id_ponto_onibus ? params.id_ponto_onibus : null
-      }),
-    });
+    const response = await fetch(
+      `${API_BASE_URL}/api/rotas_ponto_onibus/filtrar/`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          rota_id: params.id_rota ? params.id_rota : null,
+          ponto_onibus_id: params.id_ponto_onibus
+            ? params.id_ponto_onibus
+            : null,
+        }),
+      }
+    );
 
-    if (!response.ok){
+    if (!response.ok) {
       const errorResponse = await response.json(); // Detalhes do erro
       console.error("Erro detalhado do servidor:", errorResponse);
       throw new Error(`Erro: ${response.status} - ${response.statusText}`);
@@ -190,15 +195,18 @@ export const postNewRotasPontoOnibus = async (dados) => {
 
 export const postNewPontosTrajetoMassa = async (pontos_trajeto) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/api/pontos_trajeto/editar-em-massa/`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-        Accept: "application/json",
-      },
-      body: JSON.stringify(pontos_trajeto),
-    });
+    const response = await fetch(
+      `${API_BASE_URL}/api/pontos_trajeto/editar-em-massa/`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+          Accept: "application/json",
+        },
+        body: JSON.stringify(pontos_trajeto),
+      }
+    );
 
     const responseBody = await response.json(); // Tenta converter a resposta para JSON
 

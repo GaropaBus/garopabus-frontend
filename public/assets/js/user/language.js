@@ -27,24 +27,24 @@ export const translatePage = (language, langs) => {
       wprefix = wprefix.join("-");
       if (data[prefix]) {
         switch (prefix) {
-          case "metadata":
-            document.title = data[prefix][wprefix];
-            break;
-          case "navbar":
-            element.innerHTML = data[prefix][wprefix];
-            break;
-          case "label":
-            element.innerHTML = data[prefix][wprefix];
-            break;
-          case "placeholder":
-            element.placeholder = data[prefix][wprefix];
-            break;
-          case "terms":
-            element.textContent = data[prefix][wprefix];
-            break;
-          default:
-            console.log("Chave não encontrada:", key);
-            break;
+        case "metadata":
+          document.title = data[prefix][wprefix];
+          break;
+        case "navbar":
+          element.innerHTML = data[prefix][wprefix];
+          break;
+        case "label":
+          element.innerHTML = data[prefix][wprefix];
+          break;
+        case "placeholder":
+          element.placeholder = data[prefix][wprefix];
+          break;
+        case "terms":
+          element.textContent = data[prefix][wprefix];
+          break;
+        default:
+          console.log("Chave não encontrada:", key);
+          break;
         }
       }
     }
@@ -61,20 +61,20 @@ export const changeLanguage = async (newLanguage) => {
     const languageSettings = document.getElementById("language-settings");
     if (languageSettings) {
       switch (newLanguage) {
-        case "pt-br":
-          languageSettings.src = "../../assets/js/lang/br.svg";
-          languageSettings.className = "flag";
-          break;
-        case "esp":
-          languageSettings.src = "../../assets/js/lang/es.svg";
-          languageSettings.className = "flag";
-          break;
-        case "eng":
-          languageSettings.src = "../../assets/js/lang/us.svg";
-          languageSettings.className = "flag";
-          break;
-        default:
-          console.error("Idioma não suportado.");
+      case "pt-br":
+        languageSettings.src = "../../assets/js/lang/br.svg";
+        languageSettings.className = "flag";
+        break;
+      case "esp":
+        languageSettings.src = "../../assets/js/lang/es.svg";
+        languageSettings.className = "flag";
+        break;
+      case "eng":
+        languageSettings.src = "../../assets/js/lang/us.svg";
+        languageSettings.className = "flag";
+        break;
+      default:
+        console.error("Idioma não suportado.");
       }
     }
 
@@ -112,20 +112,20 @@ window.onload = async () => {
     const languageSettings = document.getElementById("language-settings");
     if (languageSettings) {
       switch (language) {
-        case "pt-br":
-          languageSettings.src = "../../assets/js/lang/br.svg";
-          languageSettings.className = "flag";
-          break;
-        case "esp":
-          languageSettings.src = "../../assets/js/lang/es.svg";
-          languageSettings.className = "flag";
-          break;
-        case "eng":
-          languageSettings.src = "../../assets/js/lang/us.svg";
-          languageSettings.className = "flag";
-          break;
-        default:
-          console.error("Idioma não suportado.");
+      case "pt-br":
+        languageSettings.src = "../../assets/js/lang/br.svg";
+        languageSettings.className = "flag";
+        break;
+      case "esp":
+        languageSettings.src = "../../assets/js/lang/es.svg";
+        languageSettings.className = "flag";
+        break;
+      case "eng":
+        languageSettings.src = "../../assets/js/lang/us.svg";
+        languageSettings.className = "flag";
+        break;
+      default:
+        console.error("Idioma não suportado.");
       }
     }
 
@@ -144,20 +144,20 @@ const languagesBox = document.querySelector(".languages-box");
 if (languageSettings) {
   const lang = await currentLanguage();
   switch (lang) {
-    case "pt-br":
-      languageSettings.src = "../../assets/js/lang/br.svg";
-      languageSettings.className = "flag";
-      break;
-    case "esp":
-      languageSettings.src = "../../assets/js/lang/es.svg";
-      languageSettings.className = "flag";
-      break;
-    case "eng":
-      languageSettings.src = "../../assets/js/lang/us.svg";
-      languageSettings.className = "flag";
-      break;
-    default:
-      console.error("Idioma não suportado.");
+  case "pt-br":
+    languageSettings.src = "../../assets/js/lang/br.svg";
+    languageSettings.className = "flag";
+    break;
+  case "esp":
+    languageSettings.src = "../../assets/js/lang/es.svg";
+    languageSettings.className = "flag";
+    break;
+  case "eng":
+    languageSettings.src = "../../assets/js/lang/us.svg";
+    languageSettings.className = "flag";
+    break;
+  default:
+    console.error("Idioma não suportado.");
   }
 
   languageSettings.addEventListener("click", () => {

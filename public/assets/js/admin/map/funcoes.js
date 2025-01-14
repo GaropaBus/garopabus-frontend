@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
     incones.style.display = "none";
     tela_rota.style.display = "block";
   });
-  document.querySelectorAll(".fechar-tela-secundaria").forEach(element => {
+  document.querySelectorAll(".fechar-tela-secundaria").forEach((element) => {
     element.addEventListener("click", () => {
       incones.style.display = "flex";
       tela_paradas.style.display = "none";

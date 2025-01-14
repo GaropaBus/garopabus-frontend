@@ -214,12 +214,15 @@ export const getNotificationsList = async () => {
 
 export const GetPontosTrajetoRota = async (id) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/api/pontos_trajeto/rota-id/${id}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      `${API_BASE_URL}/api/pontos_trajeto/rota-id/${id}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     if (!response.ok) {
       throw new Error(`Erro: ${response.status} - ${response.statusText}`);

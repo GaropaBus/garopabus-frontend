@@ -227,12 +227,16 @@ const addMarkerPontoTrajeto = (pontos_trajeto) => {
 export function addRotaMapSpecificRoute(pontos_trajeto) {
   // Verifica se o array está vazio ou indefinido
   if (!pontos_trajeto || pontos_trajeto.length === 0) {
-    alert("Nenhum ponto de trajeto cadastrado, por isso não vai aparecer a rota");
+    alert(
+      "Nenhum ponto de trajeto cadastrado, por isso não vai aparecer a rota"
+    );
     removeRotaMapSpecificRoute();
     removeMarkersPontoTrajeto();
     return;
   } else if (pontos_trajeto.length === 1) {
-    alert("Só tem um ponto de trajeto cadastrado, por isso não vai aparecer a rota");
+    alert(
+      "Só tem um ponto de trajeto cadastrado, por isso não vai aparecer a rota"
+    );
     addMarkerPontoTrajeto(pontos_trajeto);
     return;
   }
@@ -332,7 +336,11 @@ export function ativarCapturaPontoTrajetoCoordenadas() {
 
       const marker = new mapboxgl.Marker(el)
         .setLngLat([coordinates.lng, coordinates.lat])
-        .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML("<p>Para excluir atualize o trajeto da rota</p>"))
+        .setPopup(
+          new mapboxgl.Popup({ offset: 25 }).setHTML(
+            "<p>Para excluir atualize o trajeto da rota</p>"
+          )
+        )
         .addTo(map);
 
       MarkersPontosTrajeto.push(marker);

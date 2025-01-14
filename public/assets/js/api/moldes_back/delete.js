@@ -61,13 +61,16 @@ export const deletePontoOnibus = async (id) => {
 
 export const deleteRotasPontoOnibus = async (id) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/api/rotas_ponto_onibus/${id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const response = await fetch(
+      `${API_BASE_URL}/api/rotas_ponto_onibus/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
 
     if (!response.ok) {
       const errorResponse = await response.json(); // Detalhes do erro
