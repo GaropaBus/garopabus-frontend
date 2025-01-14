@@ -40,5 +40,12 @@
   },
   "placeholder": {
     "search-routes": "Search for routes"
+  },
+  "terms": {
+    "modal-title": "Terms of Use and Privacy Policy",
+    "modal-description": "To continue, you need to accept the terms.",
+    "modal-link": "Read the full terms here",
+    "modal-checkbox-label": "I accept the Terms of Use and Privacy Policy",
+    "modal-confirm-button": "Accept"
   }
 }

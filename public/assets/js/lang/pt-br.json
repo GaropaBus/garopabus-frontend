@@ -40,5 +40,12 @@
   },
   "placeholder": {
     "search-routes": "Procure por rotas"
+  },
+  "terms": {
+    "modal-title": "Termos de uso e política de privacidade",
+    "modal-description": "Para continuar, você precisa aceitar os termos.",
+    "modal-link": "Leia os termos completos aqui",
+    "modal-checkbox-label": "Eu aceito os Termos de uso e a Política de privacidade",
+    "modal-confirm-button": "Aceitar"
   }
 }
