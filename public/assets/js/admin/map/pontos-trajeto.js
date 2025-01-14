@@ -206,6 +206,27 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.error("Botão 'adicionar-ponto-trajeto-click' não encontrado.");
   }
 
+  document.addEventListener("keydown", (event) => {
+    const key = event.key; // A tecla pressionada
+    if (key === "g"){
+      if (!rota_id) {
+        alert("Selecione uma rota");
+        return;
+      }
+      if (
+        mapbox &&
+        typeof mapbox.ativarCapturaPontoTrajetoCoordenadas === "function"
+      ) {
+        mapbox.ativarCapturaPontoTrajetoCoordenadas();
+      } else {
+        console.error(
+          "Função ativarCapturaCoordenadas não encontrada no módulo mapbox."
+        );
+        alert("Erro ao ativar a captura de coordenadas.");
+      }
+    }
+  });
+
   document
     .getElementById("salvar-lista-pontos-trajeto")
     .addEventListener("click", async () => {
