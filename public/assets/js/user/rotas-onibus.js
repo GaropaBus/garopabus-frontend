@@ -27,13 +27,15 @@ const preencherTabelaRotas = (rotas, tbody) => {
     divMapa.classList.add("btn-table-routes-itens");
     const iconeMapa = document.createElement("i");
     iconeMapa.classList.add("fa", "fa-map-location-dot"); // Compatível com Font Awesome 4.7
+    iconeMapa.setAttribute("id", "rotas-map");
+    iconeMapa.onclick = () => showScheduleRotaMap(rota.id);
     divMapa.appendChild(iconeMapa);
 
     // Ícone de horários
     const divHorarios = document.createElement("div");
     divHorarios.classList.add("btn-table-routes-itens");
     divHorarios.setAttribute("id", "horarios");
-    divHorarios.onclick = () => showSchedule(rota.id);
+    divHorarios.onclick = () => showScheduleHorario(rota.id);
     const iconeHorarios = document.createElement("i");
     iconeHorarios.classList.add("fa", "fa-clock"); // Compatível com Font Awesome 4.7
     divHorarios.appendChild(iconeHorarios);
@@ -129,7 +131,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 // Função para redirecionar para o link específico utilizando query strings
-export const showSchedule = async (routeId) => {
+export const showScheduleHorario = async (routeId) => {
   try {
     const selectedRoute = await apiGet.getRota(routeId);
 
@@ -145,3 +147,21 @@ export const showSchedule = async (routeId) => {
     console.error("Erro ao processar o redirecionamento:", error);
   }
 };
+
+export const showScheduleRotaMap = async (routeId) => {
+  try {
+    const selectedRoute = await apiGet.getRota(routeId);
+
+    if (selectedRoute) {
+      console.log(selectedRoute.nome);
+      const routeName = formatRouteNameForUrl(selectedRoute.nome);
+      const link = `/user/rotas-map/?rota=${routeName}`;
+      window.location.assign(link);
+    } else {
+      console.error("Rota não encontrada!");
+    }
+  } catch (error) {
+    console.error("Erro ao processar o redirecionamento:", error);
+  }
+};
+
