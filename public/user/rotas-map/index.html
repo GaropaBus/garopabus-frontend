@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="manifest" href="../../manifest.json" />
+    <!-- GaropaBus - Mapa -->
+    <title id="metadata-title-map"></title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="Garopabus" />
+    <!-- Links externos -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="../../assets/images/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="../../assets/images/android-chrome-192x192.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="../../assets/images/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="../../assets/images/favicon.ico"
+    />
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.js"></script>
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../assets/css/user/rotas-map.css" />
+    <link rel="stylesheet" href="../../assets/css/user/header.css" />
+    <link rel="stylesheet" href="../../assets/css/base.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div class="main-title">
+          <button onclick="goBack()" class="btn-voltar" style="cursor: pointer">
+            <i class="fa fa-long-arrow-left" style="font-size: 20px"></i>
+          </button>
+          <h1>GaropaBus</h1>
+          <!-- Horários de Ônibus -->
+        </div>
+        <div class="title-rota">
+          <h3 id="routeName"></h3>
+          <!-- Preenchido pelo client-side -->
+        </div>
+      </header>
+      <main>
+        <div id="map"></div>
+      </main>
+      <nav id="nav"></nav>
+    </div>
+
+    <script type="module" src="../../assets/js/user/rotas-map.js"></script>
+    <script type="module" src="../../assets/js/user/language.js"></script>
+    <script src="../../assets/js/user/terms.js"></script>
+  </body>
+</html>

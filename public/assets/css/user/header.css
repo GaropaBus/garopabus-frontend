@@ -14,7 +14,7 @@ header h1 {
 }
 
 header .search-container,
-header .title-horario {
+header .title-horario, header .title-rota {
   margin-top: 15px;
   background-color: #ebeded;
   display: flex;
@@ -23,7 +23,7 @@ header .title-horario {
   border-radius: 30px;
 }
 
-header .title-horario {
+header .title-horario, header .title-rota {
   display: flex;
   align-items: center;
   font-size: 0.875rem;
@@ -31,7 +31,7 @@ header .title-horario {
   margin-bottom: 1rem;
 }
 
-header .title-horario h3 {
+header .title-horario h3, header .title-rota h3{
   font-weight: normal;
   color: #7e8a8c;
   font-size: 0.875rem;
