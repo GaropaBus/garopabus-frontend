@@ -33,78 +33,42 @@
     <link rel="stylesheet" href="./assets/css/index.css" />
   </head>
   <body>
-    <header>
-      <nav>
-        <h1>GaropaBus</h1>
-        <ul>
-          <li><a href="#sobre">Sobre</a></li>
-          <li><a href="#features">Features</a></li>
-          <li><a href="#contato">Contato</a></li>
-        </ul>
-      </nav>
-    </header>
-
-    <section class="hero">
-      <div class="hero-content">
-        <h2>Simplifique suas rotas de ônibus</h2>
-        <p>
-          Com o GaropaBus, você encontra o melhor caminho para o seu destino de
-          forma simples e rápida.
-        </p>
-        <a href="#features" class="btn-primary">Saiba mais</a>
-      </div>
-    </section>
-
-    <section id="sobre" class="sobre">
-      <h2>Sobre o projeto</h2>
-      <p>
-        Nosso projeto foi desenvolvido para facilitar a vida de quem utiliza o
-        transporte público. Com um mapa interativo, oferecemos uma forma simples
-        de visualizar as rotas de ônibus, horários e paradas disponíveis,
-        proporcionando uma experiência prática e eficiente.
-      </p>
-    </section>
-
-    <section id="features" class="features">
-      <h2>Nossas Features</h2>
-      <div class="feature-container">
-        <div class="feature-card">
-          <h3>Mapa Interativo</h3>
-          <p>
-            Explore as rotas e paradas de ônibus diretamente no mapa, com
-            informações detalhadas sobre cada linha.
-          </p>
-        </div>
-        <div class="feature-card">
-          <h3>Pesquisa de Linhas e Horários</h3>
-          <p>
-            Encontre facilmente a linha de ônibus que você precisa e consulte
-            seus horários atualizados.
-          </p>
-        </div>
-        <div class="feature-card">
-          <h3>Rotas Otimizadas</h3>
-          <p>
-            Planeje seu trajeto de forma otimizada, economizando tempo ao
-            escolher o melhor caminho.
-          </p>
-        </div>
-        <div class="feature-card">
-          <h3>Notificações em Tempo Real</h3>
-          <p>
-            Receba atualizações em tempo real sobre horários e condições das
-            rotas, evitando imprevistos.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <footer id="contato" class="footer">
-      <h2>Contato</h2>
-      <p>
-        Quer saber mais ou tem alguma dúvida? Entre em contato conosco pelo
-        e-mail: garopabus@gmail.com
-      </p>
-    </footer>
-  </body>
+    <div class="container">
+        <main>
+            <img src="./assets/images/Logo_garopabus_horizontal.png" alt="Bus image" class="bus-image">
+            <h2>Conheça GaropaBus</h2>
+            <p>
+                GaropaBus é o seu fiel companheiro quando o assunto é transporte publico
+            </p>
+            <div class="features">
+                <div class="feature">
+                    <h3>Horários</h3>
+                    <p>Encontre facilmente a linha de ônibus que você precisa e consulte
+                        seus horários atualizados.</p>
+                </div>
+                <div class="feature">
+                    <h3>Rotas</h3>
+                    <p>Visão geral de todas as rotas disponiveis, para facilitar a escolha do melhor caminho.</p>
+                </div>
+                <div class="feature">
+                    <h3>Notificações</h3>
+                    <p>Receba atualizações em tempo real sobre horários e condições das
+                        rotas, evitando imprevistos.</p>
+                </div>
+                <div class="feature">
+                    <h3>Mapas</h3>
+                    <p>Explore as rotas e paradas de ônibus diretamente no mapa, com
+                        informações detalhadas sobre cada linha.</p>
+                </div>  
+            </div>
+            <button class="cta-button" onclick="window.location.href='./user/index.html';">Começe Já</button>
+        </main>
+        <footer>
+            <div class="socials">
+                <a href="./termos-uso/index.html">Termos de Uso e Política de Privacidade</a>
+                <p>Quer saber mais ou tem alguma dúvida? Entre em contato conosco pelo e-mail: garopabus@gmail.com</p>
+            </div>
+            <p>&copy; 2023 GaropaBus</p>
+        </footer>
+    </div>
 </html>
