@@ -134,3 +134,89 @@ export const postNewRota = async (dados) => {
     console.error("Erro:", error.message);
   }
 };
+
+export const getRotaPontoOnibusFiltrar = async (params) => {
+  try {
+    const response = await fetch(
+      `${API_BASE_URL}/api/rotas_ponto_onibus/filtrar/`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          rota_id: params.id_rota ? params.id_rota : null,
+          ponto_onibus_id: params.id_ponto_onibus
+            ? params.id_ponto_onibus
+            : null,
+        }),
+      }
+    );
+
+    if (!response.ok) {
+      const errorResponse = await response.json(); // Detalhes do erro
+      console.error("Erro detalhado do servidor:", errorResponse);
+      throw new Error(`Erro: ${response.status} - ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    return await util.addNomeRotasPontoOnibosFiltrar(data);
+  } catch (error) {
+    console.error("Erro:", error.message);
+  }
+};
+
+export const postNewRotasPontoOnibus = async (dados) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/rotas_ponto_onibus/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        rota_id: dados.id_rota,
+        ponto_onibus_id: dados.id_ponto_onibus,
+        ordem: null,
+      }),
+    });
+
+    if (!response.ok) {
+      const errorResponse = await response.json(); // Detalhes do erro
+      console.error("Erro detalhado do servidor:", errorResponse);
+      throw new Error(`Erro: ${response.status} - ${response.statusText}`);
+    }
+  } catch (error) {
+    console.error("Erro:", error.message);
+  }
+};
+
+export const postNewPontosTrajetoMassa = async (pontos_trajeto) => {
+  try {
+    const response = await fetch(
+      `${API_BASE_URL}/api/pontos_trajeto/editar-em-massa/`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+          Accept: "application/json",
+        },
+        body: JSON.stringify(pontos_trajeto),
+      }
+    );
+
+    const responseBody = await response.json(); // Tenta converter a resposta para JSON
+
+    if (!response.ok) {
+      console.error("Erro detalhado do servidor:", responseBody);
+      throw new Error(`Erro: ${response.status} - ${response.statusText}`);
+    }
+
+    return responseBody.pontos; // Retorna a resposta se necessário
+  } catch (error) {
+    console.error("Erro:", error.message);
+  }
+};

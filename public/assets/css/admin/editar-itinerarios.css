@@ -47,11 +47,3 @@
   padding-bottom: 5px;
   border-bottom: 1px solid rgb(255, 255, 255);
 }
-
-.edit-mode:hover {
-  background-color: rgba(16, 182, 16, 0.721) !important;
-}
-
-.delete-mode:hover {
-  background-color: #c00;
-}

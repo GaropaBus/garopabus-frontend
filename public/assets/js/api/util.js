@@ -36,3 +36,10 @@ export const formatRouteNameForUrl = (routeName) => {
     .replace(/-+/g, "-") // Remove hífens duplicados
     .trim();
 };
+
+export const addNomeRotasPontoOnibosFiltrar = async (rotasList) => {
+  rotasList.forEach((element) => {
+    element.rota.nome = `${element.rota.bairro_origem} - ${element.rota.bairro_destino}${element.rota.id_rota_principal ? ` (${element.rota.nome_variacao})` : ""}`;
+  });
+  return rotasList; // Retorna a lista atualizada
+};

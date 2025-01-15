@@ -39,6 +39,9 @@ export const translatePage = (language, langs) => {
         case "placeholder":
           element.placeholder = data[prefix][wprefix];
           break;
+        case "terms":
+          element.textContent = data[prefix][wprefix];
+          break;
         default:
           console.log("Chave não encontrada:", key);
           break;

@@ -35,9 +35,17 @@
     "back-to-homepage": "Volver a la página principal",
     "install-text": "¿Desea instalar la aplicación GaropaBus?",
     "install-accept": "Aceptar",
-    "install-cancel": "Rechazar"
+    "install-cancel": "Rechazar",
+    "no-schedule": "No hay horario disponible"
   },
   "placeholder": {
     "search-routes": "Buscar rutas"
+  },
+  "terms": {
+    "modal-title": "Términos de uso y política de privacidad",
+    "modal-description": "Para continuar, necesitas aceptar los términos.",
+    "modal-link": "Lee los términos completos aquí",
+    "modal-checkbox-label": "Acepto los Términos de uso y la Política de privacidad",
+    "modal-confirm-button": "Aceptar"
   }
 }
