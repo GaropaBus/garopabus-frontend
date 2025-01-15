@@ -15,7 +15,7 @@ const preencherTabelaRotas = (rotas, tbody) => {
     const tdNome = document.createElement("td");
     tdNome.textContent = rota.nome;
     tdNome.classList.add("item-nome-rota"); // Classe para estilização
-    tdNome.onclick = () => showSchedule(rota.id); // Ação ao clicar
+    tdNome.onclick = () => showScheduleHorario(rota.id); // Ação ao clicar
     tr.appendChild(tdNome);
 
     // Coluna de ações com ícones
