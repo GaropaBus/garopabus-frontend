@@ -3,6 +3,8 @@ import * as util from "./util.js";
 
 let rota_nome;
 let list_rota;
+let list_pontos;
+let markersBusStops = [];
 
 window.goBack = () => {
   window.location.href = "/user/rotas-onibus";
@@ -55,6 +57,65 @@ const map = new mapboxgl.Map({
   maxZoom: 16, // Nível máximo de zoom (visão próxima)
 });
 
+async function isValidLink(url) {
+  try {
+    const response = await fetch(url, { method: "HEAD" });
+    return response.ok;
+  } catch (error) {
+    console.error(`Erro ao verificar o link: ${url}`, error);
+    return false;
+  }
+}
+
+function addBusStopsSpecificRoute(pontos_onibus) {
+  try {
+    const busStops = pontos_onibus;
+    busStops.forEach(async function (stop) {
+      // Verifica se já existe um marcador nas coordenadas
+      const isValid = await isValidLink(stop.link_maps);
+
+      // Cria um elemento HTML para o ícone do ponto de ônibus
+      const el = document.createElement("div");
+      el.className = "bus-stop-marker";
+
+      // Estilos do marcador
+      el.style.width = "20px";
+      el.style.height = "20px";
+      el.style.backgroundColor = "rgba(255, 255, 255, 0.7)";
+      el.style.borderRadius = "5px";
+      el.style.backgroundImage =
+        "url(../../../../../../assets/images/icon_bus.png)";
+      el.style.backgroundSize = "80%";
+      el.style.backgroundRepeat = "no-repeat";
+      el.style.backgroundPosition = "center";
+      el.style.filter = "invert(1)";
+
+      // Cria o marcador
+      const marker = new mapboxgl.Marker(el)
+        .setLngLat([stop.longitude, stop.latitude])
+        .addTo(map);
+
+      if (isValid) {
+        marker.setPopup(
+          new mapboxgl.Popup({ offset: 25 }).setHTML(
+            `<a href="${stop.link_maps}" target="_blank">Link Maps</a>`
+          )
+        );
+      }
+      // Armazena o marcador
+      markersBusStops.push(marker);
+    });
+  } catch (error) {
+    console.error("Erro ao carregar os pontos de ônibus:", error);
+  }
+}
+
+export function removeAllMarkersBusStops() {
+  markersBusStops.forEach((marker) => {
+    marker.remove(); // Remove o marcador do mapa
+  });
+  markersBusStops = []; // Limpa o array de marcadores
+}
 
 function addRotaMapSpecificRoute(pontos_trajeto) {
   // Verifica se o array está vazio ou indefinido
@@ -137,6 +198,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const rota_url = urlParams.get("rota") || "Desconhecida";
   rota_nome = formatarString(rota_url);
   list_rota = await apiGet.GetPontosTrajetoRotaNome(rota_url);
+  list_pontos = await apiGet.GetPontosOnibusNome(rota_url);
   console.log(list_rota);
   preencherNomeRota();
   preencherNavBar();
@@ -156,6 +218,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       // Exibe o valor do atributo data-rota no console
       removeRotaMapSpecificRoute();
+      removeAllMarkersBusStops();
+      addBusStopsSpecificRoute(list_pontos[event.target.dataset.rota]);
       addRotaMapSpecificRoute(list_rota[event.target.dataset.rota]);
     }
   });
