@@ -78,7 +78,7 @@ p {
   font-size: 16px;
 }
 
-.contato-container {
+.item {
   margin: 20px;
   margin-top: 10px;
   height: 72px;
@@ -90,7 +90,7 @@ p {
   text-align: center;
 }
 
-.contato-container .icon-contato {
+.item .icon {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -99,11 +99,15 @@ p {
   border-radius: 12px;
 }
 
-.contato-container button {
+.item button {
   background-color: #ebeded;
   padding: 7.5px 12.5px;
   border: none;
   border-radius: 30px;
+}
+
+#label-description-install{
+  max-width: 171.44px !important;
 }
 
 /* Estilos do Modal */
@@ -181,34 +185,6 @@ p {
   margin: 0;
   font-size: 14px;
   color: #333;
-}
-
-.instalacao-container {
-  margin: 20px;
-  margin-top: 10px;
-  height: 72px;
-  background-color: #fff;
-  display: flex;
-  align-items: center;
-  border-radius: 8px;
-  justify-content: space-around;
-  text-align: center;
-}
-
-.instalacao-container .icon-instalacao {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 15px;
-  background-color: #ebeded;
-  border-radius: 12px;
-}
-
-.instalacao-container button {
-  background-color: #ebeced;
-  padding: 7.5px 12.5px;
-  border: none;
-  border-radius: 30px;
 }
 
 .install-info {
