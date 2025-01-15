@@ -12,7 +12,7 @@ window.goBack = () => {
 
 const formatarString = (str) => {
   // Dividir a string no caractere "-"
-  const partes = str.split("-");
+  const partes = str.replace(/_/g, " ").split("-");
 
   // Capitalizar a primeira letra de cada parte e unir com " - "
   return partes
@@ -32,7 +32,12 @@ const preencherNavBar = () => {
 
   for (const rota of keys) {
     const btn = document.createElement("button");
-    btn.textContent = rota.charAt(0).toUpperCase() + rota.slice(1);
+
+    btn.textContent = rota
+      .split("_")
+      .map((parte) => parte.charAt(0).toUpperCase() + parte.slice(1))
+      .join(" ");
+
     btn.dataset.rota = rota;
     nav.appendChild(btn);
   }
