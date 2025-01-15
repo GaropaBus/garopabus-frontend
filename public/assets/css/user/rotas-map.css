@@ -14,10 +14,9 @@ nav {
   height: 70px;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
-  flex-wrap: wrap;
   overflow: auto;
   gap: 10px;
-  padding: 10px;
+  padding: 30px;
 }
 
 nav button {
@@ -26,6 +25,7 @@ nav button {
   padding: 10px 20px;
   border-radius: 5px;
   border: none;
+  white-space: nowrap; /* Garante que o texto dentro do botão não quebre */
 }
 
 nav .selecionado {
