@@ -164,4 +164,3 @@ export const showScheduleRotaMap = async (routeId) => {
     console.error("Erro ao processar o redirecionamento:", error);
   }
 };
-

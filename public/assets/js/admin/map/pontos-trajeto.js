@@ -208,7 +208,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   document.addEventListener("keydown", (event) => {
     const key = event.key; // A tecla pressionada
-    if (key === "g"){
+    if (key === "g") {
       if (!rota_id) {
         alert("Selecione uma rota");
         return;
