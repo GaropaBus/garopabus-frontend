@@ -123,6 +123,16 @@ export function removeAllMarkersBusStops() {
   markersBusStops = []; // Limpa o array de marcadores
 }
 
+map.on("load", () => {
+  map.setFilter("poi-label", [
+    "any", // O operador 'any' permite que qualquer uma das condições seja verdadeira
+    ["==", ["get", "type"], "Bank"], // Exibe ícones com 'type' igual a 'Bank'
+    ["==", ["get", "type"], "Townhall"],
+    ["==", ["get", "type"], "Office"],
+    ["==", ["get", "type"], "Park"],
+    ["==", ["get", "type"], "Place Of Worship"], // Exibe ícones com 'type' começando com 'Townhall'
+  ]);
+})
 function addRotaMapSpecificRoute(pontos_trajeto) {
   // Verifica se o array está vazio ou indefinido
   if (!pontos_trajeto || pontos_trajeto.length === 0) {
@@ -138,10 +148,12 @@ function addRotaMapSpecificRoute(pontos_trajeto) {
   const waypoints = util.prepararPontosParaApi(pontos_trajeto).join(";");
   const url = `https://api.mapbox.com/directions/v5/mapbox/driving/${waypoints}?geometries=geojson&overview=full&access_token=${mapboxgl.accessToken}`;
   
+  
   fetch(url)
   .then((response) => response.json())
   .then((data) => {
     const route = data.routes[0].geometry.coordinates;
+    
     
     if (map.getSource("route")) {
       map.getSource("route").setData({
@@ -152,24 +164,16 @@ function addRotaMapSpecificRoute(pontos_trajeto) {
         },
       });
     } else {
-        map.addSource("route", {
-          type: "geojson",
-          data: {
-            type: "Feature",
-            geometry: {
+      map.addSource("route", {
+        type: "geojson",
+        data: {
+          type: "Feature",
+          geometry: {
               type: "LineString",
               coordinates: route,
             },
           },
         });
-        map.setFilter("poi-label", [
-          "any", // O operador 'any' permite que qualquer uma das condições seja verdadeira
-          ["==", ["get", "type"], "Bank"], // Exibe ícones com 'type' igual a 'Bank'
-          ["==", ["get", "type"], "Townhall"],
-          ["==", ["get", "type"], "Office"],
-          ["==", ["get", "type"], "Park"],
-          ["==", ["get", "type"], "Place Of Worship"], // Exibe ícones com 'type' começando com 'Townhall'
-        ]);
         
         
         map.addLayer(
@@ -189,51 +193,51 @@ function addRotaMapSpecificRoute(pontos_trajeto) {
           "aerialway"
         );
       }
-
+      
       const bounds = new mapboxgl.LngLatBounds();
       route.forEach((coord) => bounds.extend(coord));
       map.fitBounds(bounds, { padding: 20 });
     })
     .catch((error) => console.error("Erro ao adicionar rota:", error));
-}
-
-function removeRotaMapSpecificRoute() {
-  // Verifica se a camada "route1" existe no mapa
-  if (map.getLayer("route1")) {
-    map.removeLayer("route1"); // Remove a camada
   }
-
-  // Verifica se a fonte "route" existe no mapa
-  if (map.getSource("route")) {
-    map.removeSource("route"); // Remove a fonte
+  
+  function removeRotaMapSpecificRoute() {
+    // Verifica se a camada "route1" existe no mapa
+    if (map.getLayer("route1")) {
+      map.removeLayer("route1"); // Remove a camada
+    }
+    
+    // Verifica se a fonte "route" existe no mapa
+    if (map.getSource("route")) {
+      map.removeSource("route"); // Remove a fonte
+    }
   }
-}
-
-document.addEventListener("DOMContentLoaded", async () => {
-  const urlParams = new URLSearchParams(window.location.search);
-  const rota_url = urlParams.get("rota") || "Desconhecida";
-  rota_nome = formatarString(rota_url);
-  list_rota = await apiGet.GetPontosTrajetoRotaNome(rota_url);
-  list_pontos = await apiGet.GetPontosOnibusNome(rota_url);
-  console.log(list_rota);
-  preencherNomeRota();
-  preencherNavBar();
-  document.getElementById("nav").addEventListener("click", (event) => {
-    // Verifica se o elemento clicado é um botão
-    if (event.target.tagName === "BUTTON") {
-      // Seleciona todos os botões dentro do elemento com ID "nav"
-      const botoes = document.getElementById("nav").querySelectorAll("button");
-
-      // Remove a classe "selecionado" de todos os botões
-      botoes.forEach((botao) => {
-        botao.classList.remove("selecionado");
-      });
-
-      // Adiciona a classe "selecionado" ao botão clicado
-      event.target.classList.add("selecionado");
-
-      // Exibe o valor do atributo data-rota no console
-      removeRotaMapSpecificRoute();
+  
+  document.addEventListener("DOMContentLoaded", async () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const rota_url = urlParams.get("rota") || "Desconhecida";
+    rota_nome = formatarString(rota_url);
+    list_rota = await apiGet.GetPontosTrajetoRotaNome(rota_url);
+    list_pontos = await apiGet.GetPontosOnibusNome(rota_url);
+    console.log(list_rota);
+    preencherNomeRota();
+    preencherNavBar();
+    document.getElementById("nav").addEventListener("click", (event) => {
+      // Verifica se o elemento clicado é um botão
+      if (event.target.tagName === "BUTTON") {
+        // Seleciona todos os botões dentro do elemento com ID "nav"
+        const botoes = document.getElementById("nav").querySelectorAll("button");
+        
+        // Remove a classe "selecionado" de todos os botões
+        botoes.forEach((botao) => {
+          botao.classList.remove("selecionado");
+        });
+        
+        // Adiciona a classe "selecionado" ao botão clicado
+        event.target.classList.add("selecionado");
+        
+        // Exibe o valor do atributo data-rota no console
+        removeRotaMapSpecificRoute();
       removeAllMarkersBusStops();
       addBusStopsSpecificRoute(list_pontos[event.target.dataset.rota]);
       addRotaMapSpecificRoute(list_rota[event.target.dataset.rota]);
