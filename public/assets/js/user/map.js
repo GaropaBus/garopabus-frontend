@@ -118,15 +118,6 @@ fetch(url)
           },
         },
       });
-      map.addLayer({
-        id: "route-layer", // Nome da camada
-        type: "line",
-        source: "route", // Fonte que você acabou de adicionar
-        paint: {
-          "line-color": "#0550A1", // Define a cor da linha (azul, por exemplo)
-          "line-width": 4, // Define a largura da linha (ajuste conforme necessário)
-        },
-      },'aerialway');
 
       
       const el = document.createElement("div");
