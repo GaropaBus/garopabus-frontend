@@ -281,8 +281,8 @@ export function addRotaMapSpecificRoute(pontos_trajeto) {
               "line-join": "round",
             },
             paint: {
-              "line-color": "#888",
-              "line-width": 8,
+              "line-color": "#0550A1",
+              "line-width": 4,
             },
           },
           "aerialway"

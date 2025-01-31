@@ -98,7 +98,6 @@ fetch(url)
     map.on("load", () => {
       iniciarMonitoramentoLocalizacao();
 
-      //  map.setFilter('poi-label', ['==', 'type', 'Bank']);
 
       map.setFilter("poi-label", [
         "any", // O operador 'any' permite que qualquer uma das condições seja verdadeira
@@ -126,7 +125,7 @@ fetch(url)
           "line-color": "#0550A1", // Define a cor da linha (azul, por exemplo)
           "line-width": 4, // Define a largura da linha (ajuste conforme necessário)
         },
-      },'road-label');
+      },'aerialway');
 
       const el = document.createElement("div");
       el.className = "user-marker";
