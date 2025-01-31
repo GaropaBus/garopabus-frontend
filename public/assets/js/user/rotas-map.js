@@ -160,7 +160,7 @@ function addRotaMapSpecificRoute(pontos_trajeto) {
             },
           },
         });
-
+        
         map.addLayer(
           {
             id: "route1",
@@ -171,8 +171,8 @@ function addRotaMapSpecificRoute(pontos_trajeto) {
               "line-join": "round",
             },
             paint: {
-              "line-color": "#888",
-              "line-width": 8,
+              "line-color": "#0550A1", // Define a cor da linha (azul, por exemplo)
+              "line-width": 4, // Define a largura da linha (ajuste conforme necessário)
             },
           },
           "aerialway"
