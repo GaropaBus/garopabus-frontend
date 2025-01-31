@@ -59,8 +59,9 @@ const map = new mapboxgl.Map({
   zoom: 12,
   maxBounds: bounds, // Mantém os limites do mapa
   minZoom: 9, // Nível mínimo de zoom (visão ampla)
-  maxZoom: 16, // Nível máximo de zoom (visão próxima)
+  maxZoom: 20, // Nível máximo de zoom (visão próxima)
 });
+
 
 async function isValidLink(url) {
   try {
@@ -78,28 +79,28 @@ function addBusStopsSpecificRoute(pontos_onibus) {
     busStops.forEach(async function (stop) {
       // Verifica se já existe um marcador nas coordenadas
       const isValid = await isValidLink(stop.link_maps);
-
+      
       // Cria um elemento HTML para o ícone do ponto de ônibus
       const el = document.createElement("div");
       el.className = "bus-stop-marker";
-
+      
       // Estilos do marcador
       el.style.width = "20px";
       el.style.height = "20px";
       el.style.backgroundColor = "rgba(255, 255, 255, 0.7)";
       el.style.borderRadius = "5px";
       el.style.backgroundImage =
-        "url(../../../../../../assets/images/icon_bus.png)";
+      "url(../../../../../../assets/images/icon_bus.png)";
       el.style.backgroundSize = "80%";
       el.style.backgroundRepeat = "no-repeat";
       el.style.backgroundPosition = "center";
       el.style.filter = "invert(1)";
-
+      
       // Cria o marcador
       const marker = new mapboxgl.Marker(el)
-        .setLngLat([stop.longitude, stop.latitude])
-        .addTo(map);
-
+      .setLngLat([stop.longitude, stop.latitude])
+      .addTo(map);
+      
       if (isValid) {
         marker.setPopup(
           new mapboxgl.Popup({ offset: 25 }).setHTML(
@@ -131,25 +132,26 @@ function addRotaMapSpecificRoute(pontos_trajeto) {
     removeRotaMapSpecificRoute();
     return;
   }
-
+  
+  
   // Usa a função local para preparar os pontos
   const waypoints = util.prepararPontosParaApi(pontos_trajeto).join(";");
   const url = `https://api.mapbox.com/directions/v5/mapbox/driving/${waypoints}?geometries=geojson&overview=full&access_token=${mapboxgl.accessToken}`;
-
+  
   fetch(url)
-    .then((response) => response.json())
-    .then((data) => {
-      const route = data.routes[0].geometry.coordinates;
-
-      if (map.getSource("route")) {
-        map.getSource("route").setData({
-          type: "Feature",
-          geometry: {
-            type: "LineString",
-            coordinates: route,
-          },
-        });
-      } else {
+  .then((response) => response.json())
+  .then((data) => {
+    const route = data.routes[0].geometry.coordinates;
+    
+    if (map.getSource("route")) {
+      map.getSource("route").setData({
+        type: "Feature",
+        geometry: {
+          type: "LineString",
+          coordinates: route,
+        },
+      });
+    } else {
         map.addSource("route", {
           type: "geojson",
           data: {
@@ -160,7 +162,16 @@ function addRotaMapSpecificRoute(pontos_trajeto) {
             },
           },
         });
-
+        map.setFilter("poi-label", [
+          "any", // O operador 'any' permite que qualquer uma das condições seja verdadeira
+          ["==", ["get", "type"], "Bank"], // Exibe ícones com 'type' igual a 'Bank'
+          ["==", ["get", "type"], "Townhall"],
+          ["==", ["get", "type"], "Office"],
+          ["==", ["get", "type"], "Park"],
+          ["==", ["get", "type"], "Place Of Worship"], // Exibe ícones com 'type' começando com 'Townhall'
+        ]);
+        
+        
         map.addLayer(
           {
             id: "route1",
@@ -171,8 +182,8 @@ function addRotaMapSpecificRoute(pontos_trajeto) {
               "line-join": "round",
             },
             paint: {
-              "line-color": "#888",
-              "line-width": 8,
+              "line-color": "#0550A1",
+              "line-width": 5,
             },
           },
           "aerialway"

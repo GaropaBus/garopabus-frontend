@@ -258,7 +258,9 @@ export function addRotaMapSpecificRoute(pontos_trajeto) {
             type: "LineString",
             coordinates: route,
           },
-        });
+        }
+      );
+
       } else {
         map.addSource("route", {
           type: "geojson",
@@ -288,53 +290,65 @@ export function addRotaMapSpecificRoute(pontos_trajeto) {
           "aerialway"
         );
       }
-
+      
       const bounds = new mapboxgl.LngLatBounds();
       route.forEach((coord) => bounds.extend(coord));
       map.fitBounds(bounds, { padding: 20 });
     })
     .catch((error) => console.error("Erro ao adicionar rota:", error));
-}
-
-export const removeMarkersPontoTrajeto = () => {
-  MarkersPontosTrajeto.forEach((marker) => {
-    marker.remove(); // Remove o marcador do mapa
-  });
-  MarkersPontosTrajeto = []; // Limpa o array de marcadores
-};
-
-export function removeRotaMapSpecificRoute() {
-  // Verifica se a camada "route1" existe no mapa
-  if (map.getLayer("route1")) {
-    map.removeLayer("route1"); // Remove a camada
   }
-
-  // Verifica se a fonte "route" existe no mapa
-  if (map.getSource("route")) {
-    map.removeSource("route"); // Remove a fonte
+  updateLineColorTo0550A1();
+  
+  function updateLineColorTo0550A1() {
+    const layers = map.getStyle().layers; // Obtém todas as camadas do mapa
+    layers.forEach((layer) => {
+      if (layer.type === "line" && layer.id !== "route1") {
+        // Altera a cor de todas as camadas do tipo "line", exceto a "route1"
+        map.setPaintProperty(layer.id, "line-color", "#0550A1");
+      }
+    });
   }
-}
-
-let ativarCapturaPontoTrajeto = false;
-
-export function ativarCapturaPontoTrajetoCoordenadas() {
-  if (!ativarCapturaPontoTrajeto) {
-    const container_map = document.getElementById("map");
-    if (container_map) {
-      container_map.style.cursor = "pointer"; // Altera o cursor do mapa
+  
+  
+  export const removeMarkersPontoTrajeto = () => {
+    MarkersPontosTrajeto.forEach((marker) => {
+      marker.remove(); // Remove o marcador do mapa
+    });
+    MarkersPontosTrajeto = []; // Limpa o array de marcadores
+  };
+  
+  export function removeRotaMapSpecificRoute() {
+    // Verifica se a camada "route1" existe no mapa
+    if (map.getLayer("route1")) {
+      map.removeLayer("route1"); // Remove a camada
     }
-
-    ativarCapturaPontoTrajeto = true;
-
-    // Adiciona o evento de clique ao mapa
-    const onClick = async (event) => {
-      const coordinates = event.lngLat;
-
-      const el = document.createElement("div");
-      el.className = "ponto-trajeto";
-      el.textContent = "new";
-
-      const marker = new mapboxgl.Marker(el)
+    
+    // Verifica se a fonte "route" existe no mapa
+    if (map.getSource("route")) {
+      map.removeSource("route"); // Remove a fonte
+    }
+  }
+  
+  let ativarCapturaPontoTrajeto = false;
+  
+  export function ativarCapturaPontoTrajetoCoordenadas() {
+    if (!ativarCapturaPontoTrajeto) {
+      const container_map = document.getElementById("map");
+      if (container_map) {
+        container_map.style.cursor = "pointer"; // Altera o cursor do mapa
+      }
+      
+      ativarCapturaPontoTrajeto = true;
+      
+      // Adiciona o evento de clique ao mapa
+      const onClick = async (event) => {
+        const coordinates = event.lngLat;
+        
+        const el = document.createElement("div");
+        el.className = "ponto-trajeto";
+        el.textContent = "new";
+        
+        const marker = new mapboxgl.Marker(el)
         .setLngLat([coordinates.lng, coordinates.lat])
         .setPopup(
           new mapboxgl.Popup({ offset: 25 }).setHTML(
@@ -342,24 +356,24 @@ export function ativarCapturaPontoTrajetoCoordenadas() {
           )
         )
         .addTo(map);
-
-      MarkersPontosTrajeto.push(marker);
-
-      // Tratar clique para atualizar o array e exibir as coordenadas
-      await pontosTrajeto.tratarClick(coordinates);
-
-      // Desativa a captura após um clique
-      ativarCapturaPontoTrajeto = false;
-      if (container_map) {
-        container_map.style.cursor = ""; // Restaura o cursor padrão
-      }
-
-      // Remove o evento "click" para evitar múltiplas capturas
-      map.off("click", onClick);
-    };
-
-    map.once("click", onClick); // Adiciona o evento de clique
-  } else {
-    alert("A captura já está ativada. Clique no mapa.");
+        
+        MarkersPontosTrajeto.push(marker);
+        
+        // Tratar clique para atualizar o array e exibir as coordenadas
+        await pontosTrajeto.tratarClick(coordinates);
+        
+        // Desativa a captura após um clique
+        ativarCapturaPontoTrajeto = false;
+        if (container_map) {
+          container_map.style.cursor = ""; // Restaura o cursor padrão
+        }
+        
+        // Remove o evento "click" para evitar múltiplas capturas
+        map.off("click", onClick);
+      };
+      
+      map.once("click", onClick); // Adiciona o evento de clique
+    } else {
+      alert("A captura já está ativada. Clique no mapa.");
+    }
   }
-}

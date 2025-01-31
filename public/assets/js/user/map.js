@@ -77,7 +77,7 @@ const map = new mapboxgl.Map({
   zoom: 12,
   maxBounds: bounds, // Mantém os limites do mapa
   minZoom: 9, // Nível mínimo de zoom (visão ampla)
-  maxZoom: 16, // Nível máximo de zoom (visão próxima)
+  maxZoom: 20, // Nível máximo de zoom (visão próxima)
 });
 
 // Waypoints (pontos de interesse)
@@ -107,6 +107,7 @@ fetch(url)
         ["==", ["get", "type"], "Place Of Worship"], // Exibe ícones com 'type' começando com 'Townhall'
       ]);
 
+      
       map.addSource("route", {
         type: "geojson",
         data: {
@@ -127,12 +128,13 @@ fetch(url)
         },
       },'aerialway');
 
+      
       const el = document.createElement("div");
       el.className = "user-marker";
       userMarker = new mapboxgl.Marker(el)
-        .setLngLat([-48.67506218376818, -28.09891989595239])
-        .addTo(map);
-
+      .setLngLat([-48.67506218376818, -28.09891989595239])
+      .addTo(map);
+      
       // Centraliza o mapa no marcador do usuário
       setTimeout(() => {
         if (userMarker && userMarker.getLngLat) {
@@ -141,7 +143,7 @@ fetch(url)
           console.error("Erro ao obter coordenadas do marcador.");
         }
       }, 1000); // Aguarda 1 segundo para garantir que o marcador tenha sido colocado
-
+      
       // Botão para centralizar o mapa no usuário
       const btn_centralizar = document.getElementById("centralizar-user");
       btn_centralizar.addEventListener("click", () => {
@@ -150,73 +152,76 @@ fetch(url)
     });
   })
   .catch((error) => console.error("Error:", error));
-
-// Array de pontos de ônibus com coordenadas e informações
-const busStops = await apiGet.getPontoOnibus();
-
-// Função para adicionar os pontos de ônibus ao mapa
-const addedMarkers = [];
-
-// Função para verificar se um marcador já existe em uma coordenada específica
-function hasMarkerAt(lng, lat) {
-  return addedMarkers.some((coord) => coord.lng === lng && coord.lat === lat);
-}
-
-// Função para verificar se um link é válido
-async function isValidLink(url) {
-  try {
-    const response = await fetch(url, { method: "HEAD" });
-    return response.ok;
-  } catch (error) {
-    console.error(`Erro ao verificar o link: ${url}`, error);
-    return false;
+  
+  // Array de pontos de ônibus com coordenadas e informações
+  const busStops = await apiGet.getPontoOnibus();
+  
+  // Função para adicionar os pontos de ônibus ao mapa
+  const addedMarkers = [];
+  
+  // Função para verificar se um marcador já existe em uma coordenada específica
+  function hasMarkerAt(lng, lat) {
+    return addedMarkers.some((coord) => coord.lng === lng && coord.lat === lat);
   }
-}
-
-// Adiciona os pontos de ônibus ao mapa
-busStops.forEach(async function (stop) {
-  if (!hasMarkerAt(stop.longitude, stop.latitude)) {
-    // Verifica se o link é válido
-    const isValid = await isValidLink(stop.link_maps);
-
-    // Cria um elemento HTML para o ícone do ponto de ônibus
-    const el = document.createElement("div");
-    el.className = "bus-stop-marker";
-
-    // Estilos do marcador
-    el.style.width = "20px";
-    el.style.height = "20px";
-    el.style.backgroundColor = "rgba(255, 255, 255, 0.7)";
-    el.style.borderRadius = "5px";
-    el.style.backgroundImage =
-      "url(../../../../../../assets/images/icon_bus.png)";
-    el.style.backgroundSize = "80%";
-    el.style.backgroundRepeat = "no-repeat";
-    el.style.backgroundPosition = "center";
-    el.style.filter = "invert(1)";
-
-    // Cria o marcador no mapa
-    const marker = new mapboxgl.Marker(el).setLngLat([
-      stop.longitude,
-      stop.latitude,
-    ]);
-
-    // Define o zIndex baixo para o marcador
-    marker.getElement().style.zIndex = "1"; // Camada mais baixa
-
-    // Apenas adiciona o popup se o link for válido
-    if (isValid) {
-      marker.setPopup(
-        new mapboxgl.Popup({ offset: 25 }).setHTML(
-          `<a href="${stop.link_maps}" target="_blank">Link Maps</a>`
-        )
-      );
+  
+  
+  // Função para verificar se um link é válido
+  async function isValidLink(url) {
+    try {
+      const response = await fetch(url, { method: "HEAD" });
+      return response.ok;
+    } catch (error) {
+      console.error(`Erro ao verificar o link: ${url}`, error);
+      return false;
     }
-
-    // Adiciona o marcador ao mapa
-    marker.addTo(map);
-
-    // Adiciona as coordenadas ao array
-    addedMarkers.push({ lng: stop.longitude, lat: stop.latitude });
   }
+  
+  // Adiciona os pontos de ônibus ao mapa
+  busStops.forEach(async function (stop) {
+    if (!hasMarkerAt(stop.longitude, stop.latitude)) {
+      // Verifica se o link é válido
+      const isValid = await isValidLink(stop.link_maps);
+      
+      // Cria um elemento HTML para o ícone do ponto de ônibus
+      const el = document.createElement("div");
+      el.className = "bus-stop-marker";
+      
+      // Estilos do marcador
+      el.style.width = "20px";
+      el.style.height = "20px";
+      el.style.backgroundColor = "rgba(255, 255, 255, 0.7)";
+      el.style.borderRadius = "5px";
+      el.style.backgroundImage =
+      "url(../../../../../../assets/images/icon_bus.png)";
+      el.style.backgroundSize = "80%";
+      el.style.backgroundRepeat = "no-repeat";
+      el.style.backgroundPosition = "center";
+      el.style.filter = "invert(1)";
+      
+      // Cria o marcador no mapa
+      const marker = new mapboxgl.Marker(el).setLngLat([
+        stop.longitude,
+        stop.latitude,
+      ]);
+      
+      // Define o zIndex baixo para o marcador
+      marker.getElement().style.zIndex = "1"; // Camada mais baixa
+      
+      // Apenas adiciona o popup se o link for válido
+      if (isValid) {
+        marker.setPopup(
+          new mapboxgl.Popup({ offset: 25 }).setHTML(
+            `<a href="${stop.link_maps}" target="_blank">Link Maps</a>`
+          )
+        );
+      }
+      
+      // Adiciona o marcador ao mapa
+      marker.addTo(map);
+      
+      // Adiciona as coordenadas ao array
+      addedMarkers.push({ lng: stop.longitude, lat: stop.latitude });
+  }
+  
+  
 });
